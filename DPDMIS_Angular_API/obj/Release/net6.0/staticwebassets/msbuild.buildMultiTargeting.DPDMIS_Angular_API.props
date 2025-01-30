@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\DPDMIS_Angular_API.props" />
+</Project>

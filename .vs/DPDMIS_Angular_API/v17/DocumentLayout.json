@@ -1,0 +1,75 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "I:\\DPDMIS_Angular_API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|i:\\dpdmis_angular_api\\dpdmis_angular_api\\controllers\\indentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\controllers\\indentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|i:\\dpdmis_angular_api\\dpdmis_angular_api\\controllers\\issuecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\controllers\\issuecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|i:\\dpdmis_angular_api\\dpdmis_angular_api\\controllers\\receiptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\controllers\\receiptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IssueController.cs",
+              "DocumentMoniker": "I:\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\IssueController.cs",
+              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Controllers\\IssueController.cs",
+              "ToolTip": "I:\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\IssueController.cs",
+              "RelativeToolTip": "DPDMIS_Angular_API\\Controllers\\IssueController.cs",
+              "ViewState": "AQIAAMEAAAAAAAAAAAAiwK8AAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T17:10:12.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IndentController.cs",
+              "DocumentMoniker": "I:\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\IndentController.cs",
+              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Controllers\\IndentController.cs",
+              "ToolTip": "I:\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\IndentController.cs",
+              "RelativeToolTip": "DPDMIS_Angular_API\\Controllers\\IndentController.cs",
+              "ViewState": "AQIAAA0BAAAAAAAAAAAiwBEBAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T17:10:12.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ReceiptController.cs",
+              "DocumentMoniker": "I:\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
+              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
+              "ToolTip": "I:\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
+              "RelativeToolTip": "DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
+              "ViewState": "AQIAAEUCAAAAAAAAAAAgwE8CAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T16:03:59.467Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
