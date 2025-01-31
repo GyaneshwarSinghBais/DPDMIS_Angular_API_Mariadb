@@ -755,7 +755,7 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
 
 
 
-        public void getWhIssuedItemData(Int64 facilityId, Int64 inwardNo, Int64 facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid, out string? MfgDate, out Int64? ponoid, out Int32? qastatus, out string? whissueblock, out string? expiryDate, out string? batchno)
+        public void getWhIssuedItemData(Int64 indentId, Int64 facilityId, Int64 inwardNo, Int64 facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid, out string? MfgDate, out Int64? ponoid, out Int32? qastatus, out string? whissueblock, out string? expiryDate, out string? batchno)
         {
             string strSQL = "";
             strSQL = @"Select distinct m.itemid,tbo.batchno,DATE_FORMAT(tbo.expdate, '%Y-%m-%d') AS EXPDATE,tbo.IssueQty*nvl(m.unitcount,1) as IssueBatchQty,tbo.InwNo
@@ -768,6 +768,7 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
              left outer join  tbFacilityReceipts tfr on (tfr.IndentID=tb.IndentID) and tfr.facilityid=" + facilityId + @" and tfr.FacReceiptID= " + facReceiptId + @"
             Left Outer Join tbFacilityReceiptItems tfi on  tfi.FacReceiptID=tfr.FacReceiptID and tfi.itemid=tbi.itemid         and tfi.INDENTITEMID=tbi.INDENTITEMID
              Where 1=1  and tb.FacilityID =" + facilityId + @"
+            AND tb.INDENTID=" + indentId + @"
              and tbo.InwNo =  " + inwardNo;
 
 

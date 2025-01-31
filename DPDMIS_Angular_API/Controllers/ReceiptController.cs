@@ -531,7 +531,7 @@ where 1=1 and tr.FACRECEIPTTYPE='" + facilityReceiptType + "' and tr.facilityid=
         [HttpPut("completeReceipts")]
         public IActionResult completeReceipts(Int64 receiptId)
         {
-            string strQuery1 = "Update tbFacilityReceipts set Status = 'C',FACRECEIPTDATE=sysdate,ENTRYDATE=sysdate Where FacReceiptID = " + receiptId;
+            string strQuery1 = "Update tbFacilityReceipts set Status = 'C',FACRECEIPTDATE=curdate(),ENTRYDATE=curdate() Where FacReceiptID = " + receiptId;
             Int32 result1 = _context.Database.ExecuteSqlRaw(strQuery1);
 
             string strQuery2 = @"Update tbFacilityReceiptItems set Status = 'C' Where FacReceiptID =" + receiptId;
@@ -694,7 +694,7 @@ LEFT OUTER JOIN (
         AND tr.INDENTID = " + indentid + @"
         AND tr.facilityid = " + facid + @"
 ) r ON r.INDENTID = tb.indentid 
-     AND r.INDENTITEMID = tbi.INDENTITEMID 
+     
      AND r.itemid = m.itemid 
      AND r.whinwno = tbo.inwno
 WHERE 
@@ -901,15 +901,15 @@ ORDER BY m.itemid;
 
 
         [HttpPost("postReceiptItems")]  //gyan
-        public async Task<ActionResult<IEnumerable<IncompleteWardIssueDTO>>> postReceiptItems(Int64 mponoid, Int64 rackID, Int64 facid, Int64 facReceiptId, Int64 whinwno, tbFacilityReceiptItemsModel ObjRItems)  //indentid is nocid
+        public async Task<ActionResult<IEnumerable<IncompleteWardIssueDTO>>> postReceiptItems(Int64 indentId, Int64 mponoid, Int64 rackID, Int64 facid, Int64 facReceiptId, Int64 whinwno, tbFacilityReceiptItemsModel ObjRItems)  //indentid is nocid
         {
-            //GetMonthName(string date_ddmmyyyy)
+            //GetMonthName(string date_ddmmyyyy) Int64 indentId
 
             try
             {
                 FacOperations ob = new FacOperations(_context);
 
-                ob.getWhIssuedItemData(facid, whinwno, facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid
+                ob.getWhIssuedItemData( indentId,facid, whinwno, facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid
                                         , out string? MfgDate, out Int64? ponoid, out Int32? qastatus, out string? whissueblock, out string? expiryDate, out string? batchno);
                 ObjRItems.INDENTITEMID = Convert.ToInt64(indentItemId);
                 ObjRItems.ITEMID = Convert.ToInt64(itemId);
@@ -967,15 +967,29 @@ ORDER BY m.itemid;
         public async Task<ActionResult<IEnumerable<getReceiptVouchersDTO>>> getReceiptVouchers(string facId, string receiptId)
         {
             string qry = @" 
-Select distinct m.itemid,m.itemcode,m.itemname,rb.batchno,rb.expdate,tbo.IssueQty*nvl(m.unitcount,1) as IssueWH
-,tfr.IndentID,tfr.FACRECEIPTID,tfi.ABSRQTY,rfb.ABSRQTY as BatrchReceiptQTY
-,nvl(rc.locationno,'-') locationno,rfb.stocklocation,tfi.facreceiptitemid,rb.InwNo,tfr.status Rstatus,tfi.status RIstatus
-             from tbIndentItems tbi
+SELECT DISTINCT 
+    CAST(m.itemid AS CHAR) AS ITEMID,
+    CAST(m.itemcode AS CHAR) AS ITEMCODE,
+    CAST(m.itemname AS CHAR) AS ITEMNAME,
+    CAST(tbo.batchno AS CHAR) AS BATCHNO,
+    CAST(tbo.expdate AS CHAR) AS EXPDATE,
+    CAST(tbo.IssueQty * IFNULL(m.unitcount,1) AS CHAR) AS ISSUEWH,
+    CAST(tfr.IndentID AS CHAR) AS INDENTID,
+    CAST(tfr.FACRECEIPTID AS CHAR) AS FACRECEIPTID,
+    CAST(tfi.ABSRQTY AS CHAR) AS ABSRQTY,
+    CAST(rfb.ABSRQTY AS CHAR) AS BATRCHRECEIPTQTY,
+    CAST(IFNULL(rc.locationno, '-') AS CHAR) AS LOCATIONNO,
+    CAST(rfb.stocklocation AS CHAR) AS STOCKLOCATION,
+    CAST(tfi.facreceiptitemid AS CHAR) AS FACRECEIPTITEMID,
+    CAST(tbo.InwNo AS CHAR) AS INWNO,
+    CAST(tfr.status AS CHAR) AS RSTATUS,
+    CAST(tfi.status AS CHAR) AS RISTATUS
+FROM tbIndentItems tbi
              left outer Join tbOutwards tbo on (tbo.IndentItemID = tbi.IndentItemID) 
-             left outer Join tbReceiptBatches rb on (rb.InwNo = tbo.InwNo) 
+             #left outer Join tbReceiptBatches rb on (rb.InwNo = tbo.InwNo) 
              Inner Join masItems m on (m.ItemID=tbi.ItemID)
              Inner Join tbIndents tb on (tb.Indentid=tbi.IndentId) 
-            left outer join  tbFacilityReceipts tfr on (tfr.IndentID=tb.IndentID) and tfr.facilityid="+ facId + @"
+            left outer join  tbFacilityReceipts tfr on (tfr.IndentID=tb.IndentID) and tfr.facilityid=" + facId + @"
             Left Outer Join tbFacilityReceiptItems tfi on  tfi.FacReceiptID=tfr.FacReceiptID and tfi.itemid=tbi.itemid    
             and tfi.INDENTITEMID=tbi.INDENTITEMID
             left outer join tbfacilityreceiptbatches rfb on rfb.facreceiptitemid=tfi.facreceiptitemid
