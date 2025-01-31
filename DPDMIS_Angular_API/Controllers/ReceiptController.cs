@@ -13,6 +13,7 @@ using Oracle.ManagedDataAccess.Client;
 using System.Data;
 using System.Runtime.CompilerServices;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Globalization;
 
 namespace DPDMIS_Angular_API.Controllers
 {
@@ -299,8 +300,21 @@ and faci.NOCNUMBER='" + NOCNumber + "' ";
             }
             
 
-            string qry = @" select f.facilityname,ind.INDENTNO,ind.INDENTDATE ,
-ISSUENO,ISSUEDDATE,nos,tbf.FACINDENTID,tbf.issueid,tbr.FACRECEIPTID,tbr.FACRECEIPTNO,tbr.FACRECEIPTDATE,nvl(tbr.status,'I') as status,tbf.facilityid from tbfacilityissues tbf 
+            string qry = @" SELECT 
+    CAST(f.facilityname AS VARCHAR(255)) AS facilityname,
+    CAST(ind.INDENTNO AS VARCHAR(255)) AS INDENTNO,
+    CAST(ind.INDENTDATE AS VARCHAR(255)) AS INDENTDATE,
+    CAST(ISSUENO AS VARCHAR(255)) AS ISSUENO,
+    CAST(ISSUEDDATE AS VARCHAR(255)) AS ISSUEDDATE,
+    CAST(nos AS VARCHAR(255)) AS nos,
+    CAST(tbf.FACINDENTID AS VARCHAR(255)) AS FACINDENTID,
+    CAST(tbf.issueid AS VARCHAR(255)) AS issueid,
+    CAST(tbr.FACRECEIPTID AS VARCHAR(255)) AS FACRECEIPTID,
+    CAST(tbr.FACRECEIPTNO AS VARCHAR(255)) AS FACRECEIPTNO,
+    CAST(tbr.FACRECEIPTDATE AS VARCHAR(255)) AS FACRECEIPTDATE,
+    CAST(NVL(tbr.status, 'I') AS VARCHAR(255)) AS status,
+    CAST(tbf.facilityid AS VARCHAR(255)) AS facilityid
+FROM tbfacilityissues tbf
 inner join masfacilities f on f.facilityid=tbf.facilityid
 inner join MASFACTRANSFERS ind on ind.indentid=tbf.FACINDENTID
 left outer join tbfacilityreceipts tbr on tbr.FACRECEIPTTYPE='SP' and tbr.issueid=tbf.issueid
@@ -755,10 +769,10 @@ SELECT IFNULL(ni.INDENTITEMID, 0) AS sr,
        m.multiple, 
        m.unitcount,
        IFNULL(ni.REQUESTEDQTY, 0) AS indentQty,
-       IFNULL(tbo.ISSUEQTY, 0) AS issueWH,
-       IFNULL(rb.batchno, '-') AS batchno, 
-       CASE WHEN rb.mfgdate IS NULL THEN '-' ELSE DATE_FORMAT(rb.mfgdate, '%d-%m-%Y') END AS mfgdate, 
-       CASE WHEN rb.expdate IS NULL THEN '-' ELSE DATE_FORMAT(rb.expdate, '%d-%m-%Y') END AS expdate,
+      IFNULL(tbo.ISSUEQTY, 0) AS issueWH,
+       IFNULL(rb.batchno, tbo.batchno) AS batchno, 
+       CASE WHEN rb.mfgdate IS NULL THEN DATE_FORMAT(tbo.mfgdate, '%d-%m-%Y')  ELSE DATE_FORMAT(rb.mfgdate, '%d-%m-%Y') END AS mfgdate, 
+       CASE WHEN rb.expdate IS NULL THEN DATE_FORMAT(tbo.expdate, '%d-%m-%Y')  ELSE DATE_FORMAT(rb.expdate, '%d-%m-%Y') END AS expdate,
        IFNULL(tbo.inwno, 0) AS inwno,
        IFNULL(r.ABSRQTY, 0) AS rqty,
         tbo.PONOID
@@ -836,7 +850,7 @@ ORDER BY m.itemid;
         }
 
         [HttpPost("postReceiptItemsSP")]  //gyan
-        public async Task<ActionResult<IEnumerable<IncompleteWardIssueDTO>>> postReceiptItemsSP( Int64 rackID, Int64 facid, Int64 facReceiptId, Int64 whinwno, tbFacilityReceiptItemsModel ObjRItems)  //indentid is nocid
+        public async Task<ActionResult<IEnumerable<IncompleteWardIssueDTO>>> postReceiptItemsSP( Int64 indentId, Int64 rackID, Int64 facid, Int64 facReceiptId, Int64 whinwno, tbFacilityReceiptItemsModel ObjRItems)  //indentid is nocid
         {
             //GetMonthName(string date_ddmmyyyy)
 
@@ -844,7 +858,7 @@ ORDER BY m.itemid;
             {
                 FacOperations ob = new FacOperations(_context);
 
-                ob.getWhIssuedItemDataSP(facid, whinwno, facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid
+                ob.getWhIssuedItemDataSP(indentId,facid, whinwno, facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid
                                         , out string? MfgDate, out Int64? ponoid, out Int32? qastatus, out string? whissueblock, out string? expiryDate, out string? batchno);
              
                 ObjRItems.ISSUEITEMID = Convert.ToInt64(indentItemId);
@@ -876,7 +890,53 @@ ORDER BY m.itemid;
 
                 objRBatches.MFGDATE = MfgDate;
                 objRBatches.EXPDATE = expiryDate;
-                objRBatches.WHISSUEBLOCK = whissueblock;
+
+                DateTime? mfgDateFormatted = null;
+                DateTime? expiryDateFormatted = null;
+
+                if (!string.IsNullOrEmpty(expiryDate))
+                {
+                    if (DateTime.TryParseExact(expiryDate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+                    {
+                        expiryDateFormatted = parsedDate;
+                    }
+                    else
+                    {
+                        // Handle invalid date format
+                        throw new Exception("Invalid expiry date format.");
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(expiryDate))
+                {
+                    if (DateTime.TryParseExact(expiryDate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedExpiryDate))
+                    {
+                        expiryDateFormatted = parsedExpiryDate;
+                    }
+                    else
+                    {
+                        // Handle the case where the date format is invalid
+                        throw new Exception("Invalid expiry date format.");
+                    }
+                }
+
+                objRBatches.MFGDATE = mfgDateFormatted?.ToString("yyyy-MM-dd"); // Ensure format is valid for MySQL
+                objRBatches.EXPDATE = expiryDateFormatted?.ToString("yyyy-MM-dd"); // Ensure format is valid for MySQL
+
+                decimal? whIssueBlockValue = null;
+
+                if (!string.IsNullOrEmpty(whissueblock))
+                {
+                    if (decimal.TryParse(whissueblock, out decimal parsedValue))
+                    {
+                        whIssueBlockValue = parsedValue;
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid WHISSUEBLOCK value.");
+                    }
+                }
+
                 objRBatches.BATCHNO = batchno;
                 objRBatches.ITEMID = Convert.ToInt64(itemId);
                 objRBatches.FACRECEIPTITEMID = Convert.ToInt64(FacReceiptitemid);

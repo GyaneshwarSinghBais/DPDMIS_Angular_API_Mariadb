@@ -5,7 +5,7 @@ namespace DPDMIS_Angular_API.DTO.ReceiptDTO
     public class getOtherFacIssueDetailsDTO
     {
         [Key]
-        public Int32 ISSUEID { get; set; }
+        public string? ISSUEID { get; set; }
         public string? FACILITYNAME { get; set; }
         public string? INDENTNO { get; set; }
         public string? INDENTDATE { get; set; }
@@ -17,7 +17,7 @@ namespace DPDMIS_Angular_API.DTO.ReceiptDTO
         public string? FACRECEIPTNO { get; set; }
         public string? FACRECEIPTDATE { get; set; }
         public string? STATUS { get; set; }
-        public Int32? facilityid { get; set; }
+        public string? facilityid { get; set; }
         
     }
 

@@ -822,7 +822,7 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
 
         }
 
-        public void getWhIssuedItemDataSP(Int64 facilityId, Int64 inwardNo, Int64 facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid, out string? MfgDate, out Int64? ponoid, out Int32? qastatus, out string? whissueblock, out string? expiryDate, out string? batchno)
+        public void getWhIssuedItemDataSP(Int64 indentId, Int64 facilityId, Int64 inwardNo, Int64 facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid, out string? MfgDate, out Int64? ponoid, out Int32? qastatus, out string? whissueblock, out string? expiryDate, out string? batchno)
         {
             string strSQL = "";
             //            strSQL1 = @"Select distinct m.itemid,rb.batchno,rb.expdate,tbo.IssueQty*nvl(m.unitcount,1) as IssueBatchQty,rb.InwNo
@@ -838,18 +838,40 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
             //             and rb.InwNo =  " + inwardNo;
 
 
-            strSQL = @" Select distinct m.itemid,rb.batchno,rb.expdate,tbo.IssueQty as IssueBatchQty,rb.InwNo
-,tbi.issueitemid as indentitemid,tfr.FacReceiptID,tfi.FacReceiptItemID,rb.MfgDate,rb.ponoid,case when nvl(m.qctest, 'Y') = 'Y' then rb.qastatus else 1 end as qastatus,rb.whissueblock
-             from tbfacilityissueitems tbi
+//            strSQL = @" Select distinct m.itemid,rb.batchno,rb.expdate,tbo.IssueQty as IssueBatchQty,rb.InwNo
+//,tbi.issueitemid as indentitemid,tfr.FacReceiptID,tfi.FacReceiptItemID,rb.MfgDate,rb.ponoid,case when nvl(m.qctest, 'Y') = 'Y' then rb.qastatus else 1 end as qastatus,rb.whissueblock
+//             from tbfacilityissueitems tbi
+//               Inner Join tbfacilityoutwards tbo on(tbo.issueitemid = tbi.issueitemid)
+//              Inner Join tbfacilityreceiptbatches rb on(rb.InwNo = tbo.InwNo)
+//             Inner Join vmasitems m on(m.ItemID = tbi.ItemID)
+//             Inner Join tbfacilityissues tb on(tb.issueid = tbi.issueid)
+//             left outer join tbFacilityReceipts tfr on(tfr.issueid= tb.issueid) and tfr.facilityid = " + facilityId + @" and tfr.FacReceiptID = " + facReceiptId + @"
+//            Left Outer Join tbFacilityReceiptItems tfi on  tfi.FacReceiptID = tfr.FacReceiptID and tfi.itemid = tbi.itemid
+//             Where 1 = 1  and tb.TOFACILITYID =" + facilityId + @"
+         
+//             and rb.InwNo = " + inwardNo;
+
+            strSQL = @"  Select distinct m.itemid,IFNULL(tbo.ISSUEQTY, 0) as IssueBatchQty,tbo.InwNo,tb.INDENTID,
+       IFNULL(rb.batchno, tbo.batchno) AS batchno, 
+       CASE WHEN rb.mfgdate IS NULL THEN DATE_FORMAT(tbo.mfgdate, '%d-%m-%Y')  ELSE DATE_FORMAT(rb.mfgdate, '%d-%m-%Y') END AS mfgdate, 
+       CASE WHEN rb.expdate IS NULL THEN DATE_FORMAT(tbo.expdate, '%d-%m-%Y')  ELSE DATE_FORMAT(rb.expdate, '%d-%m-%Y') END AS expdate
+,tbi.issueitemid as indentitemid,tfr.FacReceiptID,tfi.FacReceiptItemID,
+ IFNULL(rb.ponoid, tbo.ponoid)  AS ponoid
+,case when nvl(m.qctest, 'Y') = 'Y' then IFNULL(rb.qastatus, tbo.qastatus) else 1 end as qastatus,
+    CASE 
+        WHEN TRIM(IFNULL(rb.whissueblock, tbo.whissueblock)) = '' THEN '0' 
+        ELSE IFNULL(rb.whissueblock, tbo.whissueblock) 
+    END AS whissueblock
+             from  tbfacilityissueitems tbi 
                Inner Join tbfacilityoutwards tbo on(tbo.issueitemid = tbi.issueitemid)
-              Inner Join tbfacilityreceiptbatches rb on(rb.InwNo = tbo.InwNo)
-             Inner Join vmasitems m on(m.ItemID = tbi.ItemID)
+              LEFT outer Join tbfacilityreceiptbatches rb on(rb.InwNo = tbo.InwNo)
+             Inner JOIN vmasitems m on(m.ItemID = tbi.ItemID)
              Inner Join tbfacilityissues tb on(tb.issueid = tbi.issueid)
              left outer join tbFacilityReceipts tfr on(tfr.issueid= tb.issueid) and tfr.facilityid = " + facilityId + @" and tfr.FacReceiptID = " + facReceiptId + @"
             Left Outer Join tbFacilityReceiptItems tfi on  tfi.FacReceiptID = tfr.FacReceiptID and tfi.itemid = tbi.itemid
-             Where 1 = 1  and tb.TOFACILITYID =" + facilityId + @"
-         
-             and rb.InwNo = " + inwardNo;
+             Where 1 = 1  and tb.TOFACILITYID =" + facilityId + @"   and tbo.InwNo = "+ inwardNo + @"  AND tb.facINDENTID= " + indentId;
+
+
 
 
 
