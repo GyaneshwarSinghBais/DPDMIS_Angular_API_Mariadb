@@ -401,8 +401,16 @@ namespace DPDMIS_Angular_API.Controllers
 
             Int64 TotAllotQty = IssueQty;
 
-            string qry = @" select distinct rb.FACReceiptItemid FacReceiptItemID,rb.BatchNo,rb.MfgDate,rb.ExpDate,nvl(rb.AbsRqty,0) AbsRQty,nvl(x.issueQty,0) AllotQty , nvl(rb.AbsRqty,0)-nvl(x.issueQty,0) avlQty
-         , rb.Inwno ,nvl(rb.whinwno,0) whinwno
+            string qry = @" SELECT DISTINCT 
+    rb.FACReceiptItemid AS FacReceiptItemID,
+    rb.BatchNo,
+    IFNULL(rb.MfgDate, NULL) AS MfgDate,
+    IFNULL(rb.ExpDate, NULL) AS ExpDate,
+    IFNULL(rb.AbsRqty, 0) AS AbsRQty,
+    IFNULL(x.issueQty, 0) AS AllotQty,
+    IFNULL(rb.AbsRqty, 0) - IFNULL(x.issueQty, 0) AS avlQty,
+    rb.Inwno,
+    IFNULL(rb.whinwno, 0) AS whinwno
           from tbFacilityReceiptBatches rb  
           inner join tbfacilityreceiptitems i on rb.FACreceiptitemid=i.FACreceiptitemid  
           inner join tbfacilityreceipts r on r.FACreceiptid=i.FACreceiptid 
