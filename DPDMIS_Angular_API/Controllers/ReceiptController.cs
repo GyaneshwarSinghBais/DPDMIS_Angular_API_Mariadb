@@ -756,7 +756,7 @@ ORDER BY
 
 
         [HttpGet("getReceiptDetailsBatchSP")] //mariadb
-        public async Task<ActionResult<IEnumerable<ReceipItemBatchesDTO>>> getReceiptDetailsBatchSP(Int64 issueid, Int64 facid, Int64 indentid)
+        public async Task<ActionResult<IEnumerable<ReceipItemBatchesDTO>>> getReceiptDetailsBatchSP(Int64 facReceiptId, Int64 facid, Int64 indentid)
         {
 
             string qry = @"
@@ -793,19 +793,20 @@ LEFT OUTER JOIN (
            SUM(tbr.ABSRQTY) AS ABSRQTY,
            tbr.batchno,
            tr.ISSUEID,
-           tri.issueitemid
+           tri.issueitemid,
+            TBR.WHINWNO
     FROM tbfacilityreceipts tr
     INNER JOIN tbfacilityreceiptitems tri ON tri.FACRECEIPTID = tr.FACRECEIPTID
     INNER JOIN tbfacilityreceiptbatches tbr ON tbr.facreceiptitemid = tri.facreceiptitemid
     WHERE tr.facreceipttype = 'SP' 
       AND tr.INDENTID = " + indentid + @"
       AND tr.facilityid = " + facid + @"
-      AND tr.ISSUEID = " + issueid + @"
-    GROUP BY tr.INDENTID, tri.INDENTITEMID, tri.itemid, tbr.batchno, tr.ISSUEID, tri.issueitemid
+       AND tr.FACRECEIPTID = "+ facReceiptId + @"
+    GROUP BY tr.INDENTID, tri.INDENTITEMID, tri.itemid, tbr.batchno, tr.ISSUEID, tri.issueitemid,TBR.WHINWNO
 ) r ON r.INDENTID = tb.indentid 
     AND r.indentid = tbf.FACINDENTID 
     AND r.itemid = m.itemid 
-    AND r.batchno = rb.batchno
+    AND  R.WHINWNO=tbo.INWNO
 WHERE 1 = 1 
   AND tb.status = 'C' 
   AND tbf.status = 'C' 
@@ -1000,7 +1001,7 @@ ORDER BY m.itemid;
 
                 objRBatches.MFGDATE = MfgDate;
                 objRBatches.EXPDATE = expiryDate;
-                objRBatches.WHISSUEBLOCK = whissueblock;
+                objRBatches.WHISSUEBLOCK = Convert.ToDecimal(whissueblock);
                 objRBatches.BATCHNO = batchno;
                 objRBatches.ITEMID = Convert.ToInt64(itemId);
                 objRBatches.FACRECEIPTITEMID = Convert.ToInt64(FacReceiptitemid);
