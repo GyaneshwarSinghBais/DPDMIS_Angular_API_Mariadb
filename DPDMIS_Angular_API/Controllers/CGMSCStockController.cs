@@ -587,14 +587,46 @@ order by ty.itemtypename, m.itemname";
             }
 
 
+  //          string qry = @" select mi.ITEMCODE,mi.itemname as ITEMNAME,mi.strength1,b.BATCHNO,b.EXPDATE, (case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) end)  as FACSTOCK
+  // ,case when Round(b.EXPDATE-curdate())<30 then 'Under 1 Month'
+  // else case when Round(b.EXPDATE-curdate())>30 and Round(b.EXPDATE-curdate())<=60 then 'Under 2 Month'
+  // else case when Round(b.EXPDATE-curdate())>60 and Round(b.EXPDATE-curdate())<=90 then 'Under 3 Month'
+  //  else case when Round(b.EXPDATE-curdate())>90 and Round(b.EXPDATE-curdate())<=120 then 'Under 4 Month'
+  //      else case when Round(b.EXPDATE-curdate())>120 and Round(b.EXPDATE-curdate())<=150 then 'Under 5 Month'
+  //      else 'Under 6 Month' 
+  //      end end end end end as EXPTIMELINE,b.inwno as INWNO
+  //               from tbfacilityreceiptbatches b   
+  //               inner join tbfacilityreceiptitems i on b.facreceiptitemid=i.facreceiptitemid 
+  //               inner join tbfacilityreceipts t on t.facreceiptid=i.facreceiptid  
+  //               inner join masitems mi on mi.itemid=i.itemid 
+  //               inner join masfacilities f  on f.facilityid=t.facilityid 
+  //               left outer join 
+  //               (  
+  //                 select  fs.facilityid,fsi.itemid,ftbo.inwno,sum(nvl(ftbo.issueqty,0)) issueqty   
+  //                   from tbfacilityissues fs 
+  //                 inner join tbfacilityissueitems fsi on fsi.issueid=fs.issueid 
+  //                 inner join tbfacilityoutwards ftbo on ftbo.issueitemid=fsi.issueitemid 
+  //                 where fs.status = 'C'  and fs.facilityid= " + faclityId + @"         
+  //                 group by fsi.itemid,fs.facilityid,ftbo.inwno                     
+  //               ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid and iq.facilityid=t.facilityid                 
+  //               Where  T.Status = 'C'  And (b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>curdate()
+  //              and f.facilityid= " + faclityId + @" 
+  //              and (case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) end)>0
+  //              and Round(b.EXPDATE-curdate())<180
+  //              " + whclause + @"
+  //order by b.EXPDATE ";
+
+
             string qry = @" select mi.ITEMCODE,mi.itemname as ITEMNAME,mi.strength1,b.BATCHNO,b.EXPDATE, (case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) end)  as FACSTOCK
    ,case when Round(b.EXPDATE-curdate())<30 then 'Under 1 Month'
    else case when Round(b.EXPDATE-curdate())>30 and Round(b.EXPDATE-curdate())<=60 then 'Under 2 Month'
    else case when Round(b.EXPDATE-curdate())>60 and Round(b.EXPDATE-curdate())<=90 then 'Under 3 Month'
     else case when Round(b.EXPDATE-curdate())>90 and Round(b.EXPDATE-curdate())<=120 then 'Under 4 Month'
-        else case when Round(b.EXPDATE-curdate())>120 and Round(b.EXPDATE-curdate())<=150 then 'Under 5 Month'
+        else case when Round(b.EXPDATE-curdate())>120 and Round(CURDATE()-b.EXPDATE)<=150 then 'Under 5 Month'
         else 'Under 6 Month' 
         end end end end end as EXPTIMELINE,b.inwno as INWNO
+		  		  
+
                  from tbfacilityreceiptbatches b   
                  inner join tbfacilityreceiptitems i on b.facreceiptitemid=i.facreceiptitemid 
                  inner join tbfacilityreceipts t on t.facreceiptid=i.facreceiptid  
@@ -606,14 +638,14 @@ order by ty.itemtypename, m.itemname";
                      from tbfacilityissues fs 
                    inner join tbfacilityissueitems fsi on fsi.issueid=fs.issueid 
                    inner join tbfacilityoutwards ftbo on ftbo.issueitemid=fsi.issueitemid 
-                   where fs.status = 'C'  and fs.facilityid= " + faclityId + @"         
+                   where fs.status = 'C'  and fs.facilityid= " + faclityId + @"        
                    group by fsi.itemid,fs.facilityid,ftbo.inwno                     
                  ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid and iq.facilityid=t.facilityid                 
                  Where  T.Status = 'C'  And (b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>curdate()
-                and f.facilityid= " + faclityId + @" 
+                and f.facilityid= " + faclityId + @"
                 and (case when b.qastatus ='1' then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) end)>0
-                and Round(b.EXPDATE-curdate())<180
-                " + whclause + @"
+                and DATEDIFF(b.EXPDATE,CURDATE()) <180
+                 " + whclause + @"
   order by b.EXPDATE ";
 
             var context = new NearExpBatchDTO();
