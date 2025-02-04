@@ -1,0 +1,157 @@
+warning: in the working copy of 'DPDMIS_Angular_API/Properties/PublishProfiles/FolderProfile.pubxml.user', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/.vs/DPDMIS_Angular_API/DesignTimeBuild/.dtbcache.v2 b/.vs/DPDMIS_Angular_API/DesignTimeBuild/.dtbcache.v2[m
+[1mindex eb507a2..23fe974 100644[m
+Binary files a/.vs/DPDMIS_Angular_API/DesignTimeBuild/.dtbcache.v2 and b/.vs/DPDMIS_Angular_API/DesignTimeBuild/.dtbcache.v2 differ
+[1mdiff --git a/.vs/DPDMIS_Angular_API/FileContentIndex/326134b2-18ab-4200-a6a4-9d64c38ebf3e.vsidx b/.vs/DPDMIS_Angular_API/FileContentIndex/326134b2-18ab-4200-a6a4-9d64c38ebf3e.vsidx[m
+[1mdeleted file mode 100644[m
+[1mindex dce4c41..0000000[m
+Binary files a/.vs/DPDMIS_Angular_API/FileContentIndex/326134b2-18ab-4200-a6a4-9d64c38ebf3e.vsidx and /dev/null differ
+[1mdiff --git a/.vs/DPDMIS_Angular_API/FileContentIndex/e6ae3c9f-5228-469b-bfa9-e3b48d150797.vsidx b/.vs/DPDMIS_Angular_API/FileContentIndex/e6ae3c9f-5228-469b-bfa9-e3b48d150797.vsidx[m
+[1mdeleted file mode 100644[m
+[1mindex 37f2b07..0000000[m
+Binary files a/.vs/DPDMIS_Angular_API/FileContentIndex/e6ae3c9f-5228-469b-bfa9-e3b48d150797.vsidx and /dev/null differ
+[1mdiff --git a/.vs/DPDMIS_Angular_API/FileContentIndex/fe82c491-e1a9-4188-9f6c-98c7204a2b0c.vsidx b/.vs/DPDMIS_Angular_API/FileContentIndex/fe82c491-e1a9-4188-9f6c-98c7204a2b0c.vsidx[m
+[1mdeleted file mode 100644[m
+[1mindex 6178cd0..0000000[m
+Binary files a/.vs/DPDMIS_Angular_API/FileContentIndex/fe82c491-e1a9-4188-9f6c-98c7204a2b0c.vsidx and /dev/null differ
+[1mdiff --git a/.vs/DPDMIS_Angular_API/v17/.futdcache.v2 b/.vs/DPDMIS_Angular_API/v17/.futdcache.v2[m
+[1mindex 96d93e3..abdcf59 100644[m
+Binary files a/.vs/DPDMIS_Angular_API/v17/.futdcache.v2 and b/.vs/DPDMIS_Angular_API/v17/.futdcache.v2 differ
+[1mdiff --git a/.vs/DPDMIS_Angular_API/v17/.suo b/.vs/DPDMIS_Angular_API/v17/.suo[m
+[1mindex aa6349c..ee35504 100644[m
+Binary files a/.vs/DPDMIS_Angular_API/v17/.suo and b/.vs/DPDMIS_Angular_API/v17/.suo differ
+[1mdiff --git a/.vs/ProjectEvaluation/dpdmis_angular_api.metadata.v7.bin b/.vs/ProjectEvaluation/dpdmis_angular_api.metadata.v7.bin[m
+[1mindex 69ee016..8f9b928 100644[m
+Binary files a/.vs/ProjectEvaluation/dpdmis_angular_api.metadata.v7.bin and b/.vs/ProjectEvaluation/dpdmis_angular_api.metadata.v7.bin differ
+[1mdiff --git a/.vs/ProjectEvaluation/dpdmis_angular_api.projects.v7.bin b/.vs/ProjectEvaluation/dpdmis_angular_api.projects.v7.bin[m
+[1mindex 445422a..37ff2d6 100644[m
+Binary files a/.vs/ProjectEvaluation/dpdmis_angular_api.projects.v7.bin and b/.vs/ProjectEvaluation/dpdmis_angular_api.projects.v7.bin differ
+[1mdiff --git a/DPDMIS_Angular_API/Controllers/CGMSCStockController.cs b/DPDMIS_Angular_API/Controllers/CGMSCStockController.cs[m
+[1mindex d4660bb..4195919 100644[m
+[1m--- a/DPDMIS_Angular_API/Controllers/CGMSCStockController.cs[m
+[1m+++ b/DPDMIS_Angular_API/Controllers/CGMSCStockController.cs[m
+[36m@@ -383,13 +383,18 @@[m [mfrom tbfacilityreceipts r[m
+             if (stktype == "I")[m
+             {[m
+                 qry = @"  select   row_number() over (order by fsi.itemid) as id, fsi.itemid,vm.itemcode,vm.itemname,vm.strength1,sum(nvl(ftbo.issueqty,0)) issueqty ,fs.ISSUEDATE  ,fs.WardID,b.WardName[m
+[31m-  ,0 as inwno,0 as batchno,'' as mfgdate,'' as expdate[m
+[32m+[m[32m  ,0 as inwno,[m
+[32m+[m[32m   CAST(0 AS CHAR) AS batchno,[m[41m       [m
+[32m+[m[32m    CAST(NULLIF('', '') AS DATETIME) AS mfgdate,[m[41m [m
+[32m+[m[32m    CAST(NULLIF('', '') AS DATETIME) AS expdate[m[41m  [m
+     from tbfacilityissues fs [m
+  Inner Join masFacilityWards b on (b.WardID=fs.WardID)[m
+   inner join tbfacilityissueitems fsi on fsi.issueid=fs.issueid [m
+   inner join masitems vm on vm.itemid=fsi.itemid[m
+   inner join tbfacilityoutwards ftbo on ftbo.issueitemid=fsi.issueitemid [m
+[31m-  where fs.status = 'C' "+ whitemid + @"  and fs.facilityid="+ facId + @"  and fs.ISSUETYPE='NO' and fs.ISSUEDATE between   '"+ fromDate + @"' and    '"+ todate + @"'  [m
+[32m+[m[32m  where fs.status = 'C' " + whitemid + @"  and fs.facilityid="+ facId + @"  and fs.ISSUETYPE='NO'[m[41m [m
+[32m+[m[32m AND fs.ISSUEDATE BETWEEN STR_TO_DATE('"+ fromDate + @"', '%d-%b-%Y')[m[41m [m
+[32m+[m[32m                        AND STR_TO_DATE('"+ todate + @"', '%d-%b-%Y')[m[41m [m
+   group by fsi.itemid,fs.ISSUEDATE,vm.itemcode,vm.itemname,vm.strength1,fs.WardID,b.WardName[m
+   order by fs.ISSUEDATE ";[m
+             }[m
+[36m@@ -404,7 +409,9 @@[m [mfrom tbfacilityreceipts r[m
+   inner join masitems vm on vm.itemid = fsi.itemid[m
+   inner join tbfacilityoutwards ftbo on ftbo.issueitemid = fsi.issueitemid[m
+    inner join tbfacilityreceiptbatches rb on rb.inwno = ftbo.inwno[m
+[31m-  where fs.status = 'C'  "+ whitemid + @" and fs.facilityid = " + facId + @"  and fs.ISSUETYPE = 'NO' and fs.ISSUEDATE between   '"+ fromDate + @"' and    '"+ todate + @"' [m
+[32m+[m[32m  where fs.status = 'C'  "+ whitemid + @" and fs.facilityid = " + facId + @"  and fs.ISSUETYPE = 'NO'[m[41m [m
+[32m+[m[32m    AND fs.ISSUEDATE BETWEEN STR_TO_DATE('" + fromDate + @"', '%d-%b-%Y')[m[41m [m
+[32m+[m[32m                        AND STR_TO_DATE('" + todate + @"', '%d-%b-%Y')[m[41m  [m
+   group by fsi.itemid,fs.ISSUEDATE,vm.itemcode,vm.itemname,vm.strength1,fs.WardID,b.WardName,ftbo.inwno,rb.batchno,rb.mfgdate,rb.expdate[m
+   order by fs.ISSUEDATE,vm.itemname";[m
+ [m
+[36m@@ -682,7 +689,7 @@[m [morder by ty.itemtypename, m.itemname";[m
+                    where fs.status = 'C'  and fs.facilityid=" + phcId + @"          [m
+                    group by fsi.itemid,fs.facilityid,ftbo.inwno                     [m
+                  ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid and iq.facilityid=t.facilityid                 [m
+[31m-                 Where 1=1 " + whclause + @" and  T.Status = 'C'  And (b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate [m
+[32m+[m[32m                 Where 1=1 " + whclause + @" and  T.Status = 'C'  And (b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>curdate()[m[41m [m
+                 and f.facilityid= " + phcId + @"  " + whcatid + @"[m
+                 and (   (case when (b.qastatus ='1' or  mi.qctest='N') then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) end)) > 0[m
+                 group by  mi.ITEMCODE, t.facilityid, mi.itemid,b.qastatus,mi.qctest,mi.itemname,mi.strength1,c.categoryname,c.categoryid,itemtypename,mi.ISEDL2021[m
+[1mdiff --git a/DPDMIS_Angular_API/DTO/CGMSCStockDTO/GetConsumptionDTO.cs b/DPDMIS_Angular_API/DTO/CGMSCStockDTO/GetConsumptionDTO.cs[m
+[1mindex 0e77107..c2ec56f 100644[m
+[1m--- a/DPDMIS_Angular_API/DTO/CGMSCStockDTO/GetConsumptionDTO.cs[m
+[1m+++ b/DPDMIS_Angular_API/DTO/CGMSCStockDTO/GetConsumptionDTO.cs[m
+[36m@@ -13,13 +13,13 @@[m [mnamespace DPDMIS_Angular_API.DTO.CGMSCStockDTO[m
+      [m
+         public Int64? ITEMID { get; set; }[m
+         public String? ITEMCODE { get; set; }[m
+[31m-        public String? ISSUEDATE { get; set; }[m
+[32m+[m[32m        public DateTime? ISSUEDATE { get; set; }[m
+         public String? STRENGTH1 { get; set; }[m
+         public String? ITEMNAME { get; set; }[m
+         public String? BATCHNO { get; set; }[m
+[31m-        public String? MFGDATE { get; set; }[m
+[31m-        public String? EXPDATE { get; set; }[m
+[31m-        public String? ISSUEQTY { get; set; }[m
+[32m+[m[32m        public DateTime? MFGDATE { get; set; }[m
+[32m+[m[32m        public DateTime? EXPDATE { get; set; }[m
+[32m+[m[32m        public decimal? ISSUEQTY { get; set; }[m
+         public Int64? WARDID { get; set; }[m
+         public String? WARDNAME { get; set; }[m
+     }[m
+[1mdiff --git a/DPDMIS_Angular_API/Properties/PublishProfiles/FolderProfile.pubxml.user b/DPDMIS_Angular_API/Properties/PublishProfiles/FolderProfile.pubxml.user[m
+[1mindex 300ee38..5e6a6a0 100644[m
+[1m--- a/DPDMIS_Angular_API/Properties/PublishProfiles/FolderProfile.pubxml.user[m
+[1m+++ b/DPDMIS_Angular_API/Properties/PublishProfiles/FolderProfile.pubxml.user[m
+[36m@@ -5,7 +5,7 @@[m [mhttps://go.microsoft.com/fwlink/?LinkID=208121.[m
+ <Project>[m
+   <PropertyGroup>[m
+     <_PublishTargetUrl>G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Release\net6.0\publish\DPDMIS_Angular_API</_PublishTargetUrl>[m
+[31m-    <History>True|2025-02-03T11:43:11.0215795Z;True|2025-02-03T15:53:37.7635705+05:30;True|2025-02-03T13:30:27.2222601+05:30;True|2025-02-03T12:35:17.8720327+05:30;True|2025-01-31T16:35:50.0167871+05:30;True|2025-01-31T16:27:20.6289469+05:30;True|2025-01-31T15:55:46.4344495+05:30;True|2025-01-31T11:43:56.2482296+05:30;True|2025-01-30T17:11:20.4800638+05:30;True|2025-01-30T16:38:22.7120021+05:30;True|2025-01-30T15:57:39.9169205+05:30;True|2025-01-30T14:43:22.4555520+05:30;True|2025-01-29T16:19:40.3871474+05:30;True|2025-01-29T11:48:59.8164323+05:30;True|2025-01-29T11:48:27.9764247+05:30;True|2025-01-29T11:23:08.7842582+05:30;True|2024-12-26T17:15:21.5644803+05:30;True|2024-12-26T17:07:43.7943701+05:30;True|2024-12-26T16:39:18.7144640+05:30;True|2024-12-26T16:24:42.4338402+05:30;True|2024-12-26T15:47:25.9454358+05:30;True|2024-12-16T15:56:47.5578806+05:30;True|2024-12-16T15:08:01.9984910+05:30;True|2024-12-16T13:20:02.3334182+05:30;True|2024-12-16T13:16:32.3608088+05:30;True|2024-12-13T16:58:54.0338840+05:30;True|2024-12-13T16:44:44.7712685+05:30;True|2024-12-13T16:23:50.5330636+05:30;True|2024-12-13T16:13:21.1952145+05:30;True|2024-12-13T13:07:29.8332840+05:30;True|2024-12-12T16:50:42.0998625+05:30;True|2024-12-12T16:34:09.2119769+05:30;True|2024-12-12T16:07:50.6915233+05:30;True|2024-12-12T15:55:08.6416623+05:30;True|2024-12-12T15:21:09.7673152+05:30;True|2024-12-12T15:05:07.6968006+05:30;True|2024-12-12T12:25:08.5749942+05:30;True|2024-12-12T12:21:55.6884439+05:30;True|2024-12-12T12:21:40.6359285+05:30;True|2024-12-12T12:21:36.7277040+05:30;True|2024-12-12T12:00:10.1422528+05:30;True|2024-12-12T11:46:50.3646723+05:30;True|2024-12-11T16:02:45.5131281+05:30;True|2024-12-11T12:12:59.2018644+05:30;True|2024-12-10T11:27:45.2273360+05:30;False|2024-12-10T11:27:32.7274559+05:30;True|2024-12-06T17:04:37.8909010+05:30;True|2024-12-06T15:50:37.0578257+05:30;True|2024-12-06T15:47:08.0667824+05:30;True|2024-12-05T17:10:23.9361941+05:30;True|2024-12-04T16:59:53.6404571+05:30;True|2024-12-04T16:20:36.2082455+05:30;True|2024-12-04T15:35:12.5178449+05:30;True|2024-12-04T12:38:07.1889267+05:30;True|2024-12-04T12:21:44.2481959+05:30;False|2024-12-04T12:15:33.3319208+05:30;False|2024-12-04T12:15:30.9522525+05:30;True|2024-12-03T15:43:10.5126315+05:30;True|2024-12-03T15:37:12.2756360+05:30;True|2024-12-03T15:28:40.4657373+05:30;True|2024-12-03T13:26:27.8586368+05:30;True|2024-12-03T12:54:26.1934383+05:30;True|2024-12-03T12:08:49.1786462+05:30;True|2024-12-03T11:48:02.1129014+05:30;True|2024-12-03T11:44:35.7448976+05:30;True|2024-11-29T16:13:05.0213978+05:30;True|2024-11-29T15:54:29.8395632+05:30;True|2024-11-29T13:09:39.3202643+05:30;True|2024-11-29T12:15:28.0300809+05:30;True|2024-11-29T12:15:21.1591325+05:30;True|2024-11-29T12:11:06.9781708+05:30;True|2024-11-29T11:50:08.5655199+05:30;True|2024-11-29T11:40:36.9372353+05:30;True|2024-11-29T11:38:34.5995957+05:30;True|2024-11-29T10:55:35.7541287+05:30;True|2024-11-15T18:55:58.5609858+05:30;True|2024-11-15T17:01:59.0480907+05:30;True|2024-11-15T16:48:51.8399962+05:30;True|2024-11-12T17:50:42.2658124+05:30;True|2024-11-11T17:48:34.4862562+05:30;True|2024-11-11T16:55:24.5443925+05:30;True|2024-11-11T15:08:30.4165674+05:30;True|2024-11-11T14:46:46.2191727+05:30;True|2024-11-10T11:52:34.6547779+05:30;True|2024-11-10T11:52:17.2962106+05:30;True|2024-11-10T09:38:34.1007692+05:30;True|2024-11-09T22:17:30.5947943+05:30;True|2024-11-09T20:30:38.9266299+05:30;True|2024-11-09T15:56:20.4532522+05:30;True|2024-11-08T16:32:01.2238146+05:30;True|2024-11-08T16:14:32.7122052+05:30;True|2024-11-08T16:13:59.0602252+05:30;True|2024-11-08T14:26:36.5308743+05:30;True|2024-11-08T12:44:52.6279459+05:30;True|2024-11-08T11:53:32.9679154+05:30;True|2024-11-07T10:06:47.8367382+05:30;True|2024-11-06T22:35:34.5899502+05:30;True|2024-11-06T22:27:43.3559873+05:30;True|2024-11-06T22:06:54.0429075+05:30;True|2024-11-06T11:03:29.0564338+05:30;</History>[m
+[32m+[m[32m    <History>True|2025-02-04T07:39:56.9655412Z;True|2025-02-03T17:13:11.0215795+05:30;True|2025-02-03T15:53:37.7635705+05:30;True|2025-02-03T13:30:27.2222601+05:30;True|2025-02-03T12:35:17.8720327+05:30;True|2025-01-31T16:35:50.0167871+05:30;True|2025-01-31T16:27:20.6289469+05:30;True|2025-01-31T15:55:46.4344495+05:30;True|2025-01-31T11:43:56.2482296+05:30;True|2025-01-30T17:11:20.4800638+05:30;True|2025-01-30T16:38:22.7120021+05:30;True|2025-01-30T15:57:39.9169205+05:30;True|2025-01-30T14:43:22.4555520+05:30;True|2025-01-29T16:19:40.3871474+05:30;True|2025-01-29T11:48:59.8164323+05:30;True|2025-01-29T11:48:27.9764247+05:30;True|2025-01-29T11:23:08.7842582+05:30;True|2024-12-26T17:15:21.5644803+05:30;True|2024-12-26T17:07:43.7943701+05:30;True|2024-12-26T16:39:18.7144640+05:30;True|2024-12-26T16:24:42.4338402+05:30;True|2024-12-26T15:47:25.9454358+05:30;True|2024-12-16T15:56:47.5578806+05:30;True|2024-12-16T15:08:01.9984910+05:30;True|2024-12-16T13:20:02.3334182+05:30;True|2024-12-16T13:16:32.3608088+05:30;True|2024-12-13T16:58:54.0338840+05:30;True|2024-12-13T16:44:44.7712685+05:30;True|2024-12-13T16:23:50.5330636+05:30;True|2024-12-13T16:13:21.1952145+05:30;True|2024-12-13T13:07:29.8332840+05:30;True|2024-12-12T16:50:42.0998625+05:30;True|2024-12-12T16:34:09.2119769+05:30;True|2024-12-12T16:07:50.6915233+05:30;True|2024-12-12T15:55:08.6416623+05:30;True|2024-12-12T15:21:09.7673152+05:30;True|2024-12-12T15:05:07.6968006+05:30;True|2024-12-12T12:25:08.5749942+05:30;True|2024-12-12T12:21:55.6884439+05:30;True|2024-12-12T12:21:40.6359285+05:30;True|2024-12-12T12:21:36.7277040+05:30;True|2024-12-12T12:00:10.1422528+05:30;True|2024-12-12T11:46:50.3646723+05:30;True|2024-12-11T16:02:45.5131281+05:30;True|2024-12-11T12:12:59.2018644+05:30;True|2024-12-10T11:27:45.2273360+05:30;False|2024-12-10T11:27:32.7274559+05:30;True|2024-12-06T17:04:37.8909010+05:30;True|2024-12-06T15:50:37.0578257+05:30;True|2024-12-06T15:47:08.0667824+05:30;True|2024-12-05T17:10:23.9361941+05:30;True|2024-12-04T16:59:53.6404571+05:30;True|2024-12-04T16:20:36.2082455+05:30;True|2024-12-04T15:35:12.5178449+05:30;True|2024-12-04T12:38:07.1889267+05:30;True|2024-12-04T12:21:44.2481959+05:30;False|2024-12-04T12:15:33.3319208+05:30;False|2024-12-04T12:15:30.9522525+05:30;True|2024-12-03T15:43:10.5126315+05:30;True|2024-12-03T15:37:12.2756360+05:30;True|2024-12-03T15:28:40.4657373+05:30;True|2024-12-03T13:26:27.8586368+05:30;True|2024-12-03T12:54:26.1934383+05:30;True|2024-12-03T12:08:49.1786462+05:30;True|2024-12-03T11:48:02.1129014+05:30;True|2024-12-03T11:44:35.7448976+05:30;True|2024-11-29T16:13:05.0213978+05:30;True|2024-11-29T15:54:29.8395632+05:30;True|2024-11-29T13:09:39.3202643+05:30;True|2024-11-29T12:15:28.0300809+05:30;True|2024-11-29T12:15:21.1591325+05:30;True|2024-11-29T12:11:06.9781708+05:30;True|2024-11-29T11:50:08.5655199+05:30;True|2024-11-29T11:40:36.9372353+05:30;True|2024-11-29T11:38:34.5995957+05:30;True|2024-11-29T10:55:35.7541287+05:30;True|2024-11-15T18:55:58.5609858+05:30;True|2024-11-15T17:01:59.0480907+05:30;True|2024-11-15T16:48:51.8399962+05:30;True|2024-11-12T17:50:42.2658124+05:30;True|2024-11-11T17:48:34.4862562+05:30;True|2024-11-11T16:55:24.5443925+05:30;True|2024-11-11T15:08:30.4165674+05:30;True|2024-11-11T14:46:46.2191727+05:30;True|2024-11-10T11:52:34.6547779+05:30;True|2024-11-10T11:52:17.2962106+05:30;True|2024-11-10T09:38:34.1007692+05:30;True|2024-11-09T22:17:30.5947943+05:30;True|2024-11-09T20:30:38.9266299+05:30;True|2024-11-09T15:56:20.4532522+05:30;True|2024-11-08T16:32:01.2238146+05:30;True|2024-11-08T16:14:32.7122052+05:30;True|2024-11-08T16:13:59.0602252+05:30;True|2024-11-08T14:26:36.5308743+05:30;True|2024-11-08T12:44:52.6279459+05:30;True|2024-11-08T11:53:32.9679154+05:30;True|2024-11-07T10:06:47.8367382+05:30;True|2024-11-06T22:35:34.5899502+05:30;True|2024-11-06T22:27:43.3559873+05:30;True|2024-11-06T22:06:54.0429075+05:30;</History>[m
+     <LastFailureDetails />[m
+   </PropertyGroup>[m
+ </Project>[m
+\ No newline at end of file[m
+[1mdiff --git a/DPDMIS_Angular_API/bin/Debug/net6.0/DPDMIS_Angular_API.dll b/DPDMIS_Angular_API/bin/Debug/net6.0/DPDMIS_Angular_API.dll[m
+[1mindex 91a300b..492da93 100644[m
+Binary files a/DPDMIS_Angular_API/bin/Debug/net6.0/DPDMIS_Angular_API.dll and b/DPDMIS_Angular_API/bin/Debug/net6.0/DPDMIS_Angular_API.dll differ
+[1mdiff --git a/DPDMIS_Angular_API/bin/Debug/net6.0/DPDMIS_Angular_API.pdb b/DPDMIS_Angular_API/bin/Debug/net6.0/DPDMIS_Angular_API.pdb[m
+[1mindex 3235869..a29b3ba 100644[m
+Binary files a/DPDMIS_Angular_API/bin/Debug/net6.0/DPDMIS_Angular_API.pdb and b/DPDMIS_Angular_API/bin/Debug/net6.0/DPDMIS_Angular_API.pdb differ
+[1mdiff --git a/DPDMIS_Angular_API/bin/Release/net6.0/DPDMIS_Angular_API.dll b/DPDMIS_Angular_API/bin/Release/net6.0/DPDMIS_Angular_API.dll[m
+[1mindex 8d98255..8738521 100644[m
+Binary files a/DPDMIS_Angular_API/bin/Release/net6.0/DPDMIS_Angular_API.dll and b/DPDMIS_Angular_API/bin/Release/net6.0/DPDMIS_Angular_API.dll differ
+[1mdiff --git a/DPDMIS_Angular_API/bin/Release/net6.0/DPDMIS_Angular_API.pdb b/DPDMIS_Angular_API/bin/Release/net6.0/DPDMIS_Angular_API.pdb[m
+[1mindex 704c809..53f0798 100644[m
+Binary files a/DPDMIS_Angular_API/bin/Release/net6.0/DPDMIS_Angular_API.pdb and b/DPDMIS_Angular_API/bin/Release/net6.0/DPDMIS_Angular_API.pdb differ
+[1mdiff --git a/DPDMIS_Angular_API/bin/Release/net6.0/publish/DPDMIS_Angular_API/DPDMIS_Angular_API.dll b/DPDMIS_Angular_API/bin/Release/net6.0/publish/DPDMIS_Angular_API/DPDMIS_Angular_API.dll[m
+[1mindex 8d98255..8738521 100644[m
+Binary files a/DPDMIS_Angular_API/bin/Release/net6.0/publish/DPDMIS_Angular_API/DPDMIS_Angular_API.dll and b/DPDMIS_Angular_API/bin/Release/net6.0/publish/DPDMIS_Angular_API/DPDMIS_Angular_API.dll differ
+[1mdiff --git a/DPDMIS_Angular_API/bin/Release/net6.0/publish/DPDMIS_Angular_API/DPDMIS_Angular_API.pdb b/DPDMIS_Angular_API/bin/Release/net6.0/publish/DPDMIS_Angular_API/DPDMIS_Angular_API.pdb[m
+[1mindex 704c809..53f0798 100644[m
+Binary files a/DPDMIS_Angular_API/bin/Release/net6.0/publish/DPDMIS_Angular_API/DPDMIS_Angular_API.pdb and b/DPDMIS_Angular_API/bin/Release/net6.0/publish/DPDMIS_Angular_API/DPDMIS_Angular_API.pdb differ
+[1mdiff --git a/DPDMIS_Angular_API/obj/Debug/net6.0/DPDMIS_Angular_API.dll b/DPDMIS_Angular_API/obj/Debug/net6.0/DPDMIS_Angular_API.dll[m
+[1mindex 91a300b..492da93 100644[m
+Binary files a/DPDMIS_Angular_API/obj/Debug/net6.0/DPDMIS_Angular_API.dll and b/DPDMIS_Angular_API/obj/Debug/net6.0/DPDMIS_Angular_API.dll differ
+[1mdiff --git a/DPDMIS_Angular_API/obj/Debug/net6.0/DPDMIS_Angular_API.pdb b/DPDMIS_Angular_API/obj/Debug/net6.0/DPDMIS_Angular_API.pdb[m
+[1mindex 3235869..a29b3ba 100644[m
+Binary files a/DPDMIS_Angular_API/obj/Debug/net6.0/DPDMIS_Angular_API.pdb and b/DPDMIS_Angular_API/obj/Debug/net6.0/DPDMIS_Angular_API.pdb differ
+[1mdiff --git a/DPDMIS_Angular_API/obj/Debug/net6.0/ref/DPDMIS_Angular_API.dll b/DPDMIS_Angular_API/obj/Debug/net6.0/ref/DPDMIS_Angular_API.dll[m
+[1mindex ce5bf18..775824f 100644[m
+Binary files a/DPDMIS_Angular_API/obj/Debug/net6.0/ref/DPDMIS_Angular_API.dll and b/DPDMIS_Angular_API/obj/Debug/net6.0/ref/DPDMIS_Angular_API.dll differ
+[1mdiff --git a/DPDMIS_Angular_API/obj/Debug/net6.0/refint/DPDMIS_Angular_API.dll b/DPDMIS_Angular_API/obj/Debug/net6.0/refint/DPDMIS_Angular_API.dll[m
+[1mindex ce5bf18..775824f 100644[m
+Binary files a/DPDMIS_Angular_API/obj/Debug/net6.0/refint/DPDMIS_Angular_API.dll and b/DPDMIS_Angular_API/obj/Debug/net6.0/refint/DPDMIS_Angular_API.dll differ
+[1mdiff --git a/DPDMIS_Angular_API/obj/Release/net6.0/DPDMIS_Angular_API.dll b/DPDMIS_Angular_API/obj/Release/net6.0/DPDMIS_Angular_API.dll[m
+[1mindex 8d98255..8738521 100644[m
+Binary files a/DPDMIS_Angular_API/obj/Release/net6.0/DPDMIS_Angular_API.dll and b/DPDMIS_Angular_API/obj/Release/net6.0/DPDMIS_Angular_API.dll differ
+[1mdiff --git a/DPDMIS_Angular_API/obj/Release/net6.0/DPDMIS_Angular_API.pdb b/DPDMIS_Angular_API/obj/Release/net6.0/DPDMIS_Angular_API.pdb[m
+[1mindex 704c809..53f0798 100644[m
+Binary files a/DPDMIS_Angular_API/obj/Release/net6.0/DPDMIS_Angular_API.pdb and b/DPDMIS_Angular_API/obj/Release/net6.0/DPDMIS_Angular_API.pdb differ
+[1mdiff --git a/DPDMIS_Angular_API/obj/Release/net6.0/PubTmp/Out/DPDMIS_Angular_API.dll b/DPDMIS_Angular_API/obj/Release/net6.0/PubTmp/Out/DPDMIS_Angular_API.dll[m
+[1mindex 8d98255..8738521 100644[m
+Binary files a/DPDMIS_Angular_API/obj/Release/net6.0/PubTmp/Out/DPDMIS_Angular_API.dll and b/DPDMIS_Angular_API/obj/Release/net6.0/PubTmp/Out/DPDMIS_Angular_API.dll differ
+[1mdiff --git a/DPDMIS_Angular_API/obj/Release/net6.0/PubTmp/Out/DPDMIS_Angular_API.pdb b/DPDMIS_Angular_API/obj/Release/net6.0/PubTmp/Out/DPDMIS_Angular_API.pdb[m
+[1mindex 704c809..53f0798 100644[m
+Binary files a/DPDMIS_Angular_API/obj/Release/net6.0/PubTmp/Out/DPDMIS_Angular_API.pdb and b/DPDMIS_Angular_API/obj/Release/net6.0/PubTmp/Out/DPDMIS_Angular_API.pdb differ
+[1mdiff --git a/DPDMIS_Angular_API/obj/Release/net6.0/ref/DPDMIS_Angular_API.dll b/DPDMIS_Angular_API/obj/Release/net6.0/ref/DPDMIS_Angular_API.dll[m
+[1mindex 73f0962..5a6d9f6 100644[m
+Binary files a/DPDMIS_Angular_API/obj/Release/net6.0/ref/DPDMIS_Angular_API.dll and b/DPDMIS_Angular_API/obj/Release/net6.0/ref/DPDMIS_Angular_API.dll differ
+[1mdiff --git a/DPDMIS_Angular_API/obj/Release/net6.0/refint/DPDMIS_Angular_API.dll b/DPDMIS_Angular_API/obj/Release/net6.0/refint/DPDMIS_Angular_API.dll[m
+[1mindex 73f0962..5a6d9f6 100644[m
+Binary files a/DPDMIS_Angular_API/obj/Release/net6.0/refint/DPDMIS_Angular_API.dll and b/DPDMIS_Angular_API/obj/Release/net6.0/refint/DPDMIS_Angular_API.dll differ

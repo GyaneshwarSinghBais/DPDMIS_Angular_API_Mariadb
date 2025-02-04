@@ -383,13 +383,18 @@ from tbfacilityreceipts r
             if (stktype == "I")
             {
                 qry = @"  select   row_number() over (order by fsi.itemid) as id, fsi.itemid,vm.itemcode,vm.itemname,vm.strength1,sum(nvl(ftbo.issueqty,0)) issueqty ,fs.ISSUEDATE  ,fs.WardID,b.WardName
-  ,0 as inwno,0 as batchno,'' as mfgdate,'' as expdate
+  ,0 as inwno,
+   CAST(0 AS CHAR) AS batchno,       
+    CAST(NULLIF('', '') AS DATETIME) AS mfgdate, 
+    CAST(NULLIF('', '') AS DATETIME) AS expdate  
     from tbfacilityissues fs 
  Inner Join masFacilityWards b on (b.WardID=fs.WardID)
   inner join tbfacilityissueitems fsi on fsi.issueid=fs.issueid 
   inner join masitems vm on vm.itemid=fsi.itemid
   inner join tbfacilityoutwards ftbo on ftbo.issueitemid=fsi.issueitemid 
-  where fs.status = 'C' "+ whitemid + @"  and fs.facilityid="+ facId + @"  and fs.ISSUETYPE='NO' and fs.ISSUEDATE between   '"+ fromDate + @"' and    '"+ todate + @"'  
+  where fs.status = 'C' " + whitemid + @"  and fs.facilityid="+ facId + @"  and fs.ISSUETYPE='NO' 
+ AND fs.ISSUEDATE BETWEEN STR_TO_DATE('"+ fromDate + @"', '%d-%b-%Y') 
+                        AND STR_TO_DATE('"+ todate + @"', '%d-%b-%Y') 
   group by fsi.itemid,fs.ISSUEDATE,vm.itemcode,vm.itemname,vm.strength1,fs.WardID,b.WardName
   order by fs.ISSUEDATE ";
             }
@@ -404,7 +409,9 @@ from tbfacilityreceipts r
   inner join masitems vm on vm.itemid = fsi.itemid
   inner join tbfacilityoutwards ftbo on ftbo.issueitemid = fsi.issueitemid
    inner join tbfacilityreceiptbatches rb on rb.inwno = ftbo.inwno
-  where fs.status = 'C'  "+ whitemid + @" and fs.facilityid = " + facId + @"  and fs.ISSUETYPE = 'NO' and fs.ISSUEDATE between   '"+ fromDate + @"' and    '"+ todate + @"' 
+  where fs.status = 'C'  "+ whitemid + @" and fs.facilityid = " + facId + @"  and fs.ISSUETYPE = 'NO' 
+    AND fs.ISSUEDATE BETWEEN STR_TO_DATE('" + fromDate + @"', '%d-%b-%Y') 
+                        AND STR_TO_DATE('" + todate + @"', '%d-%b-%Y')  
   group by fsi.itemid,fs.ISSUEDATE,vm.itemcode,vm.itemname,vm.strength1,fs.WardID,b.WardName,ftbo.inwno,rb.batchno,rb.mfgdate,rb.expdate
   order by fs.ISSUEDATE,vm.itemname";
 
@@ -682,7 +689,7 @@ order by ty.itemtypename, m.itemname";
                    where fs.status = 'C'  and fs.facilityid=" + phcId + @"          
                    group by fsi.itemid,fs.facilityid,ftbo.inwno                     
                  ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid and iq.facilityid=t.facilityid                 
-                 Where 1=1 " + whclause + @" and  T.Status = 'C'  And (b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate 
+                 Where 1=1 " + whclause + @" and  T.Status = 'C'  And (b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>curdate() 
                 and f.facilityid= " + phcId + @"  " + whcatid + @"
                 and (   (case when (b.qastatus ='1' or  mi.qctest='N') then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) end)) > 0
                 group by  mi.ITEMCODE, t.facilityid, mi.itemid,b.qastatus,mi.qctest,mi.itemname,mi.strength1,c.categoryname,c.categoryid,itemtypename,mi.ISEDL2021
