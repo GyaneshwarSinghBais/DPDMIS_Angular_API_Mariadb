@@ -232,7 +232,7 @@ namespace CgmscHO_API.Utility
             string strSQL = "";
             if (Isrecipt)
                 //strSQL = "Select Lpad(NVL(Max(To_Number(SubStr(FacReceiptNo, -11, 5))), 0) + 1, 5, '0') as WHSlNo from tbFacilityReceipts Where FacReceiptNo Like '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
-               
+
                 strSQL = @"
 SELECT LPAD(IFNULL(MAX(CAST(SUBSTRING(FacReceiptNo, -11, 5) AS UNSIGNED)), 0) + 1, 5, '0') AS WHSlNo 
 FROM tbFacilityReceipts 
@@ -252,7 +252,7 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
             var myList = _context.GenrateReceiptIssueNoDbSet
             .FromSqlInterpolated(FormattableStringFactory.Create(strSQL)).ToList();
 
-            if (myList.Count  > 0 && myList[0].WHSlNo != null)
+            if (myList.Count > 0 && myList[0].WHSlNo != null)
             {
                 string WHSlNo = myList[0].WHSlNo; // Assuming IssueItemID is an integer
                 return WHSlNo.ToString();
@@ -290,7 +290,7 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
         //mariadb
         public string getSHAccYear()
         {
-           // string qry = @"select ACCYRSETID,ACCYEAR,STARTDATE,ENDDATE,SHACCYEAR,YEARORDER from masAccYearSettings Where curdate() between StartDate and EndDate";
+            // string qry = @"select ACCYRSETID,ACCYEAR,STARTDATE,ENDDATE,SHACCYEAR,YEARORDER from masAccYearSettings Where curdate() between StartDate and EndDate";
 
             string qry = @"select ACCYRSETID,ACCYEAR, STARTDATE, ENDDATE,SHACCYEAR,YEARORDER from masAccYearSettings Where curdate() between StartDate and EndDate";
 
@@ -309,27 +309,46 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
                 return null; // Or any other appropriate indication
             }
         }
+
         public string getForgotData(string emailMob)
         {
-            string qry = @"  select f.facilityid from usrusers u 
-                            left outer join masfacilities f on f.facilityid=u.facilityid
-                            where    (u.emailid ='" + emailMob + "' or f.phone1='" + emailMob + "')   ";
+            string qry = @"SELECT f.facilityid 
+                   FROM usrusers u 
+                   LEFT OUTER JOIN masfacilities f ON f.facilityid = u.facilityid
+                   WHERE (u.emailid = @EmailMob OR f.phone1 = @EmailMob)";
 
-
+            var parameters = new[] {
+        new MySqlParameter("@EmailMob", emailMob)
+    };
 
             var myList = _context.PasswordForgetDbset
-            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+                .FromSqlRaw(qry, parameters)
+                .ToList();
 
-            if (myList.Count > 0)
-            {
-                string shyr = myList[0].FACILITYID; // Assuming IssueItemID is an integer
-                return shyr.ToString();
-            }
-            else
-            {
-                return "0"; // Or any other appropriate indication
-            }
+            return myList.Any() ? myList[0].FACILITYID.ToString() : "0";
         }
+
+        // public string getForgotData(string emailMob)
+        // {
+        //     string qry = @"  select f.facilityid from usrusers u 
+        //                     left outer join masfacilities f on f.facilityid=u.facilityid
+        //                     where    (u.emailid ='" + emailMob + "' or f.phone1='" + emailMob + "')   ";
+
+
+
+        //     var myList = _context.PasswordForgetDbset
+        //     .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+        //     if (myList.Count > 0)
+        //     {
+        //         string shyr = myList[0].FACILITYID.ToString(); // Assuming IssueItemID is an integer
+        //         return shyr.ToString();
+        //     }
+        //     else
+        //     {
+        //         return "0"; // Or any other appropriate indication
+        //     }
+        // }
         public string getCollectorDisid(string userid)
         {
             string qry = @" select DISTRICTID as CMHOFACILITY  from usrusers where  userid = " + userid;
@@ -422,7 +441,7 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
 
             if (myList.Count > 0)
             {
-                string shyr =  (myList[0].ENDDATE).ToString(); // Assuming IssueItemID is an integer
+                string shyr = (myList[0].ENDDATE).ToString(); // Assuming IssueItemID is an integer
                 return shyr.ToString();
             }
             else
@@ -838,18 +857,18 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
             //             and rb.InwNo =  " + inwardNo;
 
 
-//            strSQL = @" Select distinct m.itemid,rb.batchno,rb.expdate,tbo.IssueQty as IssueBatchQty,rb.InwNo
-//,tbi.issueitemid as indentitemid,tfr.FacReceiptID,tfi.FacReceiptItemID,rb.MfgDate,rb.ponoid,case when nvl(m.qctest, 'Y') = 'Y' then rb.qastatus else 1 end as qastatus,rb.whissueblock
-//             from tbfacilityissueitems tbi
-//               Inner Join tbfacilityoutwards tbo on(tbo.issueitemid = tbi.issueitemid)
-//              Inner Join tbfacilityreceiptbatches rb on(rb.InwNo = tbo.InwNo)
-//             Inner Join vmasitems m on(m.ItemID = tbi.ItemID)
-//             Inner Join tbfacilityissues tb on(tb.issueid = tbi.issueid)
-//             left outer join tbFacilityReceipts tfr on(tfr.issueid= tb.issueid) and tfr.facilityid = " + facilityId + @" and tfr.FacReceiptID = " + facReceiptId + @"
-//            Left Outer Join tbFacilityReceiptItems tfi on  tfi.FacReceiptID = tfr.FacReceiptID and tfi.itemid = tbi.itemid
-//             Where 1 = 1  and tb.TOFACILITYID =" + facilityId + @"
-         
-//             and rb.InwNo = " + inwardNo;
+            //            strSQL = @" Select distinct m.itemid,rb.batchno,rb.expdate,tbo.IssueQty as IssueBatchQty,rb.InwNo
+            //,tbi.issueitemid as indentitemid,tfr.FacReceiptID,tfi.FacReceiptItemID,rb.MfgDate,rb.ponoid,case when nvl(m.qctest, 'Y') = 'Y' then rb.qastatus else 1 end as qastatus,rb.whissueblock
+            //             from tbfacilityissueitems tbi
+            //               Inner Join tbfacilityoutwards tbo on(tbo.issueitemid = tbi.issueitemid)
+            //              Inner Join tbfacilityreceiptbatches rb on(rb.InwNo = tbo.InwNo)
+            //             Inner Join vmasitems m on(m.ItemID = tbi.ItemID)
+            //             Inner Join tbfacilityissues tb on(tb.issueid = tbi.issueid)
+            //             left outer join tbFacilityReceipts tfr on(tfr.issueid= tb.issueid) and tfr.facilityid = " + facilityId + @" and tfr.FacReceiptID = " + facReceiptId + @"
+            //            Left Outer Join tbFacilityReceiptItems tfi on  tfi.FacReceiptID = tfr.FacReceiptID and tfi.itemid = tbi.itemid
+            //             Where 1 = 1  and tb.TOFACILITYID =" + facilityId + @"
+
+            //             and rb.InwNo = " + inwardNo;
 
             strSQL = @"  Select distinct m.itemid,IFNULL(tbo.ISSUEQTY, 0) as IssueBatchQty,tbo.InwNo,tb.INDENTID,
        IFNULL(rb.batchno, tbo.batchno) AS batchno, 
@@ -869,7 +888,7 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
              Inner Join tbfacilityissues tb on(tb.issueid = tbi.issueid)
              left outer join tbFacilityReceipts tfr on(tfr.issueid= tb.issueid) and tfr.facilityid = " + facilityId + @" and tfr.FacReceiptID = " + facReceiptId + @"
             Left Outer Join tbFacilityReceiptItems tfi on  tfi.FacReceiptID = tfr.FacReceiptID and tfi.itemid = tbi.itemid
-             Where 1 = 1  and tb.TOFACILITYID =" + facilityId + @"   and tbo.InwNo = "+ inwardNo + @"  AND tb.facINDENTID= " + indentId;
+             Where 1 = 1  and tb.TOFACILITYID =" + facilityId + @"   and tbo.InwNo = " + inwardNo + @"  AND tb.facINDENTID= " + indentId;
 
 
 
@@ -1035,7 +1054,7 @@ where 1=1 and mi.itemid=" + itemid;
         public string insertUpdateOTP1(string userid)
         {
             string mobNo = getMobileNumber(userid);
-           // string mobNo = "9691611103";
+            // string mobNo = "9691611103";
             if (userid == "4821")
             {
                 mobNo = "6263007758";
@@ -1137,23 +1156,23 @@ where 1=1 and mi.itemid=" + itemid;
             string value = "0";
             string qry = "";
 
-           
-//                qry = @" select  d.districtname,l.locationname, f.FACILITYNAME,p.FACILITYNAME as parentfac,f.LONGITUDE,f.LATITUDE,f.PHC_ID,f.PHONE1, case when f.is_aam = 'Y' then 'AAM' else '-' end as mfacility ,f.CONTACTPERSONNAME,
+
+            //                qry = @" select  d.districtname,l.locationname, f.FACILITYNAME,p.FACILITYNAME as parentfac,f.LONGITUDE,f.LATITUDE,f.PHC_ID,f.PHONE1, case when f.is_aam = 'Y' then 'AAM' else '-' end as mfacility ,f.CONTACTPERSONNAME,
 
 
-//f.FACILITYCODE,f.FACILITYID,h.FOOTER1,h.FOOTER2,h.FOOTER3,h.EMAIL,
-//d.districtid,ft.FACILITYTYPECODE,ft.FACILITYTYPEDESC,ft.ELDCAT,fw.warehouseid,w.WAREHOUSENAME,w.email as whemail,w.phone1 as whcontact  
-//,u.userid,u.emailid, p.INDENTDURATION
-//from masfacilities f
-//                            inner join usrusers u on u.FACILITYID = f.facilityid
-//                            left outer join MASFACHEADERFOOTER h on h.userid = u.userid
-//                            inner join masfacilitywh fw on fw.facilityid = f.facilityid
-//                            inner join maswarehouses w on w.WAREHOUSEID = fw.WAREHOUSEID
-//                            inner join masfacilitytypes ft on ft.FACILITYTYPEID = f.FACILITYTYPEID
-//                            inner join masdistricts d on d.districtid = f.districtid
-//                            left outer join maslocations l on l.LOCATIONID=f.LOCATIONID
-//                            left outer join masfacilities p on p.facilityid=f.PHC_ID
-//                            where 1=1  and u.userid = " + userid + "";
+            //f.FACILITYCODE,f.FACILITYID,h.FOOTER1,h.FOOTER2,h.FOOTER3,h.EMAIL,
+            //d.districtid,ft.FACILITYTYPECODE,ft.FACILITYTYPEDESC,ft.ELDCAT,fw.warehouseid,w.WAREHOUSENAME,w.email as whemail,w.phone1 as whcontact  
+            //,u.userid,u.emailid, p.INDENTDURATION
+            //from masfacilities f
+            //                            inner join usrusers u on u.FACILITYID = f.facilityid
+            //                            left outer join MASFACHEADERFOOTER h on h.userid = u.userid
+            //                            inner join masfacilitywh fw on fw.facilityid = f.facilityid
+            //                            inner join maswarehouses w on w.WAREHOUSEID = fw.WAREHOUSEID
+            //                            inner join masfacilitytypes ft on ft.FACILITYTYPEID = f.FACILITYTYPEID
+            //                            inner join masdistricts d on d.districtid = f.districtid
+            //                            left outer join maslocations l on l.LOCATIONID=f.LOCATIONID
+            //                            left outer join masfacilities p on p.facilityid=f.PHC_ID
+            //                            where 1=1  and u.userid = " + userid + "";
 
             qry = @" SELECT  
             d.districtname,
@@ -1199,7 +1218,7 @@ where 1=1 and mi.itemid=" + itemid;
         LEFT OUTER JOIN masdistricts d ON d.districtid = f.districtid
         LEFT OUTER JOIN maslocations l ON l.LOCATIONID = f.LOCATIONID
         LEFT OUTER JOIN masfacilities p ON p.facilityid = f.PHC_ID
-        WHERE u.userid ="+ userid + " ";
+        WHERE u.userid =" + userid + " ";
 
 
 

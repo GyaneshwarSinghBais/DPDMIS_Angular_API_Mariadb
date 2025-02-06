@@ -25,16 +25,36 @@ namespace DPDMIS_Angular_API.Controllers
             _context = context;
         }
 
-
         [HttpGet("getUserDataForForgotPassword")]
-        public string getUserDataForForgotPassword(string useremaiid)
+        public ActionResult<string> getUserDataForForgotPassword(string useremaiid)
         {
+            if (string.IsNullOrEmpty(useremaiid))
+            {
+                return BadRequest("Email/Mobile is required");
+            }
 
-            FacOperations op = new FacOperations(_context);
-            string getNo = op.getForgotData(useremaiid);
-            return getNo;
-
+            try
+            {
+                FacOperations op = new FacOperations(_context);
+                string result = op.getForgotData(useremaiid);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
         }
+
+
+        // [HttpGet("getUserDataForForgotPassword")]
+        // public string getUserDataForForgotPassword(string useremaiid)
+        // {
+
+        //     FacOperations op = new FacOperations(_context);
+        //     string getNo = op.getForgotData(useremaiid);
+        //     return getNo;
+
+        // }
 
         [HttpGet("getSHCstockOut")]
         public async Task<ActionResult<IEnumerable<getLastIssueDT_DTO>>> getSHCstockOut(Int64 distId)
@@ -52,7 +72,7 @@ namespace DPDMIS_Angular_API.Controllers
                 from 
                 (
                 select f.facilityname,f.PHC_ID,f.LOCATIONID,f.facilityid,m.itemid,f.districtid from masfacilities f ,masitems m 
-               where     1=1  and f.districtid = "+ distId + @" and f.is_aam = 'Y' and m.SHC='Y'
+               where     1=1  and f.districtid = " + distId + @" and f.is_aam = 'Y' and m.SHC='Y'
                 ) f
                             inner join masdistricts d on d.districtid = f.districtid
                            left outer join masfacilities p on p.facilityid=f.PHC_ID
@@ -82,7 +102,7 @@ namespace DPDMIS_Angular_API.Controllers
                            
                            ) st on st.facilityid=f.facilityid and st.itemid=f.itemid
                            
-         where 1=1 and f.districtid="+ distId + @" -- and f.facilityid=27952
+         where 1=1 and f.districtid=" + distId + @" -- and f.facilityid=27952
          )
                group by districtname ,districtid,facilityname,facilityid,parentfac,locationname
                order by locationname,parentfac
@@ -105,19 +125,19 @@ namespace DPDMIS_Angular_API.Controllers
             string whfacId = "";
             string whitemId = "";
 
-            if(distId != 0)
+            if (distId != 0)
             {
-                whDistId = " and d.districtid="+ distId + " ";
-            } 
+                whDistId = " and d.districtid=" + distId + " ";
+            }
 
             if (facId != 0)
             {
-                whfacId = " and f.facilityid="+ facId + "  ";
+                whfacId = " and f.facilityid=" + facId + "  ";
             }
 
             if (itemId != 0)
             {
-                whitemId = "  and mi.itemid="+ itemId + " ";
+                whitemId = "  and mi.itemid=" + itemId + " ";
             }
 
             string qry = @" 
@@ -147,9 +167,9 @@ select c.categoryname,mi.ITEMCODE,ty.itemtypename,mi.itemname,mi.strength1,
                    group by fsi.itemid,fs.facilityid,ftbo.inwno                     
                  ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid and iq.facilityid=t.facilityid                 
                  Where 1=1 and f.is_aam = 'Y' and  T.Status = 'C'  And (b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate 
-             "+ whfacId + @"  
-  "+ whitemId + @"
-"+ whDistId + @"
+             " + whfacId + @"  
+  " + whitemId + @"
+" + whDistId + @"
                 and (   (case when (b.qastatus ='1' or  mi.qctest='N') then (nvl(b.absrqty,0) - nvl(iq.issueqty,0)) end)) > 0
                 group by  mi.ITEMCODE, t.facilityid, mi.itemid,b.qastatus,mi.qctest,mi.itemname,mi.strength1,c.categoryname,c.categoryid,itemtypename,
                 mi.ISEDL2021,f.facilityname,d.districtname,l.locationname,d.districtid,l.locationid
@@ -191,7 +211,7 @@ select c.categoryname,mi.ITEMCODE,ty.itemtypename,mi.itemname,mi.strength1,
             }
             if (fromDate != "0" && todate != "0")
             {
-                whDateBetween = " and fs.ISSUEDATE between   '"+ fromDate + @"' and    '"+ todate + @"'  ";
+                whDateBetween = " and fs.ISSUEDATE between   '" + fromDate + @"' and    '" + todate + @"'  ";
             }
 
             string qry = @"   
@@ -210,12 +230,12 @@ select c.categoryname,mi.ITEMCODE,ty.itemtypename,mi.itemname,mi.strength1,
   inner join vmasitems vm on vm.itemid=fsi.itemid
   inner join tbfacilityoutwards ftbo on ftbo.issueitemid=fsi.issueitemid 
   where fs.status = 'C'  
-  "+ whfacId + @"  
- "+ whitemId + @" 
-"+ whDistId + @"
+  " + whfacId + @"  
+ " + whitemId + @" 
+" + whDistId + @"
   and f.is_aam = 'Y'
 and fs.ISSUETYPE='NO'    
-"+ whDateBetween + @" 
+" + whDateBetween + @" 
   group by fsi.itemid,fs.ISSUEDATE,vm.itemcode,vm.itemname,vm.strength1,fs.WardID,b.WardName,f.facilityname,f.facilityid
   ,d.districtname,l.locationname,d.districtid,l.locationid
   order by fs.ISSUEDATE                          
@@ -296,12 +316,12 @@ from masfacilities f
 
 
         [HttpGet("KPIFacWise")]
-        public async Task<ActionResult<IEnumerable<KPIFacWiseDTO>>> KPIFacWise(Int64 distId,Int64 facId)
+        public async Task<ActionResult<IEnumerable<KPIFacWiseDTO>>> KPIFacWise(Int64 distId, Int64 facId)
         {
 
             string whDistId = "";
             string whfacId = "";
-         
+
 
             if (distId != 0)
             {
@@ -313,7 +333,7 @@ from masfacilities f
                 whfacId = " and f.facilityid=" + facId + "  ";
             }
 
-      
+
 
             string qry = @"    
 
@@ -336,7 +356,7 @@ from masfacilities f
                             left outer join 
                             (
                                 select FACILITYID,count(indentid) nosotherfacindent from MASFACTRANSFERS ofi
-                            where ofi.status='C' "+ whfacId + @"
+                            where ofi.status='C' " + whfacId + @"
                             group by FACILITYID
                              ) oind on oind.facilityid=f.facilityid
                             left outer join 
@@ -354,7 +374,7 @@ from masfacilities f
        
                             
                       
-                            where 1=1 and f.is_aam = 'Y' "+ whDistId + @"
+                            where 1=1 and f.is_aam = 'Y' " + whDistId + @"
                           order by p.facilityname
                             
                             
