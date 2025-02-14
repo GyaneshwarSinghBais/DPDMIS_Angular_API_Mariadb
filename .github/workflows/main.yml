@@ -1,0 +1,24 @@
+name: Deploy to IIS Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Copy files to server via SCP
+      uses: appleboy/scp-action@v0.1.5
+      with:
+        host: 140.238.246.250
+        username: opc
+        password: Adminsct@23456$
+        source: './*'
+        target: '/mnt/D/IIS/AAMAPI'
+
+    
