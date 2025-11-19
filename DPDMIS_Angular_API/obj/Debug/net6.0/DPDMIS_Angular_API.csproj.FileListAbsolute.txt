@@ -679,16 +679,10 @@ G:\gyan\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_AP
 G:\gyan\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.csproj.CoreCompileInputs.cache
 G:\gyan\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.MvcApplicationPartsAssemblyInfo.cs
 G:\gyan\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.MvcApplicationPartsAssemblyInfo.cache
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.csproj.AssemblyReference.cache
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.GeneratedMSBuildEditorConfig.editorconfig
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.AssemblyInfoInputs.cache
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.AssemblyInfo.cs
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.csproj.CoreCompileInputs.cache
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.MvcApplicationPartsAssemblyInfo.cs
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.MvcApplicationPartsAssemblyInfo.cache
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Debug\net6.0\appsettings.Development.json
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Debug\net6.0\appsettings.json
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Debug\net6.0\Connected Services\SMSRef\ConnectedService.json
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Debug\net6.0\DPDMIS_Angular_API.staticwebassets.endpoints.json
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Debug\net6.0\DPDMIS_Angular_API.exe
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Debug\net6.0\DPDMIS_Angular_API.deps.json
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Debug\net6.0\DPDMIS_Angular_API.runtimeconfig.json
@@ -1010,15 +1004,25 @@ G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Debug\net6
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Debug\net6.0\Broadline.Controls.dll
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\bin\Debug\net6.0\Broadline.Controls.pdb
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets\msbuild.DPDMIS_Angular_API.Microsoft.AspNetCore.StaticWebAssets.props
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets\msbuild.build.DPDMIS_Angular_API.props
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.DPDMIS_Angular_API.props
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.DPDMIS_Angular_API.props
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets.pack.json
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets.build.json
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets.development.json
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.csproj.AssemblyReference.cache
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\rpswa.dswa.cache.json
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.GeneratedMSBuildEditorConfig.editorconfig
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.AssemblyInfoInputs.cache
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.AssemblyInfo.cs
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.csproj.CoreCompileInputs.cache
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.MvcApplicationPartsAssemblyInfo.cs
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.MvcApplicationPartsAssemblyInfo.cache
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.sourcelink.json
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\rjimswa.dswa.cache.json
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\rjsmrazor.dswa.cache.json
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\rjsmcshtml.dswa.cache.json
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\scopedcss\bundle\DPDMIS_Angular_API.styles.css
-G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.csproj.CopyComplete
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets.build.json
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets.build.json.cache
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets.development.json
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets.build.endpoints.json
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
+G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_A.9A8889B5.Up2Date
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.dll
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\refint\DPDMIS_Angular_API.dll
 G:\gyan\Angular API\MariaDB\DPDMIS_Angular_API\DPDMIS_Angular_API\obj\Debug\net6.0\DPDMIS_Angular_API.pdb

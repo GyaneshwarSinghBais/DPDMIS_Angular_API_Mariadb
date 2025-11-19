@@ -513,7 +513,9 @@ where c.facilityid = " + faclityId + @" and ci.nocid = " + indendid + @")
             objmascgmscnocitems.STATUS = "C";
             objmascgmscnocitems.BOOKEDFLAG = "B";
             objmascgmscnocitems.APPROVEDQTY = 0;
-            objmascgmscnocitems.BOOKEDQTY = objmascgmscnocitems.REQUESTEDQTY;
+            //objmascgmscnocitems.BOOKEDQTY = objmascgmscnocitems.REQUESTEDQTY;
+            objmascgmscnocitems.BOOKEDQTY = 0;
+            objmascgmscnocitems.REQUESTEDQTY = objmascgmscnocitems.REQUESTEDQTY;
 
             try
             {
@@ -536,7 +538,7 @@ where c.facilityid = " + faclityId + @" and ci.nocid = " + indendid + @")
                             //existingItem.STATUS = objmascgmscnocitems.STATUS;
                             //existingItem.BOOKEDFLAG = objmascgmscnocitems.BOOKEDFLAG;
                             //existingItem.APPROVEDQTY = objmascgmscnocitems.APPROVEDQTY;
-                            existingItem.BOOKEDQTY = objmascgmscnocitems.REQUESTEDQTY;
+                            existingItem.BOOKEDQTY = 0;
                             existingItem.REQUESTEDQTY = objmascgmscnocitems.REQUESTEDQTY; // Update as necessary
 
                             _context.Entry(existingItem).State = EntityState.Modified;
@@ -691,7 +693,7 @@ inner join masitemmaincategory mc on mc.MCID = c.MCID
             if (nocid != 0)
             {
                 whNocid = " left outer join mascgmscnocitems ni on ni.itemid = m.itemid and ni.nocid = " + nocid + @" ";
-                caseCond = " nvl(ni.BOOKEDQTY,0) *  nvl(m.unitcount,1)";
+                caseCond = " nvl(ni.REQUESTEDQTY,0) *  nvl(m.unitcount,1)";
             }
 
             string qry = @" select nvl(ni.sr,0) sr, m.itemid, m.itemcode,ty.itemtypename,m.itemname,m.strength1, m.multiple, m.unitcount," + caseCond + @" as indentQty from masitems m 
@@ -700,7 +702,7 @@ inner join masitemmaincategory mc on mc.MCID = c.MCID
 left outer join masitemtypes ty  on ty.itemtypeid = m.itemtypeid
 " + whNocid + @"
 where m.shc = 'Y' " + whMcid + @" and m.ISFREEZ_ITPR is NULL
-order by  nvl(ni.BOOKEDQTY,0) desc,ty.itemtypename ";
+order by  nvl(ni.REQUESTEDQTY,0) desc,ty.itemtypename ";
             var myList = _context.SHCitemlistDbSet
             .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
             return myList;

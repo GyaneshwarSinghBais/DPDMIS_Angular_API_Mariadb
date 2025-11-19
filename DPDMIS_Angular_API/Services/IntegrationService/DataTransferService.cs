@@ -1496,7 +1496,7 @@ namespace DPDMIS_Angular_API.Services.IntegrationService
         public async Task TransferDataAsync_Freeze_MASCGMSCNOC(Int64 nocid)
         {
 
-            string qry = "  update MASCGMSCNOC set NOCDATE=curdate(), STATUS = 'C',ENTRY_DATE=curdate() where nocid = " + nocid;
+            string qry = "  update MASCGMSCNOC set NOCDATE=curdate(), STATUS = 'P',IsPFacApproval='N',ENTRY_DATE=curdate() where nocid = " + nocid;
             _mariaContext.Database.ExecuteSqlRaw(qry);
 
 

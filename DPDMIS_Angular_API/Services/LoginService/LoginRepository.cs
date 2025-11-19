@@ -41,7 +41,7 @@ namespace DPDMIS_Angular_API.Services.LoginService
 
                         where (emailid ='" + emailOrMobile + "' or f.phone1='" + emailOrMobile + "')  ";
 
-            return _context.Usruser.FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList().FirstOrDefault();
+           // return _context.Usruser.FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList().FirstOrDefault();
 
             return _context.Usruser.FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList().FirstOrDefault();
         }

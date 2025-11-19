@@ -115,10 +115,10 @@ namespace DPDMIS_Angular_API.Controllers
         }
 
         [HttpPost("getOTPSaved")]
-        public string getOTPSaved(string userid)
+        public string getOTPSaved(string userid,  string ipAddress)
         {
             FacOperations fc = new FacOperations(_context);
-            string sRandomOTP = fc.insertUpdateOTP1(userid);
+            string sRandomOTP = fc.insertUpdateOTP1(userid,  ipAddress);
             return sRandomOTP;
         }
 

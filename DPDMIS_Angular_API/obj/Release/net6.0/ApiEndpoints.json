@@ -1,0 +1,3116 @@
+[
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
+    "Method": "getFacilityItemWiseStock",
+    "RelativePath": "api/AAMAdmin/getFacilityItemWiseStock",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "distId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.AAMAdminDTO.getFacilityItemWiseStockDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
+    "Method": "getFacilityWiseIssue",
+    "RelativePath": "api/AAMAdmin/getFacilityWiseIssue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "distId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "todate",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.AAMAdminDTO.getFacilityWiseIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
+    "Method": "getSHCstockOut",
+    "RelativePath": "api/AAMAdmin/getSHCstockOut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "distId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.AAMAdminDTO.getLastIssueDT_DTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
+    "Method": "getUserDataForForgotPassword",
+    "RelativePath": "api/AAMAdmin/getUserDataForForgotPassword",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "useremaiid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
+    "Method": "KPIdistWise",
+    "RelativePath": "api/AAMAdmin/KPIdistWise",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.AAMAdminDTO.KPIdistWiseDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
+    "Method": "KPIFacWise",
+    "RelativePath": "api/AAMAdmin/KPIFacWise",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "distId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.AAMAdminDTO.KPIFacWiseDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "ConsumptionReport",
+    "RelativePath": "api/CGMSCStock/ConsumptionReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "stktype",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "todate",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.GetConsumptionDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "FreezeOpeningStock",
+    "RelativePath": "api/CGMSCStock/FreezeOpeningStock",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mReceiptID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "GetBatchesOfReceipt",
+    "RelativePath": "api/CGMSCStock/GetBatchesOfReceipt",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facReceiptItemId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.GetBatchesOfReceiptDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "GetData",
+    "RelativePath": "api/CGMSCStock/GetData",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "getDistrictAchivementStatus",
+    "RelativePath": "api/CGMSCStock/getDistrictAchivementStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.getDistrictAchivementStatusDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "getFacilityOpenings",
+    "RelativePath": "api/CGMSCStock/getFacilityOpenings",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.getFacilityOpeningsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "GetFacreceiptid",
+    "RelativePath": "api/CGMSCStock/GetFacreceiptid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usrFacilityID",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.GetFacreceiptidForOpeningStockDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "getFileStorageLocation",
+    "RelativePath": "api/CGMSCStock/getFileStorageLocation",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "whid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.GetFileStorageLocationDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "GetHeaderInfo",
+    "RelativePath": "api/CGMSCStock/GetHeaderInfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ReceiptID",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.GetHeaderInfoDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "getCategory",
+    "RelativePath": "api/CGMSCStock/getItemCategory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.CategoryDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "getNearExpBatchStock",
+    "RelativePath": "api/CGMSCStock/getNearExpStock",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "criteria",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[CgmscHO_API.DTO.NearExpBatchDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "getOpeningStocksReport",
+    "RelativePath": "api/CGMSCStock/getOpeningStocksReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "usrFacilityID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.GetOpeningStocksRptDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "GetOpningClosingItem",
+    "RelativePath": "api/CGMSCStock/GetOpningClosingItem",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "fromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.GetOpningClosingItemDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "GetReceiptItems",
+    "RelativePath": "api/CGMSCStock/GetReceiptItems",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.GetReceiptItemsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "getSHCItems",
+    "RelativePath": "api/CGMSCStock/getSHCItems",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.getSHCItemsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "GetWHStockAAM",
+    "RelativePath": "api/CGMSCStock/GetWHStockAAM",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.GetWHStockItemsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "OpeningStockRowDelete",
+    "RelativePath": "api/CGMSCStock/OpeningStockRowDelete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mReceiptID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "mReceiptItemidID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "minwno",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "SaveBatchRecord",
+    "RelativePath": "api/CGMSCStock/SaveBatchRecord",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mItemID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "mBatchNo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mStockLocation",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mMfgDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mExpDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mAbsRQty",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facilityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "receiptID",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "stockReport",
+    "RelativePath": "api/CGMSCStock/stockReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "catname",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.StockReportFacilityDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "stockReportParent",
+    "RelativePath": "api/CGMSCStock/stockReportParent",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "catname",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.StockReportFacilityDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
+    "Method": "UpdateHeaderInfo",
+    "RelativePath": "api/CGMSCStock/UpdateHeaderInfo",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usrFacilityID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "receiptID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "receiptNo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "receiptDate",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masaccyearsettings_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masaccyearsettings_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masdistricts_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masdistricts_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masedl_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masedl_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masfacheaderfooter_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masfacheaderfooter_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masFacilities_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masFacilities_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masFacilityTypes_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masFacilityTypes_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masfacilitywards_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masfacilitywards_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masfacilitywh_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masfacilitywh_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masItemCategories_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masItemCategories_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masitemgroups_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masitemgroups_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masitemmaincategory_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masitemmaincategory_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masitems_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masitems_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masItemTypes_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masItemTypes_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_maslocations_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_maslocations_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_masprogram_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_masprogram_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_maswarehouses_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_maswarehouses_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_usrroles_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_usrroles_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferData_usrUsers_O2M",
+    "RelativePath": "api/DataTransfer/TransferData_usrUsers_O2M",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.DataTransferController",
+    "Method": "TransferDataAsync_Freeze_MASCGMSCNOC_M2O",
+    "RelativePath": "api/DataTransfer/TransferDataAsync_Freeze_MASCGMSCNOC_M2O",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nocid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "completemascgmscnoc",
+    "RelativePath": "api/Indent/completemascgmscnoc",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nocid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "completeOtherFacIndent",
+    "RelativePath": "api/Indent/completeOtherFacIndent",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indentId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "deleteCgmscNOCitemsALL",
+    "RelativePath": "api/Indent/deleteCgmscNOCitemsALL",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nocid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "deleteOtherFaceIdent",
+    "RelativePath": "api/Indent/deleteOtherFaceIdent",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indentId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "FacIndentAlert",
+    "RelativePath": "api/Indent/FacIndentAlert",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mcatid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "isEDL",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.IndentAlertNewDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "FacMonthIndent",
+    "RelativePath": "api/Indent/FacMonthIndent",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "istatus",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.FacMonthIndentDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "FacMonthIndentNo",
+    "RelativePath": "api/Indent/FacMonthIndentNo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "NOCNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.FacMonthIndentDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "getBlockFac",
+    "RelativePath": "api/Indent/getBlockFac",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.getBlockFACsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "GetFacDetailSHC",
+    "RelativePath": "api/Indent/GetFacDetailSHC",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentNo",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.MariadbDTO.DestinationDTO.MASFACTRANSFERS_DTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "getFacilityInfo",
+    "RelativePath": "api/Indent/getFacilityInfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "userid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "whId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "distId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.FacilityInfoAamDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "getFacMonthIndentItems",
+    "RelativePath": "api/Indent/getFacMonthIndentItems",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Mcatid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "indendid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.IndentItemsFromWardDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "getIndentTimline",
+    "RelativePath": "api/Indent/getIndentTimline",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "distId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.getIndentTimlineDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "getMainCategory",
+    "RelativePath": "api/Indent/getMainCategory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.CategoryDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "getMonthIndentProgram",
+    "RelativePath": "api/Indent/getMonthIndentProgram",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.getIndentProgramDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "getOtherFacIndentItems",
+    "RelativePath": "api/Indent/getOtherFacIndentItems",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.SHCitemlistDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "getSavedFacIndentItems",
+    "RelativePath": "api/Indent/getSavedFacIndentItems",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nocid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.SavedFacIndentItemsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "getSHCitems",
+    "RelativePath": "api/Indent/getSHCitems",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mcid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "nocid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.SHCitemlistDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "OtherFacilityIndent",
+    "RelativePath": "api/Indent/OtherFacilityIndent",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.OtherFacilityIndentDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "OtherFacIndentDetails",
+    "RelativePath": "api/Indent/OtherFacIndentDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indentId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.OtherFacIndentDetailsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "postNOCitems",
+    "RelativePath": "api/Indent/postNOCitems",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objmascgmscnocitems",
+        "Type": "DPDMIS_Angular_API.DTO.IndentDTO.MasCgmscNocItems",
+        "IsRequired": true
+      },
+      {
+        "Name": "SR",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "postOtherFacilityIndent",
+    "RelativePath": "api/Indent/postOtherFacilityIndent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentDt",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "programid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Target_facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.IncompleteWardIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "postOtherFacIndentitems",
+    "RelativePath": "api/Indent/postOtherFacIndentitems",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objMasFacDemandItems",
+        "Type": "DPDMIS_Angular_API.Models.MasFacDemandItems",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "postWhIndentNo",
+    "RelativePath": "api/Indent/postWhIndentNo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentDt",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "programid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.IncompleteWardIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IndentController",
+    "Method": "sendSMS",
+    "RelativePath": "api/Indent/sendSMS",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mob",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "otp",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "ChangpasswordbyID",
+    "RelativePath": "api/Issue/ChangpasswordbyID",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newpass",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "completeWardIssues",
+    "RelativePath": "api/Issue/completeWardIssues",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IssueID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "deleteIssueItemIdIfExist",
+    "RelativePath": "api/Issue/deleteIssueItemIdIfExist",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IssueItemID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "deleteWardIssues",
+    "RelativePath": "api/Issue/deleteWardIssues",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IssueID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "FacilityIssueCurrectstock",
+    "RelativePath": "api/Issue/FacilityIssueCurrectstock",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "catname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "issueid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IssueDTO.FacilityIssueCurrentStockDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "getFacilityIssueBatches",
+    "RelativePath": "api/Issue/getFacilityIssueBatches",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityIssueItemId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IssueDTO.getFacilityIssueBatchesDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "getFacilityWards",
+    "RelativePath": "api/Issue/getFacilityWards",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "wardid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IssueDTO.FacilityWardDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "getGeneratedIssueNo",
+    "RelativePath": "api/Issue/getGeneratedIssueNo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "getIncompleteWardIssue",
+    "RelativePath": "api/Issue/getIncompleteWardIssue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "wardid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.IncompleteWardIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "getIssueDetails",
+    "RelativePath": "api/Issue/getIssueDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Issueno",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.IncompleteWardIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "getIssueVoucherPdf",
+    "RelativePath": "api/Issue/getIssueVoucherPdf",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "issueId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IssueDTO.getIssueVoucherPdfDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "getItemStock",
+    "RelativePath": "api/Issue/getItemStock",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IssueDTO.ItemStockDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "getLastIssueDT",
+    "RelativePath": "api/Issue/getLastIssueDT",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IssueDTO.LastIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "getWardIssueItems",
+    "RelativePath": "api/Issue/getWardIssueItems",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "issueId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IssueDTO.WardIssueItemsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "postWardIssue",
+    "RelativePath": "api/Issue/postIssueNo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "objeIssue",
+        "Type": "DPDMIS_Angular_API.DTO.IssueDTO.tbFacilityGenIssue",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.IncompleteWardIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "posttboOutWards",
+    "RelativePath": "api/Issue/posttboOutWards",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ObjtbFacilityOutwardsModel",
+        "Type": "DPDMIS_Angular_API.DTO.IssueDTO.tbFacilityOutwardsModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.IssueController",
+    "Method": "postWardIssue",
+    "RelativePath": "api/Issue/postWardIssue",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ObjtbFacilityIssueItems",
+        "Type": "DPDMIS_Angular_API.DTO.IssueDTO.tbFacilityIssueItems",
+        "IsRequired": true
+      },
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.LoginController",
+    "Method": "Login",
+    "RelativePath": "api/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "DPDMIS_Angular_API.Models.LoginModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.LoginController",
+    "Method": "getOTPSaved",
+    "RelativePath": "api/Login/getOTPSaved",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.LoginController",
+    "Method": "LoginDetailsAAMConsultant",
+    "RelativePath": "api/Login/LoginDetailsAAMConsultant",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "emailORmob",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.LoginController",
+    "Method": "VerifyOTPLogin",
+    "RelativePath": "api/Login/VerifyOTPLogin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "otp",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "userid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.MariaDbController",
+    "Method": "GetAllFacilityTypes",
+    "RelativePath": "api/MariaDb/GetAllFacilityTypes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.MariadbDTO.GetAllFacilityTypesDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.OraController",
+    "Method": "completeOtherFacIndent",
+    "RelativePath": "api/Ora/completeOtherFacIndent",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indentId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.OraController",
+    "Method": "deleteOtherFaceIdent",
+    "RelativePath": "api/Ora/deleteOtherFaceIdent",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indentId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.OraController",
+    "Method": "GetOraFacDetailSHC",
+    "RelativePath": "api/Ora/GetOraFacDetailSHC",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentNo",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.SourceDTO.ORAMASFACTRANSFERS_DTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.OraController",
+    "Method": "postOtherFacilityIndent1",
+    "RelativePath": "api/Ora/postOtherFacilityIndent1",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentDt",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "programid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Target_facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "mTranferId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.IncompleteWardIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.OraController",
+    "Method": "postOtherFacIndentitems",
+    "RelativePath": "api/Ora/postOtherFacIndentitems",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "objMasFacDemandItems",
+        "Type": "DPDMIS_Angular_API.DTO.IndentDTO.OraMasFacDemandItemsDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "completeReceipts",
+    "RelativePath": "api/Receipt/completeReceipts",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receiptId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "deleteReceiptItems",
+    "RelativePath": "api/Receipt/deleteReceiptItems",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inwno",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facReceiptItemId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "itemid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "receiptId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "deletedBatchQty",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "deleteReceipts",
+    "RelativePath": "api/Receipt/deleteReceipts",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receiptId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "FacMonthIndentNo",
+    "RelativePath": "api/Receipt/FacMonthIndentNo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "NOCNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.FacMonthIndentDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getOpstockCheck",
+    "RelativePath": "api/Receipt/getOpstockCheck",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.OPStockCheckDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getOtherFacilityIssue",
+    "RelativePath": "api/Receipt/getOtherFacilityIssue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tofacilityid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IssueDTO.getOtherFacilityIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getOtherFacIssueDetails",
+    "RelativePath": "api/Receipt/getOtherFacIssueDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "issueid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "recno",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.getOtherFacIssueDetailsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getRacks",
+    "RelativePath": "api/Receipt/getRacks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "WH_FACID",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.MasRackDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getReceiptById",
+    "RelativePath": "api/Receipt/getReceiptById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "receiptId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.getReceiptByIdDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getReceiptDetails",
+    "RelativePath": "api/Receipt/getReceiptDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indentId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.ReceiptMasterDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getReceiptDetailsBatch",
+    "RelativePath": "api/Receipt/getReceiptDetailsBatch",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nocid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.ReceipItemBatchesDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getReceiptDetailsBatchSP",
+    "RelativePath": "api/Receipt/getReceiptDetailsBatchSP",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facReceiptId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.ReceipItemBatchesDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getReceiptDetailsWithType",
+    "RelativePath": "api/Receipt/getReceiptDetailsWithType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facilityReceiptType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facilityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "facReceiptId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.ReceiptDetailsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getReceiptIssueNo",
+    "RelativePath": "api/Receipt/getReceiptIssueNo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getReceiptIssueNoSP",
+    "RelativePath": "api/Receipt/getReceiptIssueNoSP",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getReceiptItemsDDL",
+    "RelativePath": "api/Receipt/getReceiptItemsDDL",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FACRECEIPTID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IndentID",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.ReceiptItemsDDL, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getReceiptItemsDetail",
+    "RelativePath": "api/Receipt/getReceiptItemsDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FACRECEIPTID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IndentID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "inwno",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.ReceiptItemsDDL, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getReceiptMaster",
+    "RelativePath": "api/Receipt/getReceiptMasterFromWH",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "faclityId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.ReceiptMasterWHDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getReceiptVouchers",
+    "RelativePath": "api/Receipt/getReceiptVouchers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "receiptId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.getReceiptVouchersDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "postReceiptItems",
+    "RelativePath": "api/Receipt/postReceiptItems",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indentId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "mponoid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "rackID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facReceiptId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "whinwno",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "ObjRItems",
+        "Type": "DPDMIS_Angular_API.DTO.ReceiptDTO.tbFacilityReceiptItemsModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.IncompleteWardIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "postReceiptItemsSP",
+    "RelativePath": "api/Receipt/postReceiptItemsSP",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indentId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "rackID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facReceiptId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "whinwno",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "ObjRItems",
+        "Type": "DPDMIS_Angular_API.DTO.ReceiptDTO.tbFacilityReceiptItemsModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.IncompleteWardIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "postReceiptMaster",
+    "RelativePath": "api/Receipt/postReceiptMaster",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "objeReceipt",
+        "Type": "DPDMIS_Angular_API.DTO.ReceiptDTO.tbFacilityReceiptsModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.ReceiptMasterDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "postReceiptMasterSP",
+    "RelativePath": "api/Receipt/postReceiptMasterSP",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tofacid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "issueid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "objeReceipt",
+        "Type": "DPDMIS_Angular_API.DTO.ReceiptDTO.tbFacilityReceiptsModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.ReceiptMasterDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "postWhIndentNo",
+    "RelativePath": "api/Receipt/postWhIndentNo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "indentDt",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "programid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.IndentDTO.IncompleteWardIssueDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

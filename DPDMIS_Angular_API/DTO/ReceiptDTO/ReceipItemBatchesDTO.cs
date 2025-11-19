@@ -28,7 +28,9 @@ namespace DPDMIS_Angular_API.DTO.ReceiptDTO
 
         public Int64? rqty { get; set; }
        public Int64? PONOID { get; set; }
-        
+
+        public Int64? QASTATUS { get; set; }
+
 
     }
 }

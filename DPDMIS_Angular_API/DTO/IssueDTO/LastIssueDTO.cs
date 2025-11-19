@@ -4,7 +4,7 @@ namespace DPDMIS_Angular_API.DTO.IssueDTO
 {
     public class LastIssueDTO
     {    
-        public string? ISSUEDATE { get; set; }
+        public DateTime? ISSUEDATE { get; set; }
   
     }
 }

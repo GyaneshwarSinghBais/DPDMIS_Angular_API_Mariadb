@@ -15,7 +15,7 @@ namespace DPDMIS_Angular_API.DTO.FacilityDTO
         public long? FACRECEIPTITEMID { get; set; }
         public string? MFGDATE { get; set; }
         public long? PONOID { get; set; }
-        public int? QASTATUS { get; set; }
+        public string? QASTATUS { get; set; }
         public string? WHISSUEBLOCK { get; set; }
     }
 }

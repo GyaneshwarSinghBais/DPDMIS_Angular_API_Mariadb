@@ -14,7 +14,13 @@ namespace DPDMIS_Angular_API.DTO.ReceiptDTO
         public Int64? INDENTITEMID { get; set; }
         public Int64? ABSRQTY { get; set; }
         public Int64? ISSUEITEMID { get; set; }
-    
+        public int? QASTATUS { get; set; }
+        public int? WHISSUEBLOCK { get; set; }
+
+
+
+
+
 
     }
 }

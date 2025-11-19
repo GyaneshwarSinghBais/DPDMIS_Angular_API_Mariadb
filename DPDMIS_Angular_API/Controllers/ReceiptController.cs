@@ -14,6 +14,7 @@ using System.Data;
 using System.Runtime.CompilerServices;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Globalization;
+using System;
 
 namespace DPDMIS_Angular_API.Controllers
 {
@@ -669,7 +670,7 @@ where 1=1 and tr.FACRECEIPTTYPE='" + facilityReceiptType + "' and tr.facilityid=
     END AS expdate,
     IFNULL(tbo.inwno, 0) AS inwno,
     IFNULL(r.ABSRQTY, 0) AS rqty,
-    tbo.ponoid
+    tbo.ponoid,IFNULL(tbo.qastatus,1) as qastatus
 FROM 
     masitems m
 INNER JOIN 
@@ -775,7 +776,7 @@ SELECT IFNULL(ni.INDENTITEMID, 0) AS sr,
        CASE WHEN rb.expdate IS NULL THEN DATE_FORMAT(tbo.expdate, '%d-%m-%Y')  ELSE DATE_FORMAT(rb.expdate, '%d-%m-%Y') END AS expdate,
        IFNULL(tbo.inwno, 0) AS inwno,
        IFNULL(r.ABSRQTY, 0) AS rqty,
-        tbo.PONOID
+        tbo.PONOID,IFNULL(tbo.qastatus,1) as qastatus
 FROM masitems m
 INNER JOIN masitemcategories c ON c.categoryid = m.categoryid
 INNER JOIN masitemmaincategory mc ON mc.MCID = c.MCID
@@ -855,8 +856,8 @@ ORDER BY m.itemid;
         {
             //GetMonthName(string date_ddmmyyyy)
 
-            try
-            {
+            //try
+            //{
                 FacOperations ob = new FacOperations(_context);
 
                 ob.getWhIssuedItemDataSP(indentId,facid, whinwno, facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid
@@ -952,11 +953,11 @@ ORDER BY m.itemid;
 
 
                 return Ok(objRBatches);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message.ToString());
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return BadRequest(ex.Message.ToString());
+            //}
         }
 
 
@@ -966,8 +967,8 @@ ORDER BY m.itemid;
         {
             //GetMonthName(string date_ddmmyyyy) Int64 indentId
 
-            try
-            {
+            //try
+            //{
                 FacOperations ob = new FacOperations(_context);
 
                 ob.getWhIssuedItemData( indentId,facid, whinwno, facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid
@@ -1016,11 +1017,11 @@ ORDER BY m.itemid;
 
 
                 return Ok(objRBatches);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message.ToString());
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return BadRequest(ex.Message.ToString());
+            //}
         }
 
 

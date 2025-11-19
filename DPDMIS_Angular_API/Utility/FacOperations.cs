@@ -4,19 +4,20 @@ using DPDMIS_Angular_API.DTO.IssueDTO;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using MySqlConnector;
 using NuGet.Protocol.Plugins;
 using Oracle.ManagedDataAccess.Client;
+using Pomelo.EntityFrameworkCore.MySql;
 using SMSRef;
 using System;
 using System.Data;
 using System.Globalization;
+using System.Net;
 using System.Net.Mail;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using static System.Net.WebRequestMethods;
-using Pomelo.EntityFrameworkCore.MySql;
-using MySqlConnector;
 
 namespace CgmscHO_API.Utility
 {
@@ -150,7 +151,7 @@ namespace CgmscHO_API.Utility
 
 
 
-        public string getFacCodeForIndent(Int64 facId)
+        public string getFacCodeForIndent(Int64 facId) 
         {
             string yearid = getACCYRSETID();
 
@@ -777,18 +778,33 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
         public void getWhIssuedItemData(Int64 indentId, Int64 facilityId, Int64 inwardNo, Int64 facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid, out string? MfgDate, out Int64? ponoid, out Int32? qastatus, out string? whissueblock, out string? expiryDate, out string? batchno)
         {
             string strSQL = "";
-            strSQL = @"Select distinct m.itemid,tbo.batchno,DATE_FORMAT(tbo.expdate, '%Y-%m-%d') AS EXPDATE,tbo.IssueQty*nvl(m.unitcount,1) as IssueBatchQty,tbo.InwNo
-,tbi.indentitemid,tfr.FacReceiptID,tfi.FacReceiptItemID,DATE_FORMAT(tbo.MfgDate, '%Y-%m-%d') AS MFGDATE,tbo.ponoid,case when nvl(m.qctest,'Y')='Y' then tbo.qastatus else 1 end as qastatus,tbo.whissueblock
-             from tbIndentItems tbi
-             left outer Join tbOutwards tbo on (tbo.IndentItemID = tbi.IndentItemID) 
-             
-             Inner Join masItems m on (m.ItemID=tbi.ItemID)
-             Inner Join tbIndents tb on (tb.Indentid=tbi.IndentId)      
-             left outer join  tbFacilityReceipts tfr on (tfr.IndentID=tb.IndentID) and tfr.facilityid=" + facilityId + @" and tfr.FacReceiptID= " + facReceiptId + @"
-            Left Outer Join tbFacilityReceiptItems tfi on  tfi.FacReceiptID=tfr.FacReceiptID and tfi.itemid=tbi.itemid         and tfi.INDENTITEMID=tbi.INDENTITEMID
-             Where 1=1  and tb.FacilityID =" + facilityId + @"
-            AND tb.INDENTID=" + indentId + @"
-             and tbo.InwNo =  " + inwardNo;
+
+
+            strSQL = @"Select distinct m.itemid,tbo.batchno,DATE_FORMAT(tbo.expdate, '%Y-%m-%d') AS EXPDATE,tbo.IssueQty*IFNULL(m.unitcount,1) as IssueBatchQty,tbo.InwNo
+,tbi.indentitemid,tfr.FacReceiptID,tfi.FacReceiptItemID,DATE_FORMAT(tbo.MfgDate, '%Y-%m-%d') AS MFGDATE,tbo.ponoid,
+CAST(CASE WHEN IFNULL(m.qctest,'Y')='Y' then tbo.qastatus else 1 END AS CHAR) as qastatus,
+CAST(IFNULL(tbo.whissueblock,'') AS CHAR) as whissueblock
+FROM tbIndentItems tbi
+LEFT OUTER JOIN tbOutwards tbo on (tbo.IndentItemID = tbi.IndentItemID) 
+INNER JOIN masItems m on (m.ItemID=tbi.ItemID)
+INNER JOIN tbIndents tb on (tb.Indentid=tbi.IndentId)      
+LEFT OUTER JOIN tbFacilityReceipts tfr on (tfr.IndentID=tb.IndentID) and tfr.facilityid=" + facilityId + @" and tfr.FacReceiptID=" + facReceiptId + @"
+LEFT OUTER JOIN tbFacilityReceiptItems tfi on tfi.FacReceiptID=tfr.FacReceiptID and tfi.itemid=tbi.itemid and tfi.INDENTITEMID=tbi.INDENTITEMID
+WHERE tb.FacilityID=" + facilityId + @" AND tb.INDENTID=" + indentId + @" AND tbo.InwNo=" + inwardNo;
+
+
+            //            strSQL = @"Select distinct m.itemid,tbo.batchno,DATE_FORMAT(tbo.expdate, '%Y-%m-%d') AS EXPDATE,tbo.IssueQty*nvl(m.unitcount,1) as IssueBatchQty,tbo.InwNo
+            //,tbi.indentitemid,tfr.FacReceiptID,tfi.FacReceiptItemID,DATE_FORMAT(tbo.MfgDate, '%Y-%m-%d') AS MFGDATE,tbo.ponoid,case when nvl(m.qctest,'Y')='Y' then tbo.qastatus else 1 end as qastatus,tbo.whissueblock
+            //             from tbIndentItems tbi
+            //             left outer Join tbOutwards tbo on (tbo.IndentItemID = tbi.IndentItemID) 
+
+            //             Inner Join masItems m on (m.ItemID=tbi.ItemID)
+            //             Inner Join tbIndents tb on (tb.Indentid=tbi.IndentId)      
+            //             left outer join  tbFacilityReceipts tfr on (tfr.IndentID=tb.IndentID) and tfr.facilityid=" + facilityId + @" and tfr.FacReceiptID= " + facReceiptId + @"
+            //            Left Outer Join tbFacilityReceiptItems tfi on  tfi.FacReceiptID=tfr.FacReceiptID and tfi.itemid=tbi.itemid         and tfi.INDENTITEMID=tbi.INDENTITEMID
+            //             Where 1=1  and tb.FacilityID =" + facilityId + @"
+            //            AND tb.INDENTID=" + indentId + @"
+            //             and tbo.InwNo =  " + inwardNo;
 
 
             //             strSQL = @" Select distinct m.itemid,tbo.batchno,tbo.expdate,tbo.IssueQty as IssueBatchQty,tbo.InwNo
@@ -820,7 +836,7 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
                 MfgDate = myList[0].MFGDATE?.ToString();
                 ponoid = Convert.ToInt64(myList[0].PONOID);
                 qastatus = Convert.ToInt32(myList[0].QASTATUS);
-                whissueblock = myList[0].WHISSUEBLOCK;
+                whissueblock = myList[0].WHISSUEBLOCK?.ToString();
                 expiryDate = myList[0].EXPDATE?.ToString();
                 batchno = myList[0].BATCHNO;
 
@@ -899,7 +915,8 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
 
             if (myList.Count > 0)
             {
-                indentItemId = myList[0].INDENTITEMID; // Assuming IssueItemID is an integer
+                //Int64 iNDENTITEMID = Convert.ToInt64(myList[0].INDENTITEMID);
+                indentItemId = Convert.ToInt64(myList[0].INDENTITEMID); // Assuming IssueItemID is an integer
                 itemId = Convert.ToInt64(myList[0].ITEMID);
                 batchQty = Convert.ToInt64(myList[0].ISSUEBATCHQTY);
                 facReceiptItemid = Convert.ToInt64(myList[0].FACRECEIPTITEMID);
@@ -1051,8 +1068,12 @@ where 1=1 and mi.itemid=" + itemid;
             return value;
         }
 
-        public string insertUpdateOTP1(string userid)
+        public string insertUpdateOTP1(string userid,  string ipAddress)
         {
+            string module = "SHC_AAM_login";
+            string templateId = "1407161537152057950";
+            string macAddress = GetMACAddress();
+
             string mobNo = getMobileNumber(userid);
             // string mobNo = "9691611103";
             if (userid == "4821")
@@ -1078,6 +1099,15 @@ where 1=1 and mi.itemid=" + itemid;
 
             var myListInsert = _context.ProgressRecDbSet
                 .FromSqlInterpolated(FormattableStringFactory.Create(strInsertQuery)).ToList();
+
+            // insert SMSlog with MACADDRESS and IPADDRESS
+
+
+            string strInsertSmsLog = @"insert into smslog(mobno, sms, entrydate, module, templateid, MACADDRESS, IPADDRESS)
+    values(" + mobNo + ", '" + senddata + "', STR_TO_DATE('" + now + "', '%Y-%m-%d %H:%i:%s'), '" + module + "', '" + templateId + "', '" + macAddress + "', '" + ipAddress + "')";
+
+            var myListInsertSmsLog = _context.ProgressRecDbSet
+              .FromSqlInterpolated(FormattableStringFactory.Create(strInsertSmsLog)).ToList();
 
             return sRandomOTP;
         }
@@ -1111,7 +1141,20 @@ where 1=1 and mi.itemid=" + itemid;
 
         //}
 
+        public  string GetMACAddress()
+        {
+            string macAddresses = "";
 
+            foreach (System.Net.NetworkInformation.NetworkInterface nic in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (nic.OperationalStatus == System.Net.NetworkInformation.OperationalStatus.Up)
+                {
+                    macAddresses += nic.GetPhysicalAddress().ToString();
+                    break;
+                }
+            }
+            return macAddresses;
+        }
 
         public void getLoginSMS(String mobNumber, String OTP)
         {
