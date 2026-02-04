@@ -311,16 +311,19 @@ WHERE IssueNo LIKE '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
             }
         }
 
-        public string getForgotData(string emailMob)
+        public string getForgotData(string emailMob) //facilityid for shc and userid for nodels
         {
-            string qry = @"SELECT f.facilityid 
+            string qry = @"SELECT f.facilityid fac ,u.USERID,
+        CASE 
+        WHEN f.facilityid IS NULL THEN u.USERID
+        ELSE f.facilityid END AS facilityid
                    FROM usrusers u 
                    LEFT OUTER JOIN masfacilities f ON f.facilityid = u.facilityid
                    WHERE (u.emailid = @EmailMob OR f.phone1 = @EmailMob)";
 
             var parameters = new[] {
         new MySqlParameter("@EmailMob", emailMob)
-    };
+             };
 
             var myList = _context.PasswordForgetDbset
                 .FromSqlRaw(qry, parameters)

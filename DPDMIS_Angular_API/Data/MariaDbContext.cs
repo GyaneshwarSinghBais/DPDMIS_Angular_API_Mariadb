@@ -109,10 +109,8 @@ namespace DPDMIS_Angular_API.Data
         public DbSet<KPIFacWiseDTO> KPIFacWiseDbSet { get; set; }
         public DbSet<NearExpBatchDTO> NearExpBatchDTODBSet { get; set; }
         public DbSet<getOtherFacilityIssueDTO> getOtherFacilityIssueDbSet { get; set; }
-        
-
-
-
+        public DbSet<DistrictWiseAamHealthPerformanceDTO> DistrictWiseAamHealthPerformanceDbSet { get; set; }
+        public DbSet<KPIFacilityDetailDTO> KPIFacilityDetailDbSet { get; set; }
 
 
 
@@ -147,9 +145,10 @@ namespace DPDMIS_Angular_API.Data
         public DbSet<MDB_mascgmscnocDTO> MDB_mascgmscnocDbSet { get; set; }
         public DbSet<MariaIntegration_MasCgmscNocItemsDTO> Integration_MasCgmscNocItemsDbSet { get; set; }
         public DbSet<MASFACTRANSFERS_DTO> MASFACTRANSFERS_DbSet { get; set; }
-        
+        public DbSet<KPIFacWiseDrillDownDTO> KPIFacWiseDrillDownDbSet { get; set; }
+        public DbSet<MasFacIssueBarcodeDto> MasFacIssueBarcodeDbSet { get; set; }
 
-
+        public DbSet<BarcodeReceiptDto> BarcodeReceiptDtoDbSet { get; set; }
 
 
 
@@ -248,9 +247,15 @@ namespace DPDMIS_Angular_API.Data
             modelBuilder.Entity<getFacilityWiseIssueDTO>().HasNoKey();
             modelBuilder.Entity<KPIdistWiseDTO>().HasNoKey();
             modelBuilder.Entity<KPIFacWiseDTO>().HasNoKey();
-            //  modelBuilder.Entity<tbFacilityGenIssue>().HasKey();
+            modelBuilder.Entity<DistrictWiseAamHealthPerformanceDTO>().HasNoKey();
+            modelBuilder.Entity<KPIFacWiseDrillDownDTO>().HasNoKey();
+            modelBuilder.Entity<KPIFacilityDetailDTO>().HasNoKey();
+            modelBuilder.Entity<MasFacIssueBarcodeDto>().HasNoKey();
 
-          //  modelBuilder.Entity<MDB_mascgmscnocDTO>().HasBaseType<tbGenIndent>();
+            modelBuilder.Entity<BarcodeReceiptDto>().HasNoKey();
+            //  modelBuilder.Entity<MASFACTRANSFERS_DTO>().HasKey();
+
+            //  modelBuilder.Entity<MDB_mascgmscnocDTO>().HasBaseType<tbGenIndent>();
 
         }
 

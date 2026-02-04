@@ -327,6 +327,176 @@
         }
       }
     },
+    "/api/AAMAdmin/AAMHealthPerformance": {
+      "get": {
+        "tags": [
+          "AAMAdmin"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DistrictWiseAamHealthPerformanceDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DistrictWiseAamHealthPerformanceDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DistrictWiseAamHealthPerformanceDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AAMAdmin/KPIFacWiseDrillDown": {
+      "get": {
+        "tags": [
+          "AAMAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "distId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KPIFacWiseDrillDownDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KPIFacWiseDrillDownDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KPIFacWiseDrillDownDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AAMAdmin/KPIFacilityDetai": {
+      "get": {
+        "tags": [
+          "AAMAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "distId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KPIFacilityDetailDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KPIFacilityDetailDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KPIFacilityDetailDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AAMAdmin/updateFacilityContact": {
+      "put": {
+        "tags": [
+          "AAMAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "contactPersonName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone1",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/CGMSCStock/getFileStorageLocation": {
       "get": {
         "tags": [
@@ -5212,6 +5382,41 @@
         },
         "additionalProperties": false
       },
+      "DistrictWiseAamHealthPerformanceDTO": {
+        "type": "object",
+        "properties": {
+          "districtid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "districtname": {
+            "type": "string",
+            "nullable": true
+          },
+          "nooffac": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "noofop": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nosindentwh": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nosfacilityreceipt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "FacMonthIndentDTO": {
         "type": "object",
         "properties": {
@@ -6177,6 +6382,128 @@
           "districtid": {
             "type": "integer",
             "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KPIFacWiseDrillDownDTO": {
+        "type": "object",
+        "properties": {
+          "districtid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "districtname": {
+            "type": "string",
+            "nullable": true
+          },
+          "facilityid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "nosdrugsopstock": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nosindent": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nositemsindented": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nosreceipt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nositemsreceipts": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KPIFacilityDetailDTO": {
+        "type": "object",
+        "properties": {
+          "districtid": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "districtname": {
+            "type": "string",
+            "nullable": true
+          },
+          "blockname": {
+            "type": "string",
+            "nullable": true
+          },
+          "facilityid": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "facilityname": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailid": {
+            "type": "string",
+            "nullable": true
+          },
+          "phonE1": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactpersonname": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentfacility": {
+            "type": "string",
+            "nullable": true
+          },
+          "warehousename": {
+            "type": "string",
+            "nullable": true
+          },
+          "nosdrugsopstock": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nosindent": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nositemsindented": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nosreceipt": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nositemsreceipts": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },

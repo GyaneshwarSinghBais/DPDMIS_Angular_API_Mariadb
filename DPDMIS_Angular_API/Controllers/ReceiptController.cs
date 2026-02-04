@@ -1,5 +1,6 @@
 ﻿using CgmscHO_API.Utility;
 using DPDMIS_Angular_API.Data;
+using DPDMIS_Angular_API.DTO.CGMSCStockDTO;
 using DPDMIS_Angular_API.DTO.IndentDTO;
 using DPDMIS_Angular_API.DTO.IssueDTO;
 using DPDMIS_Angular_API.DTO.ReceiptDTO;
@@ -10,11 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Data;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System.Globalization;
-using System;
 
 namespace DPDMIS_Angular_API.Controllers
 {
@@ -23,9 +24,11 @@ namespace DPDMIS_Angular_API.Controllers
     public class ReceiptController : ControllerBase
     {
         private readonly MariaDbContext _context;
-        public ReceiptController(MariaDbContext context)
+        private readonly OraDbContext _contextoracle;
+        public ReceiptController(MariaDbContext context, OraDbContext contextoracle)
         {
             _context = context;
+            _contextoracle = contextoracle;
         }
 
 
@@ -233,7 +236,7 @@ and faci.NOCNUMBER='" + NOCNumber + "' ";
         }
 
         [HttpPost("postReceiptMasterSP")]
-        public async Task<ActionResult<IEnumerable<ReceiptMasterDTO>>> postReceiptMasterSP(Int64 tofacid,Int64 indentid,Int64 issueid,string facid, tbFacilityReceiptsModel objeReceipt)
+        public async Task<ActionResult<IEnumerable<ReceiptMasterDTO>>> postReceiptMasterSP(Int64 tofacid, Int64 indentid, Int64 issueid, string facid, tbFacilityReceiptsModel objeReceipt)
         {
 
             try
@@ -255,8 +258,8 @@ and faci.NOCNUMBER='" + NOCNumber + "' ";
                 _context.tbFacilityReceiptsDbSet.Add(objeReceipt);
                 _context.SaveChanges();
                 Int64 ffcid = Convert.ToInt64(facid);
-               // var myObj = getReceiptDetails(Convert.ToInt64(objeReceipt.INDENTID), ffcid);
-                var myObj = getOtherFacIssueDetails(ffcid.ToString(),"I", issueid, receiptNo);
+                // var myObj = getReceiptDetails(Convert.ToInt64(objeReceipt.INDENTID), ffcid);
+                var myObj = getOtherFacIssueDetails(ffcid.ToString(), "I", issueid, receiptNo);
                 return Ok(myObj);
             }
             catch (Exception ex)
@@ -277,7 +280,7 @@ and faci.NOCNUMBER='" + NOCNumber + "' ";
 
 
         [HttpGet("getOtherFacIssueDetails")]
-        public async Task<ActionResult<IEnumerable<getOtherFacIssueDetailsDTO>>> getOtherFacIssueDetails(string faclityId,string status,Int64 issueid,string  recno)
+        public async Task<ActionResult<IEnumerable<getOtherFacIssueDetailsDTO>>> getOtherFacIssueDetails(string faclityId, string status, Int64 issueid, string recno)
         {
             string strStatus = "";
             string strIssueid = "";
@@ -287,7 +290,7 @@ and faci.NOCNUMBER='" + NOCNumber + "' ";
                 strStatus = " and nvl(tbr.status,'I') = 'I' ";
             }
 
-             if (status == "C")
+            if (status == "C")
             {
                 strStatus = " and nvl(tbr.status,'I') = 'C' ";
             }
@@ -297,9 +300,9 @@ and faci.NOCNUMBER='" + NOCNumber + "' ";
             }
             if (recno != "0")
             {
-                strRecno = " and tbr.FACRECEIPTNO= '" + recno+"'";
+                strRecno = " and tbr.FACRECEIPTNO= '" + recno + "'";
             }
-            
+
 
             string qry = @" SELECT 
     CAST(f.facilityname AS VARCHAR(255)) AS facilityname,
@@ -324,7 +327,7 @@ inner join
 select count(distinct tbi.itemid) nos,issueid from  tbfacilityissueitems tbi
 group by issueid
 )tbi on tbi.issueid=tbf.issueid 
-where  1=1 " + strStatus + @"  "+ strIssueid + @"  "+ strRecno + @"  and tbf.issuetype='SP' and tbf.TOFACILITYID=" + faclityId + @"
+where  1=1 " + strStatus + @"  " + strIssueid + @"  " + strRecno + @"  and tbf.issuetype='SP' and tbf.TOFACILITYID=" + faclityId + @"
 order by tbf.ISSUEID desc ";
 
             var context = new ReceiptItemsDDL();
@@ -341,7 +344,7 @@ order by tbf.ISSUEID desc ";
 
 
 
-        [HttpGet("getReceiptDetails")] 
+        [HttpGet("getReceiptDetails")]
         public async Task<ActionResult<IEnumerable<ReceiptMasterDTO>>> getReceiptDetails(Int64 indentId, Int64 facid)
         {
 
@@ -349,8 +352,8 @@ order by tbf.ISSUEID desc ";
             string qry = @"select faci.nocid,faci.NOCNUMBER as ReqNo ,faci.nocdate as ReqDate, fr.IndentId,tb.INDENTNO WHIssueNo, tb.INDENTDATE as WHIssueDT, FacReceiptNo,FacReceiptDate,fr.FACRECEIPTID,fr.status from tbFacilityReceipts fr
 inner join tbIndents tb on tb.IndentId=fr.IndentId
 inner join mascgmscnoc  faci on faci.nocid=tb.NOCID
-where fr.facilityid="+ facid + " and tb.IndentID="+ indentId + "";
-             
+where fr.facilityid=" + facid + " and tb.IndentID=" + indentId + "";
+
 
             //_context.Database.ExecuteSqlRaw(query,
             // new MySqlParameter("Password", salthash1),
@@ -359,11 +362,11 @@ where fr.facilityid="+ facid + " and tb.IndentID="+ indentId + "";
 
 
 
-         //MySqlParameter[] parameters = new MySqlParameter[]
-         //   {
-         //       new MySqlParameter(":facid",  facid),
-         //       new MySqlParameter(":indentid", indentId)
-         //   };
+            //MySqlParameter[] parameters = new MySqlParameter[]
+            //   {
+            //       new MySqlParameter(":facid",  facid),
+            //       new MySqlParameter(":indentid", indentId)
+            //   };
 
             //var myList = _context.ReceiptMasterDTODbSet
             //    .FromSqlRaw(qry)
@@ -375,7 +378,7 @@ where fr.facilityid="+ facid + " and tb.IndentID="+ indentId + "";
             return myList;
 
 
-        
+
         }
 
 
@@ -510,7 +513,7 @@ order by LOCATIONNO ";
              left outer join  tbFacilityReceipts tfr on (tfr.IndentID=tb.facIndentID) 
             Left Outer Join tbFacilityReceiptItems tfi on  tfi.FacReceiptID=tfr.FacReceiptID and tfi.itemid=tbi.itemid       
 				  and tfi.issueITEMID=tbi.issueITEMID
-             Where 1=1  and tb.toFacilityID ="+ tofacilityid + @" ";
+             Where 1=1  and tb.toFacilityID =" + tofacilityid + @" ";
 
 
             var myList = _context.getOtherFacilityIssueDbSet
@@ -723,32 +726,32 @@ ORDER BY
  ";
 
 
-//            string qry = @"  select nvl(ni.sr,0) sr, m.itemid, m.itemcode,ty.itemtypename,m.itemname,m.strength1, m.multiple, m.unitcount, nvl(ni.BOOKEDQTY,0) *  nvl(m.unitcount,1) as indentQty 
-// ,nvl(tbo.ISSUEQTY,0)*nvl(m.unitcount,1) as issueWH,nvl(rb.batchno,'-') batchno , case when rb.mfgdate is null then '-' else to_char(rb.mfgdate,'dd-MM-yyyy') end as mfgdate,  case when rb.expdate is null then '-' else to_char(rb.expdate,'dd-MM-yyyy') end as expdate
-//,nvl(tbo.inwno,0) as inwno
-// ,nvl(r.ABSRQTY,0) as rqty
-// from masitems m 
-//inner join masitemcategories c on c.categoryid = m.categoryid
-//inner join masitemmaincategory mc on mc.MCID = c.MCID 
-//left outer join masitemtypes ty  on ty.itemtypeid = m.itemtypeid
-//left outer join mascgmscnocitems ni on ni.itemid = m.itemid and ni.nocid = " + nocid + @"
+            //            string qry = @"  select nvl(ni.sr,0) sr, m.itemid, m.itemcode,ty.itemtypename,m.itemname,m.strength1, m.multiple, m.unitcount, nvl(ni.BOOKEDQTY,0) *  nvl(m.unitcount,1) as indentQty 
+            // ,nvl(tbo.ISSUEQTY,0)*nvl(m.unitcount,1) as issueWH,nvl(rb.batchno,'-') batchno , case when rb.mfgdate is null then '-' else to_char(rb.mfgdate,'dd-MM-yyyy') end as mfgdate,  case when rb.expdate is null then '-' else to_char(rb.expdate,'dd-MM-yyyy') end as expdate
+            //,nvl(tbo.inwno,0) as inwno
+            // ,nvl(r.ABSRQTY,0) as rqty
+            // from masitems m 
+            //inner join masitemcategories c on c.categoryid = m.categoryid
+            //inner join masitemmaincategory mc on mc.MCID = c.MCID 
+            //left outer join masitemtypes ty  on ty.itemtypeid = m.itemtypeid
+            //left outer join mascgmscnocitems ni on ni.itemid = m.itemid and ni.nocid = " + nocid + @"
 
-//inner join mascgmscnoc n on n.nocid = ni.nocid  
+            //inner join mascgmscnoc n on n.nocid = ni.nocid  
 
-//inner JOIN tbIndents tb on 1=1  and tb.nocid = n.nocid 
-//left OUTER join tbIndentItems tbi on tbi.indentid = tb.indentid and tbi.itemid = ni.itemid
-//left outer join tbOutwards tbo  on  tbo.IndentItemID = tbi.IndentItemID and tbo.itemid=m.itemid
-//left outer join   tbReceiptBatches rb on (rb.InwNo = tbo.InwNo) 
+            //inner JOIN tbIndents tb on 1=1  and tb.nocid = n.nocid 
+            //left OUTER join tbIndentItems tbi on tbi.indentid = tb.indentid and tbi.itemid = ni.itemid
+            //left outer join tbOutwards tbo  on  tbo.IndentItemID = tbi.IndentItemID and tbo.itemid=m.itemid
+            //left outer join   tbReceiptBatches rb on (rb.InwNo = tbo.InwNo) 
 
-//left outer join 
-//(
-//    Select tr.INDENTID,tri.INDENTITEMID,tri.itemid,tbr.ABSRQTY,tbr.whinwno from tbfacilityreceipts tr 
-//    inner join tbfacilityreceiptitems tri on tri.FACRECEIPTID = tr.FACRECEIPTID 
-//    inner join tbfacilityreceiptbatches tbr on tbr.facreceiptitemid = tri.facreceiptitemid
-//    where tr.facreceipttype = 'NO' and tr.INDENTID=" + indentid + @" and tr.facilityid=" + facid + @"
-//) r on r.INDENTID=tb.indentid and r.INDENTITEMID=tbi.INDENTITEMID and r.itemid=m.itemid and r.whinwno=tbo.inwno
-//where 1=1 and nvl(ni.BOOKEDQTY,0) > 0 and tb.status = 'C' and n.status = 'C' and n.nocid=" + nocid + @"
-//order by  m.itemid ";
+            //left outer join 
+            //(
+            //    Select tr.INDENTID,tri.INDENTITEMID,tri.itemid,tbr.ABSRQTY,tbr.whinwno from tbfacilityreceipts tr 
+            //    inner join tbfacilityreceiptitems tri on tri.FACRECEIPTID = tr.FACRECEIPTID 
+            //    inner join tbfacilityreceiptbatches tbr on tbr.facreceiptitemid = tri.facreceiptitemid
+            //    where tr.facreceipttype = 'NO' and tr.INDENTID=" + indentid + @" and tr.facilityid=" + facid + @"
+            //) r on r.INDENTID=tb.indentid and r.INDENTITEMID=tbi.INDENTITEMID and r.itemid=m.itemid and r.whinwno=tbo.inwno
+            //where 1=1 and nvl(ni.BOOKEDQTY,0) > 0 and tb.status = 'C' and n.status = 'C' and n.nocid=" + nocid + @"
+            //order by  m.itemid ";
             //(23413)
             var myList = _context.ReceipItemBatchesDbSet
             .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
@@ -802,7 +805,7 @@ LEFT OUTER JOIN (
     WHERE tr.facreceipttype = 'SP' 
       AND tr.INDENTID = " + indentid + @"
       AND tr.facilityid = " + facid + @"
-       AND tr.FACRECEIPTID = "+ facReceiptId + @"
+       AND tr.FACRECEIPTID = " + facReceiptId + @"
     GROUP BY tr.INDENTID, tri.INDENTITEMID, tri.itemid, tbr.batchno, tr.ISSUEID, tri.issueitemid,TBR.WHINWNO
 ) r ON r.INDENTID = tb.indentid 
     AND r.indentid = tbf.FACINDENTID 
@@ -852,107 +855,107 @@ ORDER BY m.itemid;
         }
 
         [HttpPost("postReceiptItemsSP")]  //gyan
-        public async Task<ActionResult<IEnumerable<IncompleteWardIssueDTO>>> postReceiptItemsSP( Int64 indentId, Int64 rackID, Int64 facid, Int64 facReceiptId, Int64 whinwno, tbFacilityReceiptItemsModel ObjRItems)  //indentid is nocid
+        public async Task<ActionResult<IEnumerable<IncompleteWardIssueDTO>>> postReceiptItemsSP(Int64 indentId, Int64 rackID, Int64 facid, Int64 facReceiptId, Int64 whinwno, tbFacilityReceiptItemsModel ObjRItems)  //indentid is nocid
         {
             //GetMonthName(string date_ddmmyyyy)
 
             //try
             //{
-                FacOperations ob = new FacOperations(_context);
+            FacOperations ob = new FacOperations(_context);
 
-                ob.getWhIssuedItemDataSP(indentId,facid, whinwno, facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid
-                                        , out string? MfgDate, out Int64? ponoid, out Int32? qastatus, out string? whissueblock, out string? expiryDate, out string? batchno);
-             
-                ObjRItems.ISSUEITEMID = Convert.ToInt64(indentItemId);
-                ObjRItems.ITEMID = Convert.ToInt64(itemId);
-                ObjRItems.FACRECEIPTID = facReceiptId;
-                ObjRItems.ABSRQTY = Convert.ToInt64(batchQty);
+            ob.getWhIssuedItemDataSP(indentId, facid, whinwno, facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid
+                                    , out string? MfgDate, out Int64? ponoid, out Int32? qastatus, out string? whissueblock, out string? expiryDate, out string? batchno);
 
-                ob.isFacilityReceiptItemsExist(Convert.ToInt64(Convert.ToInt64(itemId)), facReceiptId, out Int64? batchQty1, out Int64? facilityReceiptItemId);
-                Int64 FacReceiptitemid = 0;
-                if (facilityReceiptItemId != null)
+            ObjRItems.ISSUEITEMID = Convert.ToInt64(indentItemId);
+            ObjRItems.ITEMID = Convert.ToInt64(itemId);
+            ObjRItems.FACRECEIPTID = facReceiptId;
+            ObjRItems.ABSRQTY = Convert.ToInt64(batchQty);
+
+            ob.isFacilityReceiptItemsExist(Convert.ToInt64(Convert.ToInt64(itemId)), facReceiptId, out Int64? batchQty1, out Int64? facilityReceiptItemId);
+            Int64 FacReceiptitemid = 0;
+            if (facilityReceiptItemId != null)
+            {
+                Int64 total = Convert.ToInt64(batchQty1) + Convert.ToInt64(batchQty);
+                string strQuery1 = @"update tbFacilityReceiptItems set ABSRQTY= " + total + " where itemid=" + Convert.ToInt64(itemId) + "" +
+                    " and FACRECEIPTID=" + facReceiptId + " and  FACRECEIPTITEMID = " + facilityReceiptItemId + "";
+                Int32 result1 = _context.Database.ExecuteSqlRaw(strQuery1);
+                FacReceiptitemid = Convert.ToInt64(facilityReceiptItemId);
+            }
+            else
+            {
+
+                _context.tbFacilityReceiptItemsDbSet.Add(ObjRItems);  //
+                _context.SaveChanges();
+                FacReceiptitemid = Convert.ToInt64(ObjRItems.FACRECEIPTITEMID);
+            }
+
+
+
+            tbFacilityReceiptBatchesModel objRBatches = new tbFacilityReceiptBatchesModel();
+
+            objRBatches.MFGDATE = MfgDate;
+            objRBatches.EXPDATE = expiryDate;
+
+            DateTime? mfgDateFormatted = null;
+            DateTime? expiryDateFormatted = null;
+
+            if (!string.IsNullOrEmpty(expiryDate))
+            {
+                if (DateTime.TryParseExact(expiryDate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
                 {
-                    Int64 total = Convert.ToInt64(batchQty1) + Convert.ToInt64(batchQty);
-                    string strQuery1 = @"update tbFacilityReceiptItems set ABSRQTY= " + total + " where itemid=" + Convert.ToInt64(itemId) + "" +
-                        " and FACRECEIPTID=" + facReceiptId + " and  FACRECEIPTITEMID = " + facilityReceiptItemId + "";
-                    Int32 result1 = _context.Database.ExecuteSqlRaw(strQuery1);
-                    FacReceiptitemid = Convert.ToInt64(facilityReceiptItemId);
+                    expiryDateFormatted = parsedDate;
                 }
                 else
                 {
-
-                    _context.tbFacilityReceiptItemsDbSet.Add(ObjRItems);  //
-                    _context.SaveChanges();
-                    FacReceiptitemid = Convert.ToInt64(ObjRItems.FACRECEIPTITEMID);
+                    // Handle invalid date format
+                    throw new Exception("Invalid expiry date format.");
                 }
+            }
 
-
-
-                tbFacilityReceiptBatchesModel objRBatches = new tbFacilityReceiptBatchesModel();
-
-                objRBatches.MFGDATE = MfgDate;
-                objRBatches.EXPDATE = expiryDate;
-
-                DateTime? mfgDateFormatted = null;
-                DateTime? expiryDateFormatted = null;
-
-                if (!string.IsNullOrEmpty(expiryDate))
+            if (!string.IsNullOrEmpty(expiryDate))
+            {
+                if (DateTime.TryParseExact(expiryDate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedExpiryDate))
                 {
-                    if (DateTime.TryParseExact(expiryDate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
-                    {
-                        expiryDateFormatted = parsedDate;
-                    }
-                    else
-                    {
-                        // Handle invalid date format
-                        throw new Exception("Invalid expiry date format.");
-                    }
+                    expiryDateFormatted = parsedExpiryDate;
                 }
-
-                if (!string.IsNullOrEmpty(expiryDate))
+                else
                 {
-                    if (DateTime.TryParseExact(expiryDate, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedExpiryDate))
-                    {
-                        expiryDateFormatted = parsedExpiryDate;
-                    }
-                    else
-                    {
-                        // Handle the case where the date format is invalid
-                        throw new Exception("Invalid expiry date format.");
-                    }
+                    // Handle the case where the date format is invalid
+                    throw new Exception("Invalid expiry date format.");
                 }
+            }
 
-                objRBatches.MFGDATE = mfgDateFormatted?.ToString("yyyy-MM-dd"); // Ensure format is valid for MySQL
-                objRBatches.EXPDATE = expiryDateFormatted?.ToString("yyyy-MM-dd"); // Ensure format is valid for MySQL
+            objRBatches.MFGDATE = mfgDateFormatted?.ToString("yyyy-MM-dd"); // Ensure format is valid for MySQL
+            objRBatches.EXPDATE = expiryDateFormatted?.ToString("yyyy-MM-dd"); // Ensure format is valid for MySQL
 
-                decimal? whIssueBlockValue = null;
+            decimal? whIssueBlockValue = null;
 
-                if (!string.IsNullOrEmpty(whissueblock))
+            if (!string.IsNullOrEmpty(whissueblock))
+            {
+                if (decimal.TryParse(whissueblock, out decimal parsedValue))
                 {
-                    if (decimal.TryParse(whissueblock, out decimal parsedValue))
-                    {
-                        whIssueBlockValue = parsedValue;
-                    }
-                    else
-                    {
-                        throw new Exception("Invalid WHISSUEBLOCK value.");
-                    }
+                    whIssueBlockValue = parsedValue;
                 }
+                else
+                {
+                    throw new Exception("Invalid WHISSUEBLOCK value.");
+                }
+            }
 
-                objRBatches.BATCHNO = batchno;
-                objRBatches.ITEMID = Convert.ToInt64(itemId);
-                objRBatches.FACRECEIPTITEMID = Convert.ToInt64(FacReceiptitemid);
-                objRBatches.ABSRQTY = Convert.ToInt64(batchQty);
-                objRBatches.STOCKLOCATION = Convert.ToInt64(rackID);
-                objRBatches.QASTATUS = Convert.ToInt32(qastatus);
-                objRBatches.WHINWNO = Convert.ToInt64(whinwno);
-                objRBatches.PONOID = Convert.ToInt64(ponoid);
+            objRBatches.BATCHNO = batchno;
+            objRBatches.ITEMID = Convert.ToInt64(itemId);
+            objRBatches.FACRECEIPTITEMID = Convert.ToInt64(FacReceiptitemid);
+            objRBatches.ABSRQTY = Convert.ToInt64(batchQty);
+            objRBatches.STOCKLOCATION = Convert.ToInt64(rackID);
+            objRBatches.QASTATUS = Convert.ToInt32(qastatus);
+            objRBatches.WHINWNO = Convert.ToInt64(whinwno);
+            objRBatches.PONOID = Convert.ToInt64(ponoid);
 
-                _context.tbFacilityReceiptBatchesDbSet.Add(objRBatches);
-                _context.SaveChanges();
+            _context.tbFacilityReceiptBatchesDbSet.Add(objRBatches);
+            _context.SaveChanges();
 
 
-                return Ok(objRBatches);
+            return Ok(objRBatches);
             //}
             //catch (Exception ex)
             //{
@@ -969,54 +972,54 @@ ORDER BY m.itemid;
 
             //try
             //{
-                FacOperations ob = new FacOperations(_context);
+            FacOperations ob = new FacOperations(_context);
 
-                ob.getWhIssuedItemData( indentId,facid, whinwno, facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid
-                                        , out string? MfgDate, out Int64? ponoid, out Int32? qastatus, out string? whissueblock, out string? expiryDate, out string? batchno);
-                ObjRItems.INDENTITEMID = Convert.ToInt64(indentItemId);
-                ObjRItems.ITEMID = Convert.ToInt64(itemId);
-                ObjRItems.FACRECEIPTID = facReceiptId;
-                ObjRItems.ABSRQTY = Convert.ToInt64(batchQty);
+            ob.getWhIssuedItemData(indentId, facid, whinwno, facReceiptId, out Int64? indentItemId, out Int64? itemId, out Int64? batchQty, out Int64? facReceiptItemid
+                                    , out string? MfgDate, out Int64? ponoid, out Int32? qastatus, out string? whissueblock, out string? expiryDate, out string? batchno);
+            ObjRItems.INDENTITEMID = Convert.ToInt64(indentItemId);
+            ObjRItems.ITEMID = Convert.ToInt64(itemId);
+            ObjRItems.FACRECEIPTID = facReceiptId;
+            ObjRItems.ABSRQTY = Convert.ToInt64(batchQty);
 
-                ob.isFacilityReceiptItemsExist(Convert.ToInt64(Convert.ToInt64(itemId)), facReceiptId, out Int64? batchQty1, out Int64? facilityReceiptItemId);
-                Int64 FacReceiptitemid = 0;
-                if (facilityReceiptItemId != null)
-                {
-                    Int64 total = Convert.ToInt64(batchQty1) + Convert.ToInt64(batchQty);
-                    string strQuery1 = @"update tbFacilityReceiptItems set ABSRQTY= " + total + " where itemid=" + Convert.ToInt64(itemId) + "" +
-                        " and FACRECEIPTID=" + facReceiptId + " and  FACRECEIPTITEMID = " + facilityReceiptItemId + "";
-                    Int32 result1 = _context.Database.ExecuteSqlRaw(strQuery1);
-                    FacReceiptitemid = Convert.ToInt64(facilityReceiptItemId);
-                }
-                else
-                {
+            ob.isFacilityReceiptItemsExist(Convert.ToInt64(Convert.ToInt64(itemId)), facReceiptId, out Int64? batchQty1, out Int64? facilityReceiptItemId);
+            Int64 FacReceiptitemid = 0;
+            if (facilityReceiptItemId != null)
+            {
+                Int64 total = Convert.ToInt64(batchQty1) + Convert.ToInt64(batchQty);
+                string strQuery1 = @"update tbFacilityReceiptItems set ABSRQTY= " + total + " where itemid=" + Convert.ToInt64(itemId) + "" +
+                    " and FACRECEIPTID=" + facReceiptId + " and  FACRECEIPTITEMID = " + facilityReceiptItemId + "";
+                Int32 result1 = _context.Database.ExecuteSqlRaw(strQuery1);
+                FacReceiptitemid = Convert.ToInt64(facilityReceiptItemId);
+            }
+            else
+            {
 
-                    _context.tbFacilityReceiptItemsDbSet.Add(ObjRItems);  //
-                    _context.SaveChanges();
-                    FacReceiptitemid = Convert.ToInt64(ObjRItems.FACRECEIPTITEMID);
-                }
-
-
-
-                tbFacilityReceiptBatchesModel objRBatches = new tbFacilityReceiptBatchesModel();
-
-                objRBatches.MFGDATE = MfgDate;
-                objRBatches.EXPDATE = expiryDate;
-                objRBatches.WHISSUEBLOCK = Convert.ToDecimal(whissueblock);
-                objRBatches.BATCHNO = batchno;
-                objRBatches.ITEMID = Convert.ToInt64(itemId);
-                objRBatches.FACRECEIPTITEMID = Convert.ToInt64(FacReceiptitemid);
-                objRBatches.ABSRQTY = Convert.ToInt64(batchQty);
-                objRBatches.STOCKLOCATION = Convert.ToInt64(rackID);
-                objRBatches.QASTATUS = Convert.ToInt32(qastatus);
-                objRBatches.WHINWNO = Convert.ToInt64(whinwno);
-                objRBatches.PONOID = Convert.ToInt64(mponoid);
-
-                _context.tbFacilityReceiptBatchesDbSet.Add(objRBatches);
+                _context.tbFacilityReceiptItemsDbSet.Add(ObjRItems);  //
                 _context.SaveChanges();
+                FacReceiptitemid = Convert.ToInt64(ObjRItems.FACRECEIPTITEMID);
+            }
 
 
-                return Ok(objRBatches);
+
+            tbFacilityReceiptBatchesModel objRBatches = new tbFacilityReceiptBatchesModel();
+
+            objRBatches.MFGDATE = MfgDate;
+            objRBatches.EXPDATE = expiryDate;
+            objRBatches.WHISSUEBLOCK = Convert.ToDecimal(whissueblock);
+            objRBatches.BATCHNO = batchno;
+            objRBatches.ITEMID = Convert.ToInt64(itemId);
+            objRBatches.FACRECEIPTITEMID = Convert.ToInt64(FacReceiptitemid);
+            objRBatches.ABSRQTY = Convert.ToInt64(batchQty);
+            objRBatches.STOCKLOCATION = Convert.ToInt64(rackID);
+            objRBatches.QASTATUS = Convert.ToInt32(qastatus);
+            objRBatches.WHINWNO = Convert.ToInt64(whinwno);
+            objRBatches.PONOID = Convert.ToInt64(mponoid);
+
+            _context.tbFacilityReceiptBatchesDbSet.Add(objRBatches);
+            _context.SaveChanges();
+
+
+            return Ok(objRBatches);
             //}
             //catch (Exception ex)
             //{
@@ -1056,8 +1059,8 @@ FROM tbIndentItems tbi
             and tfi.INDENTITEMID=tbi.INDENTITEMID
             left outer join tbfacilityreceiptbatches rfb on rfb.facreceiptitemid=tfi.facreceiptitemid
             left outer join masracks rc on rc.rackid=rfb.stocklocation
-             Where 1=1  and tb.FacilityID ="+ facId + @"     
-             and tfr.FACRECEIPTID="+ receiptId + @" 
+             Where 1=1  and tb.FacilityID =" + facId + @"     
+             and tfr.FACRECEIPTID=" + receiptId + @" 
              order by m.itemname ";
 
 
@@ -1077,13 +1080,13 @@ FROM tbIndentItems tbi
 
             if (facId != 0)
             {
-                whfacId = "  and tfr.FacilityID ="+ facId +" ";
+                whfacId = "  and tfr.FacilityID =" + facId + " ";
             }
 
 
             if (receiptId != 0)
             {
-                whreceiptId = "  and tfr.FACRECEIPTID="+ receiptId + " ";
+                whreceiptId = "  and tfr.FACRECEIPTID=" + receiptId + " ";
             }
 
             string qry = @" Select distinct m.itemid,m.itemcode,m.itemname,m.STRENGTH1 as STRENGTH,rb.batchno,rb.mfgdate,rb.expdate,rb.ABSRQTY as BatrchReceiptQTY ,tfi.facreceiptitemid,rb.InwNo,tfr.status Rstatus,tfr.FACRECEIPTID
@@ -1092,7 +1095,7 @@ FROM tbIndentItems tbi
               left outer join tbfacilityreceiptbatches rb on rb.facreceiptitemid=tfi.facreceiptitemid  
              Inner Join masItems m on (m.ItemID=tfi.ItemID)     
              Where 1=1 " + whfacId + @"     
-             "+ whreceiptId + @"
+             " + whreceiptId + @"
              order by m.itemname  ";
             var myList = _context.getReceiptByIdDbSet
             .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
@@ -1101,6 +1104,456 @@ FROM tbIndentItems tbi
 
 
         }
+
+        //[HttpGet("getReceiptById")]
+        //public async Task<ActionResult<IEnumerable<getReceiptByIdDTO>>> getReceiptById(Int64 facId, Int64 receiptId)
+        //{
+        //    String whfacId = "";
+        //    String whreceiptId = "";
+
+        //    if (facId != 0)
+        //    {
+        //        whfacId = "  and tfr.FacilityID =" + facId + " ";
+        //    }
+
+
+        //    if (receiptId != 0)
+        //    {
+        //        whreceiptId = "  and tfr.FACRECEIPTID=" + receiptId + " ";
+        //    }
+
+        //    string qry = @" Select distinct m.itemid,m.itemcode,m.itemname,m.STRENGTH1 as STRENGTH,rb.batchno,rb.mfgdate,rb.expdate,rb.ABSRQTY as BatrchReceiptQTY ,tfi.facreceiptitemid,rb.InwNo,tfr.status Rstatus,tfr.FACRECEIPTID
+        //     from tbFacilityReceipts tfr
+        //    Left Outer Join tbFacilityReceiptItems tfi on  tfi.FacReceiptID=tfr.FacReceiptID    
+        //      left outer join tbfacilityreceiptbatches rb on rb.facreceiptitemid=tfi.facreceiptitemid  
+        //     Inner Join masItems m on (m.ItemID=tfi.ItemID)     
+        //     Where 1=1 " + whfacId + @"     
+        //     " + whreceiptId + @"
+        //     order by m.itemname  ";
+        //    var myList = _context.getReceiptByIdDbSet
+        //    .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+        //    return myList;
+
+
+        //}
+
+        [HttpGet("getBarcodeReceiptMaster")]
+        public async Task<List<BarcodeReceiptDto>> getBarcodeReceiptMaster(string BarcodeID, string status)
+        {
+            string whStatus = "";
+
+
+            string qry = $@"
+                            select distinct barcodeid, 0 as facreceiptid, FACILITYID, INDENTID, WAREHOUSEID,'0' as facreceiptno,to_char(sysdate,'dd-MM-yyyy') as facreceiptdate,'Y' as isuseapp,'C' as status,'NO' as facreceipttype,0 as issueid,0 as tofacilityid
+                            from (
+                            select tb.facilityid,tb.INDENTID, tb.WAREHOUSEID,  tb.INDENTNO, tb.INDENTDATE ,tbi.indentitemid,tbo.outwno,tbo.barcodeid
+                            from tbindents  tb 
+                            inner join tbindentitems tbi on tbi.indentid=tb.indentid
+                            inner join tboutwards tbo on tbo.indentitemid=tbi.indentitemid
+                            inner join tblissuebarcode bi on bi.barcodeid=tbo.barcodeid
+                            where tb.status='C'  and bi.barcodeid='{BarcodeID}'
+                            )";
+            var myList = _contextoracle.BarcodeReceiptDtoDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+
+        [HttpGet("GetFacreceiptidBarcode")]
+        public async Task<List<GetFacreceiptidForOpeningStockDTO>> GetFacreceiptidBarcode(string usrFacilityID, string mIndentID)
+        {
+
+            string qry = @" select facreceiptid from tbfacilityreceipts where facilityid=" + usrFacilityID + " and  INDENTID=" + mIndentID + "  ";
+
+            var myList = _context.GetFacreceiptidForOpeningStockDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+        }
+
+        [HttpGet("CheckBarcodeAndFacReceipt")]
+        public async Task<IActionResult> CheckBarcodeAndFacReceipt(string BarcodeID, string status)
+        {
+            GetDataDTO response = new GetDataDTO();
+
+            response.BarcodeReceiptDto = await getBarcodeReceiptMaster(BarcodeID, status);
+
+            if (response.BarcodeReceiptDto == null || response.BarcodeReceiptDto.Count == 0)
+                return BadRequest("Barcode Not Found");
+
+            var data = response.BarcodeReceiptDto.First();
+
+            string usrFacilityID = data.FACILITYID;
+            string mIndentID = data.INDENTID;
+
+
+
+            response.GetFacreceiptidForOpeningStockDTO = await GetFacreceiptidBarcode(usrFacilityID, mIndentID);
+            Int64 receiptId = 0;
+            if (response.GetFacreceiptidForOpeningStockDTO == null || response.GetFacreceiptidForOpeningStockDTO.Count == 0)
+            {
+
+                tbFacilityReceiptsModel receipt = new tbFacilityReceiptsModel();
+                receipt.FACILITYID = Convert.ToInt64(usrFacilityID);
+                receipt.INDENTID = Convert.ToInt64(mIndentID);
+                receipt.FACRECEIPTDATE = DateTime.Now.ToString("dd-MM-yyyy");
+                receipt.STATUS = "C"; // optional
+
+                // 3️⃣ Call Your API Method Directly
+                var result = await postReceiptMaster(usrFacilityID, receipt);
+                var receiptList = result.Value?.ToList();
+
+
+                var actionResult = await GetFacReceiptIDString(usrFacilityID, mIndentID);
+
+                // Cast to OkObjectResult to get value
+                var okResult = actionResult as OkObjectResult;
+
+                // Store the returned value
+                string receiptIdString = okResult?.Value?.ToString();
+
+                // Optional: Convert to long if needed
+
+                if (receiptIdString != null && receiptIdString != "No")
+                {
+                    receiptId = Convert.ToInt64(receiptIdString);
+
+                }
+
+
+            }
+            else
+            {
+
+                var mReceipTID = response.GetFacreceiptidForOpeningStockDTO.First();
+                receiptId = mReceipTID.FACRECEIPTID;
+            }
+
+            if (receiptId != null && receiptId != 0)
+            {
+                await InsertReceiptItemBarcode(Convert.ToInt64(mIndentID), Convert.ToInt64(usrFacilityID), Convert.ToInt64(receiptId), BarcodeID);
+
+            }
+
+
+            return Ok(new
+            {
+                Barcode = BarcodeID,
+                Facility = usrFacilityID,
+                Indent = mIndentID,
+                ReceiptID = receiptId
+            });
+        }
+
+
+        [HttpGet("GetFacReceiptIDString")]
+        public async Task<IActionResult> GetFacReceiptIDString(string usrFacilityID, string mIndentID)
+        {
+            // Parameterized query (safe)
+            string qry = $@"
+        select facreceiptid 
+        from tbfacilityreceipts 
+        where facilityid = {usrFacilityID} 
+          and INDENTID = {mIndentID}";
+
+            // Call EF
+            var facReceiptList = _context.GetFacreceiptidForOpeningStockDbSet
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .ToList();
+
+            // Check and return string
+            if (facReceiptList != null && facReceiptList.Count > 0)
+            {
+                // Return first FACRECEIPTID as string
+                return Ok(facReceiptList[0].FACRECEIPTID.ToString());
+            }
+            else
+            {
+                // Return "No" if not found
+                return Ok("No");
+            }
+        }
+
+
+
+
+
+
+        [HttpGet("GetFacReceiptItemidIDString")]
+        public async Task<IActionResult> GetFacReceiptItemidIDString(long mFacReceiptID, long mItemid)
+        {
+            try
+            {
+                // ================= RAW SQL SAFE QUERY ==================
+                string sql = @"SELECT FACRECEIPTITEMID, ABSRQTY 
+                       FROM tbfacilityreceiptitems 
+                       WHERE FACRECEIPTID = {0} AND ITEMID = {1}";
+
+                var data = await _context.tbFacilityReceiptItemsDbSet1
+                    .FromSqlRaw(sql, mFacReceiptID, mItemid)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync();
+
+
+                if (data == null)
+                {
+                    return Ok(new
+                    {
+                        FacReceiptItemID = 0,
+                        AbsQty = 0
+                    });
+                }
+
+
+                return Ok(new
+                {
+                    FacReceiptItemID = data.FACRECEIPTITEMID,
+                    AbsQty = data.ABSRQTY
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error: " + ex.Message);
+            }
+        }
+
+
+
+
+
+
+
+        [HttpGet("GetFacissueDetailsBarcodeNew")]
+        public async Task<IActionResult> GetFacissueDetailsBarcodeNew(string barcCodID)
+        {
+            // Parameterized query (safe)
+            string qry = $@"
+Select distinct m.itemid,tbo.batchno,
+DATE_FORMAT(tbo.expdate, '%Y-%m-%d') AS EXPDATE,
+tbo.IssueQty*IFNULL(m.unitcount,1) as IssueBatchQty,
+tbo.InwNo,
+tbi.indentitemid,
+tfr.FacReceiptID,
+tfi.FacReceiptItemID,
+DATE_FORMAT(tbo.MfgDate, '%Y-%m-%d') AS MFGDATE,
+tbo.ponoid,
+CAST( CASE WHEN IFNULL(m.qctest,'Y')='Y' then tbo.qastatus else 1 END AS CHAR)  as qastatus,
+CAST(IFNULL(tbo.whissueblock,'') AS CHAR)  as whissueblock
+FROM tbIndentItems tbi
+LEFT JOIN tbOutwards tbo ON tbo.IndentItemID = tbi.IndentItemID
+INNER JOIN masItems m ON m.ItemID=tbi.ItemID
+INNER JOIN tbIndents tb ON tb.Indentid=tbi.IndentId
+LEFT JOIN tbFacilityReceipts tfr ON tfr.IndentID=tb.IndentID
+LEFT JOIN tbFacilityReceiptItems tfi ON tfi.FacReceiptID=tfr.FacReceiptID 
+   AND tfi.itemid=tbi.itemid AND tfi.INDENTITEMID=tbi.INDENTITEMID
+WHERE tbo.barcodeid = {barcCodID}";
+
+            // Call EF
+            var facReceiptList = _context.MasFacIssueBarcodeDbSet
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .ToList();
+
+            // Check and return string
+            if (facReceiptList != null && facReceiptList.Count > 0)
+            {
+                // Return first FACRECEIPTID as string
+                return Ok(facReceiptList[0].FACRECEIPTID.ToString());
+            }
+            else
+            {
+                // Return "No" if not found
+                return Ok("No");
+            }
+        }
+
+
+
+        [HttpPost("InsertReceiptItemBarcode")]
+        public async Task<IActionResult> InsertReceiptItemBarcode(long indentId, long facid, long facReceiptId, string barcodeID)
+        {
+            //try
+            //{
+            FacOperations ob = new FacOperations(_context);
+
+            string qry = $@"
+Select distinct m.itemid,tbo.batchno,
+DATE_FORMAT(tbo.expdate, '%Y-%m-%d') AS EXPDATE,
+tbo.IssueQty*IFNULL(m.unitcount,1) as IssueBatchQty,
+tbo.InwNo,
+tbi.indentitemid,
+tfr.FacReceiptID,
+tfi.FacReceiptItemID,
+DATE_FORMAT(tbo.MfgDate, '%Y-%m-%d') AS MFGDATE,
+tbo.ponoid,
+CAST( CASE WHEN IFNULL(m.qctest,'Y')='Y' then tbo.qastatus else 1 END AS CHAR)  as qastatus,
+CAST(IFNULL(tbo.whissueblock,'') AS CHAR)  as whissueblock
+FROM tbIndentItems tbi
+LEFT JOIN tbOutwards tbo ON tbo.IndentItemID = tbi.IndentItemID
+INNER JOIN masItems m ON m.ItemID=tbi.ItemID
+INNER JOIN tbIndents tb ON tb.Indentid=tbi.IndentId
+LEFT JOIN tbFacilityReceipts tfr ON tfr.IndentID=tb.IndentID
+LEFT JOIN tbFacilityReceiptItems tfi ON tfi.FacReceiptID=tfr.FacReceiptID 
+   AND tfi.itemid=tbi.itemid AND tfi.INDENTITEMID=tbi.INDENTITEMID
+WHERE tbo.barcodeid = {barcodeID}";
+
+            // var parents = await _context.MasFacIssueBarcodeDbSet.FromSqlRaw(sql).ToListAsync();
+
+
+            var parents = _context.MasFacIssueBarcodeDbSet.FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            if (parents.Count == 0)
+                return NotFound("Barcode not found");
+
+            foreach (var parent in parents)
+            {
+                // ===== Insert / Update Receipt Items =====
+                // ob.isFacilityReceiptItemsExist(Convert.ToInt64( parent.ITEMID), facReceiptId,out long? oldQty, out long? facReceiptItemId);
+
+
+                var result = await GetFacReceiptItemidIDString(Convert.ToInt64(facReceiptId), Convert.ToInt64(parent.ITEMID));
+
+                var okResult = result as OkObjectResult;
+                long receiptItemId = 0;
+                long oldQty = 0;
+
+                long facReceiptItemId = 0;
+
+
+                if (okResult != null)
+                {
+                    dynamic obj = okResult.Value;
+                    facReceiptItemId = Convert.ToInt64(obj.FacReceiptItemID);
+
+                }
+
+
+
+
+
+                if (facReceiptItemId != null && facReceiptItemId != 0)
+                {
+                    long total = (oldQty) + Convert.ToInt64(parent.ISSUEBATCHQTY);
+
+                    await _context.Database.ExecuteSqlRawAsync("UPDATE tbFacilityReceiptItems SET ABSRQTY={0} WHERE FACRECEIPTITEMID={1}", total, facReceiptItemId);
+                    _context.SaveChanges();
+                    receiptItemId = facReceiptItemId;
+                    // receiptItemId = facReceiptItemId.Value;
+                }
+                else
+                {
+                    //tbFacilityReceiptItemsModel item = new tbFacilityReceiptItemsModel
+                    //{
+                    //    FACRECEIPTID = facReceiptId,
+                    //    ITEMID = Convert.ToInt64(parent.ITEMID),
+                    //    INDENTITEMID = Convert.ToInt64(parent.INDENTITEMID),
+                    //    ABSRQTY = Convert.ToInt64(parent.ISSUEBATCHQTY)
+                    //};
+
+                    //_context.tbFacilityReceiptItemsDbSet.Add(item);
+                    //await _context.SaveChangesAsync();
+
+
+
+                    InsertReceiptItemNew(facReceiptId,
+                                        Convert.ToInt64(parent.ITEMID),
+                                        Convert.ToInt64(parent.INDENTITEMID),
+                                        Convert.ToInt64(parent.ISSUEBATCHQTY)
+                                    );
+
+
+                    var result1 = await GetFacReceiptItemidIDString(Convert.ToInt64(facReceiptId), Convert.ToInt64(parent.ITEMID));
+
+                    var okResult1 = result1 as OkObjectResult;
+
+                    if (okResult1 != null)
+                    {
+                        dynamic obj1 = okResult1.Value;
+                        receiptItemId = obj1.FacReceiptItemID;
+
+                    }
+                    //receiptItemId = item.FACRECEIPTITEMID;
+                }
+
+                InsertbatchesBarcode(
+     receiptItemId, Convert.ToInt64(parent.ITEMID), parent.BATCHNO, parent.MFGDATE, parent.EXPDATE, Convert.ToUInt16(parent.QASTATUS),
+   1, Convert.ToDecimal(parent.WHISSUEBLOCK), Convert.ToInt64(parent.PONOID), Convert.ToInt64(parent.INWNO), Convert.ToInt64(parent.ISSUEBATCHQTY));
+
+
+
+
+            }
+
+
+
+            return Ok("Receipt Items Inserted Successfully");
+            //}
+            //catch (Exception ex)
+            //{
+            //    return StatusCode(500, ex.Message);
+            //}
+        }
+
+
+
+        [HttpPost("InsertbatchesBarcode")]
+        public void InsertbatchesBarcode(
+
+    long FACRECEIPTITEMID,
+    long ITEMID,
+    string BATCHNO,
+    string MFGDATE,
+    string EXPDATE,
+    int QASTATUS,
+    long STOCKLOCATION,
+    decimal WHISSUEBLOCK,
+    long PONOID,
+    long WHINWNO,
+    long ABSRQTY
+)
+        {
+
+            string sql = $@"
+        INSERT INTO tbfacilityreceiptbatches 
+        (FACRECEIPTITEMID, ITEMID, BATCHNO, MFGDATE, EXPDATE, QASTATUS,
+         STOCKLOCATION, WHISSUEBLOCK, PONOID, WHINWNO, ABSRQTY)
+        VALUES
+        ( {FACRECEIPTITEMID}, {ITEMID}, '{BATCHNO}', 
+         '{MFGDATE}', 
+         '{EXPDATE}', 
+         {QASTATUS}, {STOCKLOCATION}, {WHISSUEBLOCK}, 
+         {PONOID}, {WHINWNO}, {ABSRQTY} )";
+
+            _context.Database.ExecuteSqlRaw(sql);
+
+            _context.SaveChanges();
+
+        }
+
+
+
+        [HttpPost("InsertReceiptItemNew")]
+        public void InsertReceiptItemNew(
+   long FACRECEIPTID, long ITEMID,
+    long? INDENTITEMID,
+    long? ABSRQTY
+)
+        {
+            string sql = $@"
+         INSERT INTO tbfacilityreceiptitems
+        (FACRECEIPTID, ITEMID, INDENTITEMID, ABSRQTY)
+        VALUES
+        (  {FACRECEIPTID}, {ITEMID}, {INDENTITEMID}, 
+         {ABSRQTY})";
+
+            _context.Database.ExecuteSqlRaw(sql);
+            _context.SaveChanges();
+
+
+        }
+
+
 
     }
 

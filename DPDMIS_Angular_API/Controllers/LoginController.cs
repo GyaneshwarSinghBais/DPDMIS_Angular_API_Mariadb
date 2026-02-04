@@ -139,7 +139,7 @@ inner join masdistricts d on d.districtid = u.districtid
 inner join masfacheaderfooter hf on hf.USERID=u.USERID
 inner join maswarehouses w on w.WAREHOUSEID = d.WAREHOUSEID
  where 1=1 and u.roleid=486    
-     and (emailid ='" + emailORmob + "' or hf.FOOTER3='" + emailORmob + @"') 
+     and (emailid ='" + emailORmob + "' or hf.FOOTER3='" + emailORmob + @"' or u.depmobile='" + emailORmob + @"') 
       ";
 
             var result = _context.UsruserModelConsultantDbSet

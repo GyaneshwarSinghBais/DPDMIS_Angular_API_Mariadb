@@ -108,10 +108,10 @@ namespace DPDMIS_Angular_API.Data
         public DbSet<OraMasFacDemandItemsDTO> OraMasFacDemandItemsDbSet { get; set; }
         public DbSet<ORAMASFACTRANSFERS_DTO> ORAMASFACTRANSFERS_DbSet { get; set; }
         public DbSet<ORAMASFACTRANSFERSINDENT_DTO> ORAMASFACTRANSFERSINDENT_DbSet { get; set; }
+
+        public DbSet<BarcodeReceiptDto> BarcodeReceiptDtoDbSet { get; set; }
+
         
-
-
-
 
 
 
@@ -140,13 +140,13 @@ namespace DPDMIS_Angular_API.Data
         public DbSet<ORA_mascgmscnocDTO> ORA_mascgmscnocDbSet { get; set; }
         public DbSet<ORAIntegration_MasCgmscNocItemsDTO> ORAIntegration_MasCgmscNocItemsDbSet { get; set; }
         public DbSet<ValueMascgmscnocDTO> ValueMascgmscnocDbSet { get; set; }
+
+        public DbSet<BarcodeReceiptDto> BarcodeReceiptDto { get; set; }
+
+
+
+
         
-
-
-
-
-
-
 
 
 
@@ -184,7 +184,8 @@ namespace DPDMIS_Angular_API.Data
             modelBuilder.Entity<getReceiptVouchersDTO>().HasNoKey();
             modelBuilder.Entity<getReceiptByIdDTO>().HasNoKey();
             modelBuilder.Entity<getFacilityItemWiseStockDTO>().HasNoKey();
-            
+            modelBuilder.Entity<BarcodeReceiptDto>().HasNoKey();
+
 
 
             //  modelBuilder.Entity<MasCgmscNocItems>().ToTable("MasCgmscNocItems");

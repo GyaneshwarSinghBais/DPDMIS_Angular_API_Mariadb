@@ -1,6 +1,26 @@
 [
   {
     "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
+    "Method": "DistrictWiseAamHealthPerformance",
+    "RelativePath": "api/AAMAdmin/AAMHealthPerformance",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.AAMAdminDTO.DistrictWiseAamHealthPerformanceDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
     "Method": "getFacilityItemWiseStock",
     "RelativePath": "api/AAMAdmin/getFacilityItemWiseStock",
     "HttpMethod": "GET",
@@ -155,6 +175,32 @@
   },
   {
     "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
+    "Method": "KPIFacilityDetai",
+    "RelativePath": "api/AAMAdmin/KPIFacilityDetai",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "distId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.AAMAdminDTO.KPIFacilityDetailDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
     "Method": "KPIFacWise",
     "RelativePath": "api/AAMAdmin/KPIFacWise",
     "HttpMethod": "GET",
@@ -183,6 +229,58 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
+    "Method": "KPIFacWiseDrillDown",
+    "RelativePath": "api/AAMAdmin/KPIFacWiseDrillDown",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "distId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.AAMAdminDTO.KPIFacWiseDrillDownDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.AAMAdmin",
+    "Method": "UpdateFacilityContact",
+    "RelativePath": "api/AAMAdmin/updateFacilityContact",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "facilityId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "contactPersonName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "phone1",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
@@ -567,32 +665,6 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.getSHCItemsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "DPDMIS_Angular_API.Controllers.CGMSCStockController",
-    "Method": "GetWHStockAAM",
-    "RelativePath": "api/CGMSCStock/GetWHStockAAM",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "facid",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.GetWHStockItemsDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2113,6 +2185,11 @@
         "Name": "userid",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "ipAddress",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -2316,6 +2393,27 @@
   },
   {
     "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "CheckBarcodeAndFacReceipt",
+    "RelativePath": "api/Receipt/CheckBarcodeAndFacReceipt",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "BarcodeID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
     "Method": "completeReceipts",
     "RelativePath": "api/Receipt/completeReceipts",
     "HttpMethod": "PUT",
@@ -2412,6 +2510,126 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "getBarcodeReceiptMaster",
+    "RelativePath": "api/Receipt/getBarcodeReceiptMaster",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "BarcodeID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[DPDMIS_Angular_API.DTO.ReceiptDTO.BarcodeReceiptDto, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "GetFacissueDetailsBarcodeNew",
+    "RelativePath": "api/Receipt/GetFacissueDetailsBarcodeNew",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "barcCodID",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "GetFacreceiptidBarcode",
+    "RelativePath": "api/Receipt/GetFacreceiptidBarcode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usrFacilityID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mIndentID",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[DPDMIS_Angular_API.DTO.CGMSCStockDTO.GetFacreceiptidForOpeningStockDTO, DPDMIS_Angular_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "GetFacReceiptIDString",
+    "RelativePath": "api/Receipt/GetFacReceiptIDString",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usrFacilityID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "mIndentID",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "GetFacReceiptItemidIDString",
+    "RelativePath": "api/Receipt/GetFacReceiptItemidIDString",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mFacReceiptID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "mItemid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
@@ -2889,6 +3107,146 @@
           "application/json",
           "text/json"
         ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "InsertbatchesBarcode",
+    "RelativePath": "api/Receipt/InsertbatchesBarcode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "FACRECEIPTITEMID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "ITEMID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "BATCHNO",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MFGDATE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "EXPDATE",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "QASTATUS",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "STOCKLOCATION",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "WHISSUEBLOCK",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "PONOID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "WHINWNO",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "ABSRQTY",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "InsertReceiptItemBarcode",
+    "RelativePath": "api/Receipt/InsertReceiptItemBarcode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "indentId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "facReceiptId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "barcodeID",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DPDMIS_Angular_API.Controllers.ReceiptController",
+    "Method": "InsertReceiptItemNew",
+    "RelativePath": "api/Receipt/InsertReceiptItemNew",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "FACRECEIPTID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "ITEMID",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "INDENTITEMID",
+        "Type": "System.Nullable\u00601[[System.Int64, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "ABSRQTY",
+        "Type": "System.Nullable\u00601[[System.Int64, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
         "StatusCode": 200
       }
     ]

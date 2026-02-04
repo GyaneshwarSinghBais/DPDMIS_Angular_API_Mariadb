@@ -4,11 +4,13 @@ using DPDMIS_Angular_API.DTO.AAMAdminDTO;
 using DPDMIS_Angular_API.DTO.IndentDTO;
 using DPDMIS_Angular_API.DTO.IssueDTO;
 using DPDMIS_Angular_API.DTO.ReceiptDTO;
+using DPDMIS_Angular_API.MariadbDTO.DestinationDTO;
 using DPDMIS_Angular_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
 using System.Runtime.CompilerServices;
@@ -20,9 +22,11 @@ namespace DPDMIS_Angular_API.Controllers
     public class AAMAdmin : ControllerBase
     {
         private readonly MariaDbContext _context;
-        public AAMAdmin(MariaDbContext context)
+        private readonly OraDbContext _oraContext;
+        public AAMAdmin(MariaDbContext context, OraDbContext oraContext)
         {
             _context = context;
+            _oraContext = oraContext;
         }
 
         [HttpGet("getUserDataForForgotPassword")]
@@ -94,16 +98,16 @@ namespace DPDMIS_Angular_API.Controllers
                      from tbfacilityissues fs 
                    inner join tbfacilityissueitems fsi on fsi.issueid=fs.issueid 
                    inner join tbfacilityoutwards ftbo on ftbo.issueitemid=fsi.issueitemid 
-                   where fs.status = 'C'   --and fs.facilityid="" + faclityId + @""          
+                   where fs.status = 'C'            
                    group by fsi.itemid,fs.facilityid,ftbo.inwno                     
                  ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid and iq.facilityid=t.facilityid                 
-                 Where 1=1 and f.is_aam = 'Y' and  T.Status = 'C'  And (b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate 
+                 Where 1=1 and f.is_aam = 'Y' and  T.Status = 'C'  And (b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate() 
                                group by  t.facilityid, mi.itemid
                            
                            ) st on st.facilityid=f.facilityid and st.itemid=f.itemid
                            
          where 1=1 and f.districtid=" + distId + @" -- and f.facilityid=27952
-         )
+         ) stkout
                group by districtname ,districtid,facilityname,facilityid,parentfac,locationname
                order by locationname,parentfac
                            
@@ -142,7 +146,7 @@ namespace DPDMIS_Angular_API.Controllers
 
             string qry = @" 
 select c.categoryname,mi.ITEMCODE,ty.itemtypename,mi.itemname,mi.strength1,  
-                 (case when (b.qastatus ='1' or  mi.qctest='N') then (sum(nvl(b.absrqty,0)) - sum(nvl(iq.issueqty,0))) end) ReadyForIssue                 
+                 (case when (b.qastatus ='1' or  mi.qctest='N') then (sum(ifnull(b.absrqty,0)) - sum(nvl(iq.issueqty,0))) end) ReadyForIssue                 
                  ,t.facilityid, mi.itemid,c.categoryid, case when mi.ISEDL2021='Y' then 'EDL' else 'Non EDL' end as EDLType
                 ,f.facilityname,d.districtname,l.locationname,d.districtid,l.locationid
                  from tbfacilityreceiptbatches b   
@@ -166,7 +170,7 @@ select c.categoryname,mi.ITEMCODE,ty.itemtypename,mi.itemname,mi.strength1,
                    where fs.status = 'C'     
                    group by fsi.itemid,fs.facilityid,ftbo.inwno                     
                  ) iq on b.inwno = Iq.inwno and iq.itemid=i.itemid and iq.facilityid=t.facilityid                 
-                 Where 1=1 and f.is_aam = 'Y' and  T.Status = 'C'  And (b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate 
+                 Where 1=1 and f.is_aam = 'Y' and  T.Status = 'C'  And (b.Whissueblock = 0 or b.Whissueblock is null) and b.expdate>sysdate() 
              " + whfacId + @"  
   " + whitemId + @"
 " + whDistId + @"
@@ -391,6 +395,391 @@ from masfacilities f
             return myList;
 
         }
+
+
+        [HttpGet("AAMHealthPerformance")]
+        public async Task<ActionResult<IEnumerable<DistrictWiseAamHealthPerformanceDTO>>> DistrictWiseAamHealthPerformance()
+        {
+
+            string qry = @"  SELECT d.districtid,d.DISTRICTNAME,nooffac,IFNULL(nosop,0) AS NoofOP,IFNULL(nosIndenttowh,0) AS nosIndentWH,IFNULL(nosfacilityReceipt,0) AS nosfacilityReceipt
+FROM 
+(
+select d.districtid,d.DISTRICTNAME,count(distinct f.facilityid) nooffac from masfacilities f
+inner join maslocations l on l.locationid = f.locationid
+inner join masdistricts d on d.districtid = f.districtid
+
+
+where f.is_aam = 'Y' AND f.isactive = 1
+GROUP BY d.districtid,d.DISTRICTNAME
+) d
+
+
+LEFT OUTER JOIN 
+(
+SELECT DISTRICTID,COUNT(facilityid) AS nosop
+FROM 
+(
+SELECT d.DISTRICTID, f.facilityid, f.facilityname,t.FACRECEIPTNO,t.FACRECEIPTTYPE,t.FACRECEIPTDATE,COUNT(DISTINCT i.itemid) noofdrugs FROM tbfacilityreceiptbatches b
+INNER JOIN tbfacilityreceiptitems i ON i.FACRECEIPTITEMID = b.FACRECEIPTITEMID
+INNER JOIN tbfacilityreceipts t ON t.FACRECEIPTID = i.FACRECEIPTID
+INNER JOIN masfacilities f ON f.facilityid = t.FACILITYID
+INNER JOIN masdistricts d ON d.DISTRICTID = f.districtid 
+WHERE t.`STATUS` = 'C' AND t.facreceipttype = 'FC'
+group by d.DISTRICTNAME, f.facilityname,t.FACRECEIPTNO,t.FACRECEIPTTYPE,t.FACRECEIPTDATE 
+) op 
+group by op.DISTRICTID
+) op ON op.DISTRICTID=d.districtid
+
+LEFT OUTER JOIN 
+(
+SELECT id.districtid,COUNT(facilityid) AS nosIndenttowh
+FROM 
+(
+SELECT f.districtid,n.NOCID,f.facilityid,COUNT(ni.ITEMID) noofitems 
+FROM mascgmscnoc n
+INNER JOIN mascgmscnocitems ni ON ni.NOCID = n.nocid
+INNER JOIN masfacilities f ON f.facilityid = n.facilityid
+WHERE f.facilitytypeid = 377 and n.status = 'C'
+GROUP BY n.NOCID,f.facilityid ,f.districtid  
+) id  GROUP BY id.districtid
+
+) id ON id.districtid=d.DISTRICTID
+
+
+LEFT OUTER JOIN 
+(
+SELECT districtid,COUNT(facilityid) AS nosfacilityReceipt
+FROM 
+(
+SELECT f.districtid,f.facilityid FROM tbfacilityreceipts r
+INNER JOIN masfacilities f ON f.facilityid = r.FACILITYID
+WHERE r.FACRECEIPTTYPE='NO' AND r.`STATUS`='C'
+) r 
+GROUP BY districtid
+) rec ON rec.districtid=d.DISTRICTID
+
+
+ORDER BY d.DISTRICTNAME
+                            
+                       
+                           
+                     ";
+            var myList = _context.DistrictWiseAamHealthPerformanceDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+        [HttpGet("KPIFacWiseDrillDown")]
+        public async Task<ActionResult<IEnumerable<KPIFacWiseDrillDownDTO>>> KPIFacWiseDrillDown(Int64 distId)
+        {
+
+            string whDistId = "";
+        
+
+
+            if (distId != 0)
+            {
+                whDistId = " and d.districtid = " + distId + " ";
+            }
+
+
+
+
+            string qry = @" SELECT  
+    d.districtid,
+    d.DISTRICTNAME,
+    f.facilityid,
+    f.facilityname,
+
+    IFNULL(op.noofdrugs, 0)        AS nosdrugsOpStock,
+    IFNULL(id.nosindent, 0)        AS nosindent,
+    IFNULL(id.NositemsIndented,0) AS NositemsIndented,
+    IFNULL(rec.nosreceipt, 0)     AS nosreceipt,
+    IFNULL(rec.nositemsreceipts,0) AS nositemsreceipts
+
+FROM masfacilities f
+INNER JOIN maslocations l 
+    ON l.locationid = f.locationid
+INNER JOIN masdistricts d 
+    ON d.districtid = f.districtid
+
+/* ---------- OPENING STOCK (FC) ---------- */
+LEFT JOIN 
+(
+    SELECT  
+        op.facilityid,
+        COUNT(op.facilityid) AS noofdrugs
+    FROM
+    (
+        SELECT  
+            f.facilityid,
+            t.FACRECEIPTNO,
+            t.FACRECEIPTTYPE,
+            t.FACRECEIPTDATE,
+            COUNT(DISTINCT i.itemid) AS drugcount
+        FROM tbfacilityreceiptbatches b
+        INNER JOIN tbfacilityreceiptitems i 
+            ON i.FACRECEIPTITEMID = b.FACRECEIPTITEMID
+        INNER JOIN tbfacilityreceipts t 
+            ON t.FACRECEIPTID = i.FACRECEIPTID
+        INNER JOIN masfacilities f 
+            ON f.facilityid = t.FACILITYID
+        WHERE t.STATUS = 'C'
+          AND t.facreceipttype = 'FC'
+        GROUP BY  
+            f.facilityid,
+            t.FACRECEIPTNO,
+            t.FACRECEIPTTYPE,
+            t.FACRECEIPTDATE
+    ) op
+    GROUP BY op.facilityid
+) op 
+    ON op.facilityid = f.facilityid
+
+/* ---------- INDENT ---------- */
+LEFT JOIN 
+(
+    SELECT  
+        id.facilityid,
+        COUNT(id.NOCID) AS nosindent,
+        SUM(id.noofitems) AS NositemsIndented
+    FROM
+    (
+        SELECT  
+            n.NOCID,
+            f.facilityid,
+            COUNT(ni.ITEMID) AS noofitems
+        FROM mascgmscnoc n
+        INNER JOIN mascgmscnocitems ni 
+            ON ni.NOCID = n.nocid
+        INNER JOIN masfacilities f 
+            ON f.facilityid = n.facilityid
+        WHERE n.status = 'C'
+        GROUP BY  
+            n.NOCID,
+            f.facilityid
+    ) id
+    GROUP BY id.facilityid
+) id 
+    ON id.facilityid = f.facilityid
+
+/* ---------- RECEIPT FROM WAREHOUSE ---------- */
+LEFT JOIN 
+(
+    SELECT  
+        r.facilityid,
+        COUNT(DISTINCT r.FACRECEIPTID) AS nosreceipt,
+        COUNT(DISTINCT i.ITEMID) AS nositemsreceipts
+    FROM tbfacilityreceipts r
+    INNER JOIN tbfacilityreceiptitems i 
+        ON i.FACRECEIPTID = r.FACRECEIPTID
+    INNER JOIN tbfacilityreceiptbatches b 
+        ON b.FACRECEIPTITEMID = i.FACRECEIPTITEMID
+    WHERE r.FACRECEIPTTYPE = 'NO'
+      AND r.STATUS = 'C'
+    GROUP BY r.facilityid
+) rec 
+    ON rec.facilityid = f.facilityid
+
+/* ---------- FILTER ---------- */
+WHERE 1=1"+ whDistId + @"
+  AND f.is_aam = 'Y'
+  AND f.isactive = 1
+
+ORDER BY f.facilityname               
+                     ";
+            var myList = _context.KPIFacWiseDrillDownDbSet
+           .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
+        }
+
+
+        [HttpGet("KPIFacilityDetai")]
+        public async Task<ActionResult<IEnumerable<KPIFacilityDetailDTO>>>
+    KPIFacilityDetai(long distId)
+        {
+            string whDistId = "";
+
+            if (distId != 0)
+            {
+                whDistId = " AND d.districtid = " + distId + " ";
+            }
+
+            string qry = @"  SELECT  d.districtid,d.DISTRICTNAME,l.LOCATIONNAME AS blockname,f.facilityid,f.facilityname,u.EMAILID, f.phone1,f.contactpersonname,
+pf.facilityname AS parentFacility, w.WAREHOUSENAME,
+
+ifnull(noofdrugs,0) AS nosdrugsOpStock,ifnull(nosindent,0) AS nosindent , ifnull(NositemsIndented,0) as NositemsIndented ,
+IFNULL(nosreceipt,0) AS nosreceipt,ifnull(nositemsreceipts,0) AS nositemsreceipts
+from masfacilities f
+LEFT outer join maslocations l on l.locationid = f.locationid
+inner join masdistricts d on d.districtid = f.districtid
+INNER JOIN maswarehouses w ON w.WAREHOUSEID = d.WAREHOUSEID
+INNER JOIN usrusers u ON u.FACILITYID = f.facilityid
+LEFT outer  JOIN masfacilities pf ON pf.facilityid = f.phc_id
+
+LEFT OUTER JOIN 
+(
+SELECT  f.facilityid,COUNT(DISTINCT i.itemid) noofdrugs FROM tbfacilityreceiptbatches b
+INNER JOIN tbfacilityreceiptitems i ON i.FACRECEIPTITEMID = b.FACRECEIPTITEMID
+INNER JOIN tbfacilityreceipts t ON t.FACRECEIPTID = i.FACRECEIPTID
+INNER JOIN masfacilities f ON f.facilityid = t.FACILITYID
+INNER JOIN masdistricts d ON d.DISTRICTID = f.districtid 
+WHERE t.`STATUS` = 'C' AND t.facreceipttype = 'FC'
+group by d.DISTRICTNAME, f.facilityname,t.FACRECEIPTNO,t.FACRECEIPTTYPE,t.FACRECEIPTDATE
+) op ON op.facilityid=f.facilityid
+
+
+
+LEFT OUTER JOIN 
+(
+SELECT facilityid,nosindent,noofitems AS NositemsIndented
+FROM 
+(
+SELECT count(distinct n.NOCID) nosindent,f.facilityid,COUNT(ni.ITEMID) noofitems 
+FROM mascgmscnoc n
+INNER JOIN mascgmscnocitems ni ON ni.NOCID = n.nocid
+INNER JOIN masfacilities f ON f.facilityid = n.facilityid
+WHERE f.facilitytypeid = 377 and n.status = 'C'
+GROUP BY n.NOCID,f.facilityid  
+) id 
+GROUP BY facilityid
+) id ON id.facilityid=f.facilityid
+
+LEFT OUTER JOIN 
+(
+SELECT r.facilityid,COUNT(DISTINCT i.itemid) nositemsreceipts,COUNT(DISTINCT r.FACRECEIPTID) AS nosreceipt FROM tbfacilityreceipts r
+INNER JOIN masfacilities f ON f.facilityid = r.FACILITYID
+INNER JOIN tbfacilityreceiptitems i ON i.FACRECEIPTID = r.FACRECEIPTID
+INNER JOIN tbfacilityreceiptbatches b ON b.FACRECEIPTITEMID = i.FACRECEIPTITEMID
+WHERE r.FACRECEIPTTYPE='NO' AND r.`STATUS`='C'
+GROUP BY r.facilityid
+)rec ON rec.facilityid=f.facilityid
+
+WHERE 1=1 "+ whDistId + @"
+and f.is_aam = 'Y' AND f.isactive = 1
+
+ORDER BY l.LOCATIONNAME 
+
+ ";
+
+            var myList = _context.Set<KPIFacilityDetailDTO>()
+                .FromSqlInterpolated(FormattableStringFactory.Create(qry))
+                .AsNoTracking()
+                .ToList();
+
+            return myList;
+        }
+
+
+        [HttpPut("updateFacilityContact")]
+        public async Task<IActionResult> UpdateFacilityContact(long facilityId, string contactPersonName, string phone1)
+        {
+            if (facilityId <= 0)
+                return BadRequest("Valid facilityId is required.");
+
+            contactPersonName ??= string.Empty;
+            phone1 ??= string.Empty;
+
+            // Local helper to read PHONE1 and CONTACTPERSONNAME from a DbContext without using entity mappings
+            async Task<(string phone, string contact)> ReadPhoneAndContactAsync(DbContext ctx, long id)
+            {
+                var conn = ctx.Database.GetDbConnection();
+                // don't dispose the connection supplied by DbContext
+                if (conn.State != ConnectionState.Open)
+                    await conn.OpenAsync();
+
+                await using var cmd = conn.CreateCommand();
+
+                // Detect Oracle provider (simple type/name check)
+                bool isOracle = ctx.GetType().Name.IndexOf("Ora", StringComparison.OrdinalIgnoreCase) >= 0
+                                || conn.GetType().Name.IndexOf("Oracle", StringComparison.OrdinalIgnoreCase) >= 0;
+
+                string sqlParam = isOracle ? ":id" : "@id";
+                cmd.CommandText = $"SELECT PHONE1, CONTACTPERSONNAME FROM MASFACILITIES WHERE FACILITYID = {sqlParam}";
+
+                var param = cmd.CreateParameter();
+                // For OracleParameter the Name should not include the ':' prefix
+                param.ParameterName = isOracle ? "id" : "@id";
+                param.Value = id;
+                cmd.Parameters.Add(param);
+
+                await using var reader = await cmd.ExecuteReaderAsync();
+                if (await reader.ReadAsync())
+                {
+                    var phoneVal = reader.IsDBNull(0) ? string.Empty : reader.GetString(0);
+                    var contactVal = reader.IsDBNull(1) ? string.Empty : reader.GetString(1);
+                    return (phoneVal ?? string.Empty, contactVal ?? string.Empty);
+                }
+
+                return (string.Empty, string.Empty);
+            }
+
+            try
+            {
+                // read original values from MariaDB and Oracle using explicit SELECTs (no EF entity mapping)
+                var origMaria = await ReadPhoneAndContactAsync(_context, facilityId);
+                var origOra = await ReadPhoneAndContactAsync(_oraContext, facilityId);
+
+                // Update MariaDB
+                string mQuery = "UPDATE MASFACILITIES SET CONTACTPERSONNAME = @contact, PHONE1 = @phone WHERE FACILITYID = @id";
+                await _context.Database.ExecuteSqlRawAsync(mQuery,
+                    new MySqlParameter("@contact", contactPersonName),
+                    new MySqlParameter("@phone", phone1),
+                    new MySqlParameter("@id", facilityId)
+                );
+
+                // Update Oracle - if fails, revert MariaDB
+                try
+                {
+                    string oQuery = "UPDATE MASFACILITIES SET CONTACTPERSONNAME = :contact, PHONE1 = :phone WHERE FACILITYID = :id";
+                    await _oraContext.Database.ExecuteSqlRawAsync(oQuery,
+                        new OracleParameter("contact", contactPersonName),
+                        new OracleParameter("phone", phone1),
+                        new OracleParameter("id", facilityId)
+                    );
+                }
+                catch (Exception oraEx)
+                {
+                    // Attempt to revert MariaDB
+                    try
+                    {
+                        string revertMQuery = "UPDATE MASFACILITIES SET CONTACTPERSONNAME = @contact, PHONE1 = @phone WHERE FACILITYID = @id";
+                        await _context.Database.ExecuteSqlRawAsync(revertMQuery,
+                            new MySqlParameter("@contact", origMaria.contact),
+                            new MySqlParameter("@phone", origMaria.phone),
+                            new MySqlParameter("@id", facilityId)
+                        );
+                    }
+                    catch (Exception revertEx)
+                    {
+                        return StatusCode(StatusCodes.Status500InternalServerError, new
+                        {
+                            message = "Oracle update failed and MariaDB revert failed. Manual intervention required.",
+                            oracleError = oraEx.Message,
+                            revertMariaError = revertEx.Message
+                        });
+                    }
+
+                    return StatusCode(StatusCodes.Status500InternalServerError, new
+                    {
+                        message = "Oracle update failed. MariaDB changes reverted.",
+                        oracleError = oraEx.Message
+                    });
+                }
+
+                return Ok(new { message = "Facility contact updated in both MariaDB and Oracle." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error: " + ex.Message);
+            }
+        }
+
 
     }
 
