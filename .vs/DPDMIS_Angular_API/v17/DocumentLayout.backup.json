@@ -3,60 +3,24 @@
   "WorkspaceRootPath": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\controllers\\supportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\controllers\\supportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\controllers\\receiptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\controllers\\receiptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\data\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\data\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\dto\\facilitydto\\getbarcodedetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\dto\\facilitydto\\getbarcodedetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\data\\mariadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\data\\mariadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\controllers\\mariadbcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\controllers\\mariadbcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\dto\\facilitydto\\masfacissuebarcodedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\dto\\facilitydto\\masfacissuebarcodedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\controllers\\aamadmin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\controllers\\aamadmin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\utility\\facoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\utility\\facoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\controllers\\issuecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\controllers\\issuecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\controllers\\cgmscstockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\controllers\\cgmscstockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\services\\loginservice\\loginrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\services\\loginservice\\loginrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\dto\\aamadmindto\\kpifacilitydetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\dto\\aamadmindto\\kpifacilitydetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\models\\usrusermodelconsultant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\models\\usrusermodelconsultant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|g:\\gyan\\angular api\\mariadb\\dpdmis_angular_api\\dpdmis_angular_api\\data\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAF16AFF-2742-497B-B309-012D8D7C5137}|DPDMIS_Angular_API\\DPDMIS_Angular_API.csproj|solutionrelative:dpdmis_angular_api\\data\\oradbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,177 +38,68 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MariaDbController.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\MariaDbController.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Controllers\\MariaDbController.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\MariaDbController.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\Controllers\\MariaDbController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAAABcAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T11:20:58.321Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MasFacIssueBarcodeDto.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\DTO\\FacilityDTO\\MasFacIssueBarcodeDto.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\DTO\\FacilityDTO\\MasFacIssueBarcodeDto.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\DTO\\FacilityDTO\\MasFacIssueBarcodeDto.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\DTO\\FacilityDTO\\MasFacIssueBarcodeDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T11:02:15.933Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ReceiptController.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
-              "ViewState": "AgIAAIMEAAAAAAAAAAASwJgEAAArAAAAAAAAAA==",
+              "Title": "SupportController.cs",
+              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\SupportController.cs",
+              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Controllers\\SupportController.cs",
+              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\SupportController.cs",
+              "RelativeToolTip": "DPDMIS_Angular_API\\Controllers\\SupportController.cs",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAcwJMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-03T10:57:34.454Z",
+              "WhenOpened": "2026-02-06T06:49:03.235Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FacOperations.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Utility\\FacOperations.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Utility\\FacOperations.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Utility\\FacOperations.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\Utility\\FacOperations.cs",
-              "ViewState": "AgIAACwBAAAAAAAAAAAnwDkBAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-13T09:47:59.938Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "IssueController.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\IssueController.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Controllers\\IssueController.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\IssueController.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\Controllers\\IssueController.cs",
-              "ViewState": "AgIAADEBAAAAAAAAAAAvwDsBAABQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-13T09:47:44.049Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CGMSCStockController.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\CGMSCStockController.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Controllers\\CGMSCStockController.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\CGMSCStockController.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\Controllers\\CGMSCStockController.cs",
-              "ViewState": "AgIAADUCAAAAAAAAAAAvwEwCAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T10:45:43.445Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "OraDbContext.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Data\\OraDbContext.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Data\\OraDbContext.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Data\\OraDbContext.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\Data\\OraDbContext.cs",
-              "ViewState": "AgIAAK0AAAAAAAAAAAA2wLoAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-31T05:26:50.543Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\appsettings.json",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\appsettings.json",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\appsettings.json",
-              "RelativeToolTip": "DPDMIS_Angular_API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-12-31T05:26:40.748Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "KPIFacilityDetailDTO.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\DTO\\AAMAdminDTO\\KPIFacilityDetailDTO.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\DTO\\AAMAdminDTO\\KPIFacilityDetailDTO.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\DTO\\AAMAdminDTO\\KPIFacilityDetailDTO.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\DTO\\AAMAdminDTO\\KPIFacilityDetailDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBgAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T09:55:12.596Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AAMAdmin.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\AAMAdmin.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Controllers\\AAMAdmin.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\AAMAdmin.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\Controllers\\AAMAdmin.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAA5wB8AAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T09:26:12.055Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "LoginRepository.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Services\\LoginService\\LoginRepository.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Services\\LoginService\\LoginRepository.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Services\\LoginService\\LoginRepository.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\Services\\LoginService\\LoginRepository.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T08:07:52.499Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "UsruserModelConsultant.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Models\\UsruserModelConsultant.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Models\\UsruserModelConsultant.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Models\\UsruserModelConsultant.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\Models\\UsruserModelConsultant.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T07:34:21.327Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "GetBarcodeDetailsDto.cs",
+              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\DTO\\FacilityDTO\\GetBarcodeDetailsDto.cs",
+              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\DTO\\FacilityDTO\\GetBarcodeDetailsDto.cs",
+              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\DTO\\FacilityDTO\\GetBarcodeDetailsDto.cs",
+              "RelativeToolTip": "DPDMIS_Angular_API\\DTO\\FacilityDTO\\GetBarcodeDetailsDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T07:58:17.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "MariaDbContext.cs",
               "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Data\\MariaDbContext.cs",
               "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Data\\MariaDbContext.cs",
               "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Data\\MariaDbContext.cs",
               "RelativeToolTip": "DPDMIS_Angular_API\\Data\\MariaDbContext.cs",
-              "ViewState": "AgIAAO4AAAAAAAAAAAAvwP4AAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAOgAAAAAAAAAAAAQwPIAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-29T07:34:12.07Z",
+              "WhenOpened": "2026-02-04T07:56:02.646Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "LoginController.cs",
-              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\LoginController.cs",
-              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Controllers\\LoginController.cs",
-              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\LoginController.cs",
-              "RelativeToolTip": "DPDMIS_Angular_API\\Controllers\\LoginController.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAxwCIAAAAiAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "OraDbContext.cs",
+              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Data\\OraDbContext.cs",
+              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Data\\OraDbContext.cs",
+              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Data\\OraDbContext.cs",
+              "RelativeToolTip": "DPDMIS_Angular_API\\Data\\OraDbContext.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAIwJEAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-14T07:05:04.158Z"
+              "WhenOpened": "2026-02-04T07:56:01.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ReceiptController.cs",
+              "DocumentMoniker": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
+              "RelativeDocumentMoniker": "DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
+              "ToolTip": "G:\\gyan\\Angular API\\MariaDB\\DPDMIS_Angular_API\\DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
+              "RelativeToolTip": "DPDMIS_Angular_API\\Controllers\\ReceiptController.cs",
+              "ViewState": "AgIAABcCAAAAAAAAAAAvwDsCAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-04T05:00:58.083Z",
+              "EditorCaption": ""
             }
           ]
         }

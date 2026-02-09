@@ -1,6 +1,7 @@
 ﻿using CgmscHO_API.Utility;
 using DPDMIS_Angular_API.Data;
 using DPDMIS_Angular_API.DTO.CGMSCStockDTO;
+using DPDMIS_Angular_API.DTO.FacilityDTO;
 using DPDMIS_Angular_API.DTO.IndentDTO;
 using DPDMIS_Angular_API.DTO.IssueDTO;
 using DPDMIS_Angular_API.DTO.ReceiptDTO;
@@ -1200,7 +1201,7 @@ FROM tbIndentItems tbi
                 receipt.FACILITYID = Convert.ToInt64(usrFacilityID);
                 receipt.INDENTID = Convert.ToInt64(mIndentID);
                 receipt.FACRECEIPTDATE = DateTime.Now.ToString("dd-MM-yyyy");
-                receipt.STATUS = "C"; // optional
+                receipt.STATUS = "I"; // optional
 
                 // 3️⃣ Call Your API Method Directly
                 var result = await postReceiptMaster(usrFacilityID, receipt);
@@ -1389,7 +1390,7 @@ tfi.FacReceiptItemID,
 DATE_FORMAT(tbo.MfgDate, '%Y-%m-%d') AS MFGDATE,
 tbo.ponoid,
 CAST( CASE WHEN IFNULL(m.qctest,'Y')='Y' then tbo.qastatus else 1 END AS CHAR)  as qastatus,
-CAST(IFNULL(tbo.whissueblock,'') AS CHAR)  as whissueblock
+CAST(IFNULL(tbo.whissueblock,'') AS CHAR)  as whissueblock,tbo.BARCODEID
 FROM tbIndentItems tbi
 LEFT JOIN tbOutwards tbo ON tbo.IndentItemID = tbi.IndentItemID
 INNER JOIN masItems m ON m.ItemID=tbi.ItemID
@@ -1425,6 +1426,7 @@ WHERE tbo.barcodeid = {barcodeID}";
                 {
                     dynamic obj = okResult.Value;
                     facReceiptItemId = Convert.ToInt64(obj.FacReceiptItemID);
+                    oldQty = Convert.ToInt64(obj.AbsQty);
 
                 }
 
@@ -1478,7 +1480,7 @@ WHERE tbo.barcodeid = {barcodeID}";
 
                 InsertbatchesBarcode(
      receiptItemId, Convert.ToInt64(parent.ITEMID), parent.BATCHNO, parent.MFGDATE, parent.EXPDATE, Convert.ToUInt16(parent.QASTATUS),
-   1, Convert.ToDecimal(parent.WHISSUEBLOCK), Convert.ToInt64(parent.PONOID), Convert.ToInt64(parent.INWNO), Convert.ToInt64(parent.ISSUEBATCHQTY));
+   1, Convert.ToDecimal(parent.WHISSUEBLOCK), Convert.ToInt64(parent.PONOID), Convert.ToInt64(parent.INWNO), Convert.ToInt64(parent.ISSUEBATCHQTY), Convert.ToInt64(parent.BARCODEID));
 
 
 
@@ -1510,20 +1512,21 @@ WHERE tbo.barcodeid = {barcodeID}";
     decimal WHISSUEBLOCK,
     long PONOID,
     long WHINWNO,
-    long ABSRQTY
+    long ABSRQTY,
+     long BarcodeID
 )
         {
 
             string sql = $@"
         INSERT INTO tbfacilityreceiptbatches 
         (FACRECEIPTITEMID, ITEMID, BATCHNO, MFGDATE, EXPDATE, QASTATUS,
-         STOCKLOCATION, WHISSUEBLOCK, PONOID, WHINWNO, ABSRQTY)
+         STOCKLOCATION, WHISSUEBLOCK, PONOID, WHINWNO, ABSRQTY,BarcodeID)
         VALUES
         ( {FACRECEIPTITEMID}, {ITEMID}, '{BATCHNO}', 
          '{MFGDATE}', 
          '{EXPDATE}', 
          {QASTATUS}, {STOCKLOCATION}, {WHISSUEBLOCK}, 
-         {PONOID}, {WHINWNO}, {ABSRQTY} )";
+         {PONOID}, {WHINWNO}, {ABSRQTY}, {BarcodeID} )";
 
             _context.Database.ExecuteSqlRaw(sql);
 
@@ -1549,6 +1552,55 @@ WHERE tbo.barcodeid = {barcodeID}";
 
             _context.Database.ExecuteSqlRaw(sql);
             _context.SaveChanges();
+
+
+        }
+
+        [HttpGet("getBarcodeReceiptDetails")]
+        public async Task<ActionResult<IEnumerable<GetBarcodeReceiptDetailsDto>>> getBarcodeReceiptDetails(string BarcodeID)
+        {
+            string whStatus = "";
+
+
+            string qry = @"SELECT  DISTINCT  r.facreceiptid,r.FACRECEIPTNO,DATE_FORMAT(r.FACRECEIPTDATE, '%Y-%m-%d') AS FACRECEIPTDATE FROM tbfacilityreceipts r 
+INNER JOIN tbfacilityreceiptitems ri ON ri.FACRECEIPTID=r.facreceiptid
+INNER JOIN tbfacilityreceiptbatches rb ON rb.facreceiptitemid=ri.FACRECEIPTITEMID
+INNER JOIN tbindents  tb ON tb.INDENTID=r.INDENTID
+WHERE rb.BarcodeID=" + BarcodeID;
+            var context = new ReceiptMasterWHDTO();
+            var myList = _context.GetBarcodeReceiptDetailsDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+
+
+
+        }
+
+        [HttpGet("getBarcodeDetails")]
+        public async Task<ActionResult<IEnumerable<GetBarcodeDetailsDto>>> getBarcodeDetails(string BarcodeID)
+        {
+            string whStatus = "";
+
+
+            string qry = @"select tb.INDENTID, tb.INDENTNO,TO_CHAR(tb.INDENTDATE,'DD-mm-YYYY') AS INDENTDATE,m.itemcode,m.itemname,rb.batchno,rb.mfgdate,rb.expdate,sum(tbo.issueqty) as issueqty,tbo.barcodeID from tbindents tb 
+inner join tbindentitems tbi on tbi.INDENTID=tb.INDENTID
+inner join tboutwards tbo on tbo.indentitemid=tbi.indentitemid
+inner join tbreceiptbatches rb on rb.inwno=tbo.inwno
+inner join masitems m on m.itemid=tbi.itemid
+where tb.STATUS='C'  AND tbo.barcodeid= '" + BarcodeID + @"'
+group by tb.INDENTID, tb.INDENTNO, tb.INDENTDATE,m.itemcode,m.itemname,tbo.barcodeID,rb.mfgdate,rb.expdate,rb.batchno
+ORDER BY m.itemcode";
+
+
+
+
+            var context = new ReceiptMasterWHDTO();
+
+            var myList = _contextoracle.GetBarcodeDetailsDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            return myList;
+
 
 
         }

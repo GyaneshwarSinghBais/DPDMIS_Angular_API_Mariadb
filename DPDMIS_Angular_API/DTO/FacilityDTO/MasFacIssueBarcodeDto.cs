@@ -17,5 +17,7 @@
         public long? PONOID { get; set; }
         public string? QASTATUS { get; set; }
         public string? WHISSUEBLOCK { get; set; }
+
+        public long? BARCODEID { get; set; }
     }
 }

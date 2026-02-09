@@ -143,10 +143,12 @@ namespace DPDMIS_Angular_API.Data
 
         public DbSet<BarcodeReceiptDto> BarcodeReceiptDto { get; set; }
 
+        public DbSet<GetBarcodeDetailsDto> GetBarcodeDetailsDbSet { get; set; }
 
 
 
-        
+
+
 
 
 
@@ -185,7 +187,7 @@ namespace DPDMIS_Angular_API.Data
             modelBuilder.Entity<getReceiptByIdDTO>().HasNoKey();
             modelBuilder.Entity<getFacilityItemWiseStockDTO>().HasNoKey();
             modelBuilder.Entity<BarcodeReceiptDto>().HasNoKey();
-
+            modelBuilder.Entity<GetBarcodeDetailsDto>().HasNoKey();
 
 
             //  modelBuilder.Entity<MasCgmscNocItems>().ToTable("MasCgmscNocItems");

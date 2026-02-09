@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DPDMIS_Angular_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2bbe1aa4785639d00541118f5046ff9281ecce5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+79fd10d6602ae425b2c789cc8fe5c8180823998b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DPDMIS_Angular_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DPDMIS_Angular_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

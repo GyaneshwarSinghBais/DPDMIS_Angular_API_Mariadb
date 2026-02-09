@@ -111,7 +111,7 @@ namespace DPDMIS_Angular_API.Data
         public DbSet<getOtherFacilityIssueDTO> getOtherFacilityIssueDbSet { get; set; }
         public DbSet<DistrictWiseAamHealthPerformanceDTO> DistrictWiseAamHealthPerformanceDbSet { get; set; }
         public DbSet<KPIFacilityDetailDTO> KPIFacilityDetailDbSet { get; set; }
-
+        public DbSet<GetBarcodeReceiptDetailsDto> GetBarcodeReceiptDetailsDbSet { get; set; }
 
 
 
@@ -253,6 +253,7 @@ namespace DPDMIS_Angular_API.Data
             modelBuilder.Entity<MasFacIssueBarcodeDto>().HasNoKey();
 
             modelBuilder.Entity<BarcodeReceiptDto>().HasNoKey();
+            modelBuilder.Entity<GetBarcodeReceiptDetailsDto>().HasNoKey();
             //  modelBuilder.Entity<MASFACTRANSFERS_DTO>().HasKey();
 
             //  modelBuilder.Entity<MDB_mascgmscnocDTO>().HasBaseType<tbGenIndent>();
