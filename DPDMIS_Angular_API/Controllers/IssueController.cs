@@ -2,7 +2,7 @@
 using DPDMIS_Angular_API.Data;
 using DPDMIS_Angular_API.DTO.IndentDTO;
 using DPDMIS_Angular_API.DTO.IssueDTO;
-using DPDMIS_Angular_API.DTO.ReceiptDTO;
+//using DPDMIS_Angular_API.DTO.ReceiptDTO;
 using DPDMIS_Angular_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

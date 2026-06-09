@@ -3636,8 +3636,8 @@
   },
   {
     "ContainingType": "DPDMIS_Angular_API.Controllers.SupportController",
-    "Method": "updateIssueIncompleteBasedOnIssueIdAndFacilityId",
-    "RelativePath": "api/Support/updateIssueIncompleteBasedOnIssueIdAndFacilityId",
+    "Method": "updateIncompleteBasedOnIssueIdAndFacilityId",
+    "RelativePath": "api/Support/updateIncompleteBasedOnIssueIdAndFacilityId",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,

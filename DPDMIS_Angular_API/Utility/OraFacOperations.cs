@@ -91,35 +91,38 @@ namespace CgmscHO_API.Utility
         //        //}
 
 
-        //        public bool changpassword(string userid, string NewPassword, out string message)
-        //        {
+        public bool changpassword(string userid, string NewPassword, out string message)
+        {
 
 
-        //            //,LASTPWDCHANGEDATE=TO_DATE('" + now + "','MM/DD/YYYY hh24:mi:ss') 
-        //            string dt1 = DateTime.Now.ToString("dd-MMM-yyyy hh:mm:ss tt");
-        //            string now = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
-        //                Broadline.Common.SecUtils.SaltedHash sh = Broadline.Common.SecUtils.SaltedHash.Create(NewPassword);
-        //                string salthash1 = "salt{" + sh.Salt + "}hash{" + sh.Hash + "}";
-        //          //  string Query = "UPDATE usrUsers Set Pwd = '" + salthash1 + "' Where UserID = " + userid;
-        //            //    _context.Database.ExecuteSqlRaw(Query);
+            //,LASTPWDCHANGEDATE=TO_DATE('" + now + "','MM/DD/YYYY hh24:mi:ss') 
+            string dt1 = DateTime.Now.ToString("dd-MMM-yyyy hh:mm:ss tt");
+           // string now = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+            Broadline.Common.SecUtils.SaltedHash sh = Broadline.Common.SecUtils.SaltedHash.Create(NewPassword);
+            string salthash1 = "salt{" + sh.Salt + "}hash{" + sh.Hash + "}";
+            //  string Query = "UPDATE usrUsers Set Pwd = '" + salthash1 + "' Where UserID = " + userid;
+            //    _context.Database.ExecuteSqlRaw(Query);
 
-        //            // Construct parameterized query
-        //            string query = "UPDATE usrUsers SET Pwd = :Password, LASTPWDCHANGEDATE = :LastPwdChangeDate,RESETPASSWORD=1 WHERE UserID = :UserID";
+            // Construct parameterized query
+            string query = @"UPDATE usrUsers
+                 SET Pwd = :Password,
+                     LASTPWDCHANGEDATE = :LastPwdChangeDate,
+                     RESETPASSWORD = 1
+                 WHERE UserID = :UserID";
 
-        //            // Execute parameterized query
-        //            _context.Database.ExecuteSqlRaw(query,
-        //                new OracleParameter("Password", salthash1),
-        //                new OracleParameter("LastPwdChangeDate", dt1),
-        //                new OracleParameter("UserID", userid)
-        //            );
+            _context.Database.ExecuteSqlRaw(
+                query,
+                new OracleParameter("Password", salthash1),
+                new OracleParameter("LastPwdChangeDate", DateTime.Now),
+                new OracleParameter("UserID", userid)
+            );
 
 
+            message = "Password Successfully Updated";
+            return true;
 
-        //            message = "Password Successfully Updated";
-        //                return true;
 
-
-        //        }
+        }
 
 
 
@@ -170,67 +173,67 @@ namespace CgmscHO_API.Utility
 
 
 
-        //        public string FacAutoGenerateNumbers(string FacilityID, bool IsReceipt, string mType)
-        //        {
-        //            string mGenNo = "";
+        public string FacAutoGenerateNumbers(string FacilityID, bool IsReceipt, string mType)
+        {
+            string mGenNo = "";
 
-        //            string mSHAccYear = getSHAccYear();
-        //            string mWHPrefix = getFacCode(FacilityID);
-        //            string genNo = getGenNumber(IsReceipt, mType, mSHAccYear, mWHPrefix);
-        //            if (!string.IsNullOrEmpty(genNo))
-        //                mGenNo = mWHPrefix + "/" + mType + "/" + genNo + "/" + mSHAccYear;
-        //            else
-        //                mGenNo = mWHPrefix + "/" + mType + "/" + "00001" + "/" + mSHAccYear;
+            string mSHAccYear = getSHAccYear();
+            string mWHPrefix = getFacCode(FacilityID);
+            string genNo = getGenNumber(IsReceipt, mType, mSHAccYear, mWHPrefix);
+            if (!string.IsNullOrEmpty(genNo))
+                mGenNo = mWHPrefix + "/" + mType + "/" + genNo + "/" + mSHAccYear;
+            else
+                mGenNo = mWHPrefix + "/" + mType + "/" + "00001" + "/" + mSHAccYear;
 
-        //            return mGenNo;
-        //        }
+            return mGenNo;
+        }
 
-        //        public string getGenNumber(bool Isrecipt, string mType, string mSHAccYear, string mWHPrefix)
-        //        {
-        //            string strSQL = "";
-        //            if (Isrecipt)
-        //                strSQL = "Select Lpad(NVL(Max(To_Number(SubStr(FacReceiptNo, -11, 5))), 0) + 1, 5, '0') as WHSlNo from tbFacilityReceipts Where FacReceiptNo Like '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
-        //            else
-        //                strSQL = "Select Lpad(NVL(Max(To_Number(SubStr(IssueNo, -11, 5))), 0) + 1, 5, '0') as WHSlNo from tbFacilityIssues Where IssueNo Like '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
-
-
-        //            var myList = _context.GenrateReceiptIssueNoDbSet
-        //            .FromSqlInterpolated(FormattableStringFactory.Create(strSQL)).ToList();
-
-        //            if (myList.Count > 0)
-        //            {
-        //                string WHSlNo = myList[0].WHSlNo; // Assuming IssueItemID is an integer
-        //                return WHSlNo.ToString();
-        //            }
-        //            else
-        //            {
-        //                return null; // Or any other appropriate indication
-        //            }
-        //        }
-
-        //        public void getIndentData(Int64 indentId, out string? nocDate, out Int64? wardid)
-        //        {
-        //            string strSQL = "";
-        //            strSQL = " select NOCID, NOCDATE as REQUESTEDDATE,WARDID from maswardindents where nocid= " + indentId;
+        public string getGenNumber(bool Isrecipt, string mType, string mSHAccYear, string mWHPrefix)
+        {
+            string strSQL = "";
+            if (Isrecipt)
+                strSQL = "Select Lpad(NVL(Max(To_Number(SubStr(FacReceiptNo, -11, 5))), 0) + 1, 5, '0') as WHSlNo from tbFacilityReceipts Where FacReceiptNo Like '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
+            else
+                strSQL = "Select Lpad(NVL(Max(To_Number(SubStr(IssueNo, -11, 5))), 0) + 1, 5, '0') as WHSlNo from tbFacilityIssues Where IssueNo Like '" + mWHPrefix + "/" + mType + "/%/" + mSHAccYear + "'";
 
 
+            var myList = _context.GenrateReceiptIssueNoDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(strSQL)).ToList();
 
-        //            var myList = _context.IndentDataDbSet
-        //            .FromSqlInterpolated(FormattableStringFactory.Create(strSQL)).ToList();
+            if (myList.Count > 0)
+            {
+                string WHSlNo = myList[0].WHSlNo; // Assuming IssueItemID is an integer
+                return WHSlNo.ToString();
+            }
+            else
+            {
+                return null; // Or any other appropriate indication
+            }
+        }
 
-        //            if (myList.Count > 0)
-        //            {
-        //                nocDate = myList[0].REQUESTEDDATE; // Assuming IssueItemID is an integer
-        //                wardid = Convert.ToInt64(myList[0].WARDID);
+        public void getIndentData(Int64 indentId, out string? nocDate, out Int64? wardid)
+        {
+            string strSQL = "";
+            strSQL = " select NOCID, NOCDATE as REQUESTEDDATE,WARDID from maswardindents where nocid= " + indentId;
+            //TO_CHAR(NOCDATE,'DD-MON-YYYY')
 
-        //            }
-        //            else
-        //            {
-        //                nocDate = null;
-        //                wardid = null;
-        //            }
 
-        //        }
+            var myList = _context.IndentDataDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(strSQL)).ToList();
+
+            if (myList.Count > 0)
+            {
+                nocDate = myList[0].REQUESTEDDATE; // Assuming IssueItemID is an integer
+                wardid = Convert.ToInt64(myList[0].WARDID);
+
+            }
+            else
+            {
+                nocDate = null;
+                wardid = null;
+            }
+           
+        }
 
         public string getSHAccYear()
         {
@@ -408,36 +411,36 @@ namespace CgmscHO_API.Utility
 
 
 
-        //        private string getFacCode(string facId)
-        //        {
-        //            string qry = @" select f.FACILITYNAME,f.FACILITYCODE,f.FACILITYID,h.FOOTER1,h.FOOTER2,h.FOOTER3,h.EMAIL,  d.districtid,d.districtname,ft.FACILITYTYPECODE,ft.FACILITYTYPEDESC,ft.ELDCAT,fw.warehouseid,w.WAREHOUSENAME,w.email as whemail,w.phone1 as whcontact,f.FACILITYTYPEID,ft.hodid,cm.cmhofacility   from masfacilities f
-        //                            inner join usrusers u on u.FACILITYID=f.facilityid
-        //                            left outer join MASFACHEADERFOOTER h on h.userid=u.userid
-        //                            inner join masfacilitywh fw on fw.facilityid=f.facilityid
-        //                            inner join maswarehouses w on w.WAREHOUSEID=fw.WAREHOUSEID
-        //                            inner join masfacilitytypes ft on ft.FACILITYTYPEID=f.FACILITYTYPEID
-        //                            inner join masdistricts d on d.districtid=f.districtid
-        //                             inner join 
-        //                            (
-        //                            select FACILITYID as cmhofacility,districtid from masfacilities where facilitytypeid=353 and isactive=1
-        //                            ) cm on cm.districtid=d.districtid
-        //                            where f.facilityid = " + facId;
+        private string getFacCode(string facId)
+        {
+            string qry = @" select f.FACILITYNAME,f.FACILITYCODE,f.FACILITYID,h.FOOTER1,h.FOOTER2,h.FOOTER3,h.EMAIL,  d.districtid,d.districtname,ft.FACILITYTYPECODE,ft.FACILITYTYPEDESC,ft.ELDCAT,fw.warehouseid,w.WAREHOUSENAME,w.email as whemail,w.phone1 as whcontact,f.FACILITYTYPEID,ft.hodid,cm.cmhofacility   from masfacilities f
+                                    inner join usrusers u on u.FACILITYID=f.facilityid
+                                    left outer join MASFACHEADERFOOTER h on h.userid=u.userid
+                                    inner join masfacilitywh fw on fw.facilityid=f.facilityid
+                                    inner join maswarehouses w on w.WAREHOUSEID=fw.WAREHOUSEID
+                                    inner join masfacilitytypes ft on ft.FACILITYTYPEID=f.FACILITYTYPEID
+                                    inner join masdistricts d on d.districtid=f.districtid
+                                     inner join 
+                                    (
+                                    select FACILITYID as cmhofacility,districtid from masfacilities where facilitytypeid=353 and isactive=1
+                                    ) cm on cm.districtid=d.districtid
+                                    where f.facilityid = " + facId;
 
-        //            //var context = new FacilityInfoDTO();
+            //var context = new FacilityInfoDTO();
 
-        //            var myList = _context.FacilityInfoDbSet
-        //            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            var myList = _context.FacilityInfoDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
 
-        //            if (myList.Count > 0)
-        //            {
-        //                string facCode = myList[0].FACILITYCODE; // Assuming IssueItemID is an integer
-        //                return facCode.ToString();
-        //            }
-        //            else
-        //            {
-        //                return null; // Or any other appropriate indication
-        //            }
-        //        }
+            if (myList.Count > 0)
+            {
+                string facCode = myList[0].FACILITYCODE; // Assuming IssueItemID is an integer
+                return facCode.ToString();
+            }
+            else
+            {
+                return null; // Or any other appropriate indication
+            }
+        }
 
         //        public Int64 getWHID(string facId)
         //        {
@@ -597,33 +600,33 @@ namespace CgmscHO_API.Utility
         //            return retFACTYpeid;
         //        }
 
-        //        public Int32 geFACHOID(string facId)
-        //        {
-        //            string qry = @" select f.FACILITYNAME,f.FACILITYCODE,f.FACILITYID,h.FOOTER1,h.FOOTER2,h.FOOTER3,h.EMAIL,  d.districtid,d.districtname,ft.FACILITYTYPECODE,ft.FACILITYTYPEDESC,ft.ELDCAT,fw.warehouseid,w.WAREHOUSENAME,w.email as whemail,w.phone1 as whcontact,f.FACILITYTYPEID,ft.hodid,cm.cmhofacility  from masfacilities f
-        //                            inner join usrusers u on u.FACILITYID=f.facilityid
-        //                            left outer join MASFACHEADERFOOTER h on h.userid=u.userid
-        //                            inner join masfacilitywh fw on fw.facilityid=f.facilityid
-        //                            inner join maswarehouses w on w.WAREHOUSEID=fw.WAREHOUSEID
-        //                            inner join masfacilitytypes ft on ft.FACILITYTYPEID=f.FACILITYTYPEID
-        //                            inner join masdistricts d on d.districtid=f.districtid
-        //                           inner join 
-        //                            (
-        //                            select FACILITYID as cmhofacility,districtid from masfacilities where facilitytypeid=353 and isactive=1
-        //                            ) cm on cm.districtid=d.districtid
-        //                            where f.facilityid = " + facId;
+        public Int32 geFACHOID(string facId)
+        {
+            string qry = @" select f.FACILITYNAME,f.FACILITYCODE,f.FACILITYID,h.FOOTER1,h.FOOTER2,h.FOOTER3,h.EMAIL,  d.districtid,d.districtname,ft.FACILITYTYPECODE,ft.FACILITYTYPEDESC,ft.ELDCAT,fw.warehouseid,w.WAREHOUSENAME,w.email as whemail,w.phone1 as whcontact,f.FACILITYTYPEID,ft.hodid,cm.cmhofacility  from masfacilities f
+                                    inner join usrusers u on u.FACILITYID=f.facilityid
+                                    left outer join MASFACHEADERFOOTER h on h.userid=u.userid
+                                    inner join masfacilitywh fw on fw.facilityid=f.facilityid
+                                    inner join maswarehouses w on w.WAREHOUSEID=fw.WAREHOUSEID
+                                    inner join masfacilitytypes ft on ft.FACILITYTYPEID=f.FACILITYTYPEID
+                                    inner join masdistricts d on d.districtid=f.districtid
+                                   inner join 
+                                    (
+                                    select FACILITYID as cmhofacility,districtid from masfacilities where facilitytypeid=353 and isactive=1
+                                    ) cm on cm.districtid=d.districtid
+                                    where f.facilityid = " + facId;
 
-        //            //var context = new FacilityInfoDTO();
+            //var context = new FacilityInfoDTO();
 
-        //            var myList = _context.FacilityInfoDbSet
-        //            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
-        //            Int32 retFACHODID = 0;
-        //            if (myList.Count > 0)
-        //            {
-        //                retFACHODID = Convert.ToInt32(myList[0].HODID); // Assuming IssueItemID is an integer
+            var myList = _context.FacilityInfoDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            Int32 retFACHODID = 0;
+            if (myList.Count > 0)
+            {
+                retFACHODID = Convert.ToInt32(myList[0].HODID); // Assuming IssueItemID is an integer
 
-        //            }
-        //            return retFACHODID;
-        //        }
+            }
+            return retFACHODID;
+        }
 
         //        //public string GetMonthName(string? date_ddmmyyyy)
         //        //{

@@ -1,9 +1,10 @@
 ﻿using CgmscHO_API.Utility;
 using DPDMIS_Angular_API.Data;
-using DPDMIS_Angular_API.DTO.IndentDTO;
-using DPDMIS_Angular_API.DTO.SourceDTO;
+//using DPDMIS_Angular_API.DTO.IndentDTO;
+//using DPDMIS_Angular_API.DTO.SourceDTO;
 using DPDMIS_Angular_API.MariadbDTO.DestinationDTO;
 using DPDMIS_Angular_API.Models;
+using DPDMIS_Angular_API.OraDTO.OraIndentDTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,12 +25,12 @@ namespace DPDMIS_Angular_API.Controllers
         }
 
         [HttpPost("postOtherFacIndentitems")]
-        public IActionResult postOtherFacIndentitems(OraMasFacDemandItemsDTO objMasFacDemandItems)
+        public IActionResult postOtherFacIndentitems(OraOraMasFacDemandItemsDTO objMasFacDemandItems)
         {
             Int32? indentId = null;
             string qry = @"  select indentid from MASFACTRANSFERS where mtransferid = "+ objMasFacDemandItems.INDENTID + " ";
             //(23413)
-            var myList = _context.ORAMASFACTRANSFERSINDENT_DbSet
+            var myList = _context.OraOraMasFacDemandItemsDbSet
             .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
 
             if (myList.Any())
@@ -51,7 +52,7 @@ namespace DPDMIS_Angular_API.Controllers
             {
                 if (objMasFacDemandItems.INDENTITEMID == 0)
                 {
-                    _context.OraMasFacDemandItemsDbSet.Add(objMasFacDemandItems);
+                    _context.OraOraMasFacDemandItemsDbSet.Add(objMasFacDemandItems);
                 }
                 else
                 {
@@ -59,7 +60,7 @@ namespace DPDMIS_Angular_API.Controllers
                     // If SR is not "0", update the existing entry
 
                     //var existingItem = _context.OraMasFacDemandItemsDbSet.FirstOrDefault(x => x.INDENTITEMID == objMasFacDemandItems.INDENTITEMID);
-                    var existingItem = _context.OraMasFacDemandItemsDbSet.FirstOrDefault(x => x.INDENTID == objMasFacDemandItems.INDENTID && x.ITEMID == objMasFacDemandItems.ITEMID);
+                    var existingItem = _context.OraOraMasFacDemandItemsDbSet.FirstOrDefault(x => x.INDENTID == objMasFacDemandItems.INDENTID && x.ITEMID == objMasFacDemandItems.ITEMID);
 
 
                     if (existingItem != null)

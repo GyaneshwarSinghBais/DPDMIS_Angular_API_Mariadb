@@ -6,6 +6,9 @@ using DPDMIS_Angular_API.DTO.IndentDTO;
 using DPDMIS_Angular_API.DTO.IssueDTO;
 using DPDMIS_Angular_API.DTO.ReceiptDTO;
 using DPDMIS_Angular_API.Models;
+using DPDMIS_Angular_API.OraDTO.OraCGMSCStockDTO;
+using DPDMIS_Angular_API.OraDTO.OraFacilityDTO;
+using DPDMIS_Angular_API.OraDTO.OraReceiptDTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -1140,7 +1143,7 @@ FROM tbIndentItems tbi
         //}
 
         [HttpGet("getBarcodeReceiptMaster")]
-        public async Task<List<BarcodeReceiptDto>> getBarcodeReceiptMaster(string BarcodeID, string status)
+        public async Task<List<OraBarcodeReceiptDto>> getBarcodeReceiptMaster(string BarcodeID, string status)
         {
             string whStatus = "";
 
@@ -1155,7 +1158,7 @@ FROM tbIndentItems tbi
                             inner join tblissuebarcode bi on bi.barcodeid=tbo.barcodeid
                             where tb.status='C'  and bi.barcodeid='{BarcodeID}'
                             )";
-            var myList = _contextoracle.BarcodeReceiptDtoDbSet
+            var myList = _contextoracle.OraBarcodeReceiptDtoDbSet
             .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
 
             return myList;
@@ -1175,26 +1178,37 @@ FROM tbIndentItems tbi
             return myList;
         }
 
+        [HttpGet("OraGetFacreceiptidBarcode")]
+        public async Task<List<OraGetFacreceiptidForOpeningStockDTO>> OraGetFacreceiptidBarcode(string usrFacilityID, string mIndentID)
+        {
+
+            string qry = @" select facreceiptid from tbfacilityreceipts where facilityid=" + usrFacilityID + " and  INDENTID=" + mIndentID + "  ";
+
+            var myList = _contextoracle.OraGetFacreceiptidForOpeningStockDbSet
+            .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+            return myList;
+        }
+
         [HttpGet("CheckBarcodeAndFacReceipt")]
         public async Task<IActionResult> CheckBarcodeAndFacReceipt(string BarcodeID, string status)
         {
-            GetDataDTO response = new GetDataDTO();
+            OraGetDataDTO response = new OraGetDataDTO();
 
-            response.BarcodeReceiptDto = await getBarcodeReceiptMaster(BarcodeID, status);
+            response.OraBarcodeReceiptDto = await getBarcodeReceiptMaster(BarcodeID, status);
 
-            if (response.BarcodeReceiptDto == null || response.BarcodeReceiptDto.Count == 0)
+            if (response.OraBarcodeReceiptDto == null || response.OraBarcodeReceiptDto.Count == 0)
                 return BadRequest("Barcode Not Found");
 
-            var data = response.BarcodeReceiptDto.First();
+            var data = response.OraBarcodeReceiptDto.First();
 
             string usrFacilityID = data.FACILITYID;
             string mIndentID = data.INDENTID;
 
 
 
-            response.GetFacreceiptidForOpeningStockDTO = await GetFacreceiptidBarcode(usrFacilityID, mIndentID);
+            response.OraGetFacreceiptidForOpeningStockDTO = await OraGetFacreceiptidBarcode(usrFacilityID, mIndentID);
             Int64 receiptId = 0;
-            if (response.GetFacreceiptidForOpeningStockDTO == null || response.GetFacreceiptidForOpeningStockDTO.Count == 0)
+            if (response.OraBarcodeReceiptDto == null || response.OraBarcodeReceiptDto.Count == 0)
             {
 
                 tbFacilityReceiptsModel receipt = new tbFacilityReceiptsModel();
@@ -1229,7 +1243,7 @@ FROM tbIndentItems tbi
             else
             {
 
-                var mReceipTID = response.GetFacreceiptidForOpeningStockDTO.First();
+                var mReceipTID = response.OraGetFacreceiptidForOpeningStockDTO.First();
                 receiptId = mReceipTID.FACRECEIPTID;
             }
 
@@ -1577,7 +1591,7 @@ WHERE rb.BarcodeID=" + BarcodeID;
         }
 
         [HttpGet("getBarcodeDetails")]
-        public async Task<ActionResult<IEnumerable<GetBarcodeDetailsDto>>> getBarcodeDetails(string BarcodeID)
+        public async Task<ActionResult<IEnumerable<OraGetBarcodeDetailsDto>>> getBarcodeDetails(string BarcodeID)
         {
             string whStatus = "";
 
@@ -1596,7 +1610,7 @@ ORDER BY m.itemcode";
 
             var context = new ReceiptMasterWHDTO();
 
-            var myList = _contextoracle.GetBarcodeDetailsDbSet
+            var myList = _contextoracle.OraGetBarcodeDetailsDbSet
             .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
 
             return myList;

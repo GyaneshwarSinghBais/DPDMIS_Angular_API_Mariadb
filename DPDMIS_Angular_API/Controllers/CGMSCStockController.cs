@@ -743,13 +743,21 @@ select distinct  mi.itemid, CONCAT(mi.itemcode,' ', mi.itemname,' ', mi.strength
 
             //string qry = @"   select ITEMID, (ITEMCODE || '-' || ITEMNAME || '-' || STRENGTH1) as ITEMCODE  from masitems where SHC = 'Y'  ";
 
+            //            string qry = @"  SELECT 
+            //    ITEMID, 
+            //    CONCAT(ITEMCODE, '-', ITEMNAME, '-', STRENGTH1) AS ITEMCODE 
+            //FROM 
+            //    masitems 
+            //WHERE 
+            //    SHC = 'Y'; ";
+
             string qry = @"  SELECT 
     ITEMID, 
-    CONCAT(ITEMCODE, '-', ITEMNAME, '-', STRENGTH1) AS ITEMCODE 
+    CONCAT_WS('-', ITEMCODE, ITEMNAME, STRENGTH1) AS ITEMCODE 
 FROM 
     masitems 
 WHERE 
-    SHC = 'Y'; ";
+    SHC = 'Y' ; ";
 
             var myList = _context.getSHCItemsDbSet
             .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();

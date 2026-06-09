@@ -186,9 +186,7 @@ namespace CgmscHO_API.Utility
         public string getFacCodeForSHCIndent(Int64 facId)
         {
             string yearid = getACCYRSETID();
-            //   string qry = " Select Lpad(NVL(Max(To_Number(a.AUTO_CODE)), 0) + 1, 5, '0') as SOCode" +
-            //" From MASFACTRANSFERS a" +
-            //" where a.FACILITYID=" + facId + " and a.accyrsetid=" + yearid;
+         
 
             string qry = "SELECT LPAD(COALESCE(MAX(CAST(a.AUTO_CODE AS UNSIGNED)), 0) + 1, 5, '0') AS SOCode" +
              " FROM MASFACTRANSFERS a" +

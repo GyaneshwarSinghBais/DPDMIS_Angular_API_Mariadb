@@ -108,10 +108,23 @@ namespace DPDMIS_Angular_API.Controllers
         public async Task<ActionResult<IEnumerable<MASFACTRANSFERS_DTO>>> GetFacDetailSHC(Int64 facid, string indentNo)
         {
             string qry = @"  select INDENTID, INDENTNO, INDENTDATE, FACILITYID, FROMFACILITYID, DISPATCHNO, DISPATCHDATE, REMARKS, PROGRAMID, AUTO_CODE, ENTRYDATE, ACCYRSETID, STATUS,MTRANSFERID from MASFACTRANSFERS
-        where INDENTNO = '" + indentNo + "' and FACILITYID = " + facid + " ";
+            where INDENTNO = '" + indentNo + "' and FACILITYID = " + facid + " ";
+
+
             //(23413)
             var myList = _context.MASFACTRANSFERS_DbSet
             .FromSqlInterpolated(FormattableStringFactory.Create(qry)).ToList();
+
+            //        var myList = _context.MASFACTRANSFERS_DbSet
+            //.FromSqlInterpolated($@"
+            //    SELECT INDENTID, INDENTNO, INDENTDATE, FACILITYID, FROMFACILITYID,
+            //           DISPATCHNO, DISPATCHDATE, REMARKS, PROGRAMID, AUTO_CODE,
+            //           ENTRYDATE, ACCYRSETID, STATUS, MTRANSFERID
+            //    FROM MASFACTRANSFERS
+            //    WHERE INDENTNO = {indentNo}
+            //    AND FACILITYID = {facid}")
+            //.ToList();
+
 
             return myList;
             //return Ok(JsonConvert.SerializeObject(myList));

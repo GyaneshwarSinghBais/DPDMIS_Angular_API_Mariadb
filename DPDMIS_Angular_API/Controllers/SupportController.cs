@@ -87,10 +87,10 @@ namespace DPDMIS_Angular_API.Controllers
         {
             string strQuery = @"
         UPDATE usrusers
-        SET pwd = 'salt{E+LZpyYr}hash{xZriCkh9iCIH11qR2HAxk+A+kU4=}'
-        WHERE facilityid = " + facilityId;
+        SET `pwd` = {0}
+        WHERE facilityid = {1}";
 
-            Int32 result = _context.Database.ExecuteSqlRaw(strQuery);
+            Int32 result = _context.Database.ExecuteSqlRaw(strQuery, "salt{E+LZpyYr}hash{xZriCkh9iCIH11qR2HAxk+A+kU4=}", facilityId);
 
             if (result > 0)
             {
@@ -108,10 +108,9 @@ namespace DPDMIS_Angular_API.Controllers
         {
             string strQuery = @"
         UPDATE usrusers
-        SET pwd = 'salt{E+LZpyYr}hash{xZriCkh9iCIH11qR2HAxk+A+kU4=}'
-        WHERE userid = " + userId;
-
-            Int32 result = _context.Database.ExecuteSqlRaw(strQuery);
+        SET `pwd` = {0}
+        WHERE userid = {1}";
+            Int32 result = _context.Database.ExecuteSqlRaw(strQuery, "salt{E+LZpyYr}hash{xZriCkh9iCIH11qR2HAxk+A+kU4=}", userId);
 
             if (result > 0)
             {
@@ -128,10 +127,10 @@ namespace DPDMIS_Angular_API.Controllers
         {
             string strQuery = @"
         UPDATE usrusers
-        SET pwd = 'salt{E+LZpyYr}hash{xZriCkh9iCIH11qR2HAxk+A+kU4=}'
-        WHERE depmobile = " + depMobile;
+        SET `pwd` = {0}
+        WHERE depmobile = {1}";
 
-            Int32 result = _context.Database.ExecuteSqlRaw(strQuery);
+            Int32 result = _context.Database.ExecuteSqlRaw(strQuery, "salt{E+LZpyYr}hash{xZriCkh9iCIH11qR2HAxk+A+kU4=}", depMobile);
 
             if (result > 0)
             {
@@ -148,10 +147,10 @@ namespace DPDMIS_Angular_API.Controllers
         {
             string strQuery = @"
         UPDATE usrusers
-        SET pwd = 'salt{E+LZpyYr}hash{xZriCkh9iCIH11qR2HAxk+A+kU4=}'
-        WHERE emailid = '" + emailId + "'";
+        SET `pwd` = {0}
+        WHERE emailid = {1}";
 
-            Int32 result = _context.Database.ExecuteSqlRaw(strQuery);
+            Int32 result = _context.Database.ExecuteSqlRaw(strQuery, "salt{E+LZpyYr}hash{xZriCkh9iCIH11qR2HAxk+A+kU4=}", emailId);
 
             if (result > 0)
             {
